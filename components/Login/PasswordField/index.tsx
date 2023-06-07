@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { forwardRef, useRef } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi"
-
+import { Field} from 'formik';
 export const PasswordField = forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
     const { isOpen, onToggle } = useDisclosure();
@@ -37,7 +37,8 @@ export const PasswordField = forwardRef<HTMLInputElement, InputProps>(
               onClick={onClickReveal}
             />
           </InputRightElement>
-          <Input
+          <Field
+            as={Input}
             id="password"
             ref={mergeRef}
             name="password"

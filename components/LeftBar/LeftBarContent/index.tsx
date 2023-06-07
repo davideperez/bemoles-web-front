@@ -23,6 +23,7 @@ import { IconType } from 'react-icons';
 import NavItem from '../NavItem';
 import { HiOutlineTicket } from 'react-icons/hi';
 import Logo from '../../Login/Logo';
+import { useRouter } from 'next/router';
 
 interface SidebarProps extends BoxProps {
     onClose: () => void;
@@ -31,17 +32,19 @@ interface SidebarProps extends BoxProps {
 interface LinkItemProps {
     name: string;
     icon: IconType;
+    link: string;
   }
 
 const LinkItems: Array<LinkItemProps> = [
     // { name: 'Home', icon: FiHome },
-    { name: 'Eventos', icon: MdCalendarToday },
-    { name: 'Talleres', icon: MdOutlinePalette },
-    { name: 'Reservas', icon: HiOutlineTicket },
-    { name: 'Proyectos', icon: MdLightbulbOutline },
+    { name: 'Eventos', icon: MdCalendarToday, link: '/admin/events'},
+    { name: 'Talleres', icon: MdOutlinePalette, link: '/admin/workshops' },
+    { name: 'Reservas', icon: HiOutlineTicket, link: '/admin/reserves' },
+    { name: 'Proyectos', icon: MdLightbulbOutline, link: '/admin/proyects' },
   ];
 
 const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
+    const router = useRouter();
     return (
         <Box
           bg={useColorModeValue('white', 'gray.900')}
@@ -56,7 +59,7 @@ const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
             <CloseButton display={{ base:'flex', md: 'none' }} onClick={onClose} />
           </Flex>
           {LinkItems.map((link) => (
-            <NavItem key={link.name} icon={link.icon}>
+            <NavItem key={link.name} icon={link.icon} to={link.link} isSelected={router.asPath.includes(link.link)}>
               {link.name}
             </NavItem>
           ))}

@@ -1,30 +1,35 @@
 import React, { ReactElement } from "react";
 import { Flex, Icon, Link, FlexProps } from "@chakra-ui/react";
+import NextLink from 'next/link'
 
 import { IconType } from "react-icons";
+import { toASCII } from "punycode";
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: React.ReactNode;
+  to: string;
+  isSelected: boolean;
 }
 
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, to, isSelected, children, ...rest }: NavItemProps) => {
   return (
-    <Link
-      href="#"
+    <NextLink href={to}>
+
+      <Flex
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
-    >
-      <Flex
         align="center"
         p="4"
         mx="4"
-        borderRadius="lg"
+        borderRadius="2xl"
         role="group"
         cursor="pointer"
+        bg={isSelected ? "#9D6E33" : "none"}
+        color={isSelected ? "white" : "revert"}
         _hover={{
-          bg: "cyan.400",
-          color: "white",
+          // bg: "gray.200",
+          color: "",
         }}
         {...rest}
       >
@@ -40,7 +45,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         )}
         {children}
       </Flex>
-    </Link>
+    </NextLink>
   );
 };
 
