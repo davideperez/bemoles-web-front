@@ -40,7 +40,7 @@ const LinkItems: Array<LinkItemProps> = [
     { name: 'Eventos', icon: MdCalendarToday, link: '/admin/events'},
     { name: 'Talleres', icon: MdOutlinePalette, link: '/admin/workshops' },
     { name: 'Reservas', icon: HiOutlineTicket, link: '/admin/reserves' },
-    { name: 'Proyectos', icon: MdLightbulbOutline, link: '/admin/proyects' },
+    { name: 'Proyectos', icon: MdLightbulbOutline, link: '/admin/projects' },
   ];
 
 const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
@@ -54,7 +54,7 @@ const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
           pos="fixed"
           h="full"
           {...rest}>
-          <Flex h="20" alignItems="center" mx="8" justifyContent="space-between" mt="0.5rem">
+          <Flex h="20" alignItems="center" mx="8" justifyContent="space-between" my="0.5rem">
             <Logo />
             <CloseButton display={{ base:'flex', md: 'none' }} onClick={onClose} />
           </Flex>

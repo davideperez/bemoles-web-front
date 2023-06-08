@@ -20,16 +20,16 @@ const NavItem = ({ icon, to, isSelected, children, ...rest }: NavItemProps) => {
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
         align="center"
-        p="4"
+        p="3"
         mx="4"
+        my={1}
         borderRadius="2xl"
         role="group"
         cursor="pointer"
         bg={isSelected ? "#9D6E33" : "none"}
         color={isSelected ? "white" : "revert"}
         _hover={{
-          // bg: "gray.200",
-          color: "",
+          bg: !isSelected ? "gray.200" : "#9D6E33",
         }}
         {...rest}
       >
@@ -37,9 +37,6 @@ const NavItem = ({ icon, to, isSelected, children, ...rest }: NavItemProps) => {
           <Icon
             mr="4"
             fontSize="16"
-            _groupHover={{
-              color: "white",
-            }}
             as={icon}
           />
         )}

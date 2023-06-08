@@ -1,8 +1,11 @@
+import { Heading, Stack } from '@chakra-ui/react'
 import React from 'react'
 
 const ProjectsPage = () => {
   return (
-    <div>ProjectsPage</div>
+    <Stack spacing={4}>
+    <Heading>Proyectos</Heading>
+    </Stack>
   )
 }
 
