@@ -114,7 +114,7 @@ const EventsPage = () => {
               {events?.values?.map((event) => (
                 <Tr key={event._id}>
                   <Td p={2}>
-                    <Image src={event.flyer} alt={event.title} w="100px" />
+                    <Image src={event.image || '/images/noavail.jpg'} alt={event.title} w="50px" />
                   </Td>
                   <Td p={2}>{event.title}</Td>
                   <Td p={2}>{new Date(event.date).toLocaleString()}</Td>

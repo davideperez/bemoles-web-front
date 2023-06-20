@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -17,9 +17,33 @@ import Logo from "../../../components/Login/Logo";
 import { PasswordField } from "../../../components/Login/PasswordField";
 import { Formik, Field } from "formik";
 import { useFormik } from "formik";
+import { authService } from "../../../services/auth.service";
+import { UserContext } from "../../../context/userContext";
+import { useRouter } from "next/router";
 
 const AdminLoginPage = () => {
-  
+  const router = useRouter();
+  const { user, setUser } = useContext(UserContext);
+
+  const handleSubmit = async (userCredentials: {
+    username: string;
+    password: string;
+  }) => {
+    try {
+      const { data: userData } = await authService.login(userCredentials);
+      if (userData) {
+        setUser(userData);
+        console.log({ userData });
+        router.push("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (user.token) router.replace('/admin');
+  }, [router, user])
 
   return (
     <Container
@@ -43,37 +67,36 @@ const AdminLoginPage = () => {
         </Stack>
         <Formik
           initialValues={{
-            email: "",
+            username: "",
             password: "",
           }}
-          onSubmit={(values) => {
-            alert(JSON.stringify(values, null, 2));
-          }}
+          onSubmit={handleSubmit}
         >
-          {({ handleSubmit}) => (
+          {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
-        <Box pb={{ base: "0", sm: "8" }} px={{ base: "4", sm: "10" }}>
-          <Stack spacing="6">
-            <Stack spacing="5">
-              <FormControl>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Field as={Input} id="email" name="email" type="email" />
-              </FormControl>
-              <PasswordField />
-            </Stack>
-            <Stack spacing="6">
-              <Button
-                colorScheme={"messenger"}
-                bg="#9D6E33"
-                _hover={{ bg: "#9D6E33", opacity: 0.5 }}
-                type="submit"
-              >
-                Ingresar
-              </Button>
-            </Stack>
-          </Stack>
-        </Box>
-        </form>)}
+              <Box pb={{ base: "0", sm: "8" }} px={{ base: "4", sm: "10" }}>
+                <Stack spacing="6">
+                  <Stack spacing="5">
+                    <FormControl>
+                      <FormLabel htmlFor="username">Email</FormLabel>
+                      <Field as={Input} id="username" name="username" type="email" />
+                    </FormControl>
+                    <PasswordField />
+                  </Stack>
+                  <Stack spacing="6">
+                    <Button
+                      colorScheme={"messenger"}
+                      bg="#9D6E33"
+                      _hover={{ bg: "#9D6E33", opacity: 0.5 }}
+                      type="submit"
+                    >
+                      Ingresar
+                    </Button>
+                  </Stack>
+                </Stack>
+              </Box>
+            </form>
+          )}
         </Formik>
       </Stack>
     </Container>

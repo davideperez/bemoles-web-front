@@ -6,11 +6,14 @@ import {
   useColorModeValue,
   Text,
   BoxProps,
+  Button,
+  Stack,
 } from '@chakra-ui/react';
 import {
   FiCompass,
   FiStar,
   FiSettings,
+  FiLogOut,
 } from 'react-icons/fi';
 
 import {
@@ -45,7 +48,12 @@ const LinkItems: Array<LinkItemProps> = [
 
 const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
     const router = useRouter();
+
+    const logout = () => {
+      console.log("logout")
+    }
     return (
+      <>
         <Box
           bg={useColorModeValue('white', 'gray.900')}
           borderRight="1px"
@@ -58,12 +66,19 @@ const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
             <Logo />
             <CloseButton display={{ base:'flex', md: 'none' }} onClick={onClose} />
           </Flex>
+          <Stack spacing={0} h="90%">
+
           {LinkItems.map((link) => (
             <NavItem key={link.name} icon={link.icon} to={link.link} isSelected={router.asPath.includes(link.link)}>
               {link.name}
             </NavItem>
           ))}
+          </Stack>
+          {/* <Button colorScheme="orange" leftIcon={<FiLogOut />} size="sm" onClick={logout} mt="auto">
+              Logout
+            </Button> */}
         </Box>
+            </>
       );
     };
 export default LeftBarContent

@@ -1,17 +1,40 @@
-import React, { FC, ReactElement, useState } from "react"
+import React, { FC, ReactElement, useMemo, useState } from "react";
 
-const UserContext = React.createContext([{}, () => {}])
+type UserProviderType = {
+  children: React.ReactNode;
+};
 
-let initialState = {}
-
-const UserProvider: FC<{children: ReactElement}> = ({children}) => {
-  const [state, setState] = useState(initialState)
-
-  return (
-    <UserContext.Provider value={[state, setState]}>
-      {children}
-    </UserContext.Provider>
-  )
+type UserContext = {
+  user: User;
+  setUser: React.Dispatch<React.SetStateAction<User>>;
 }
 
-export { UserContext, UserProvider }
+type User = {
+  firstName: string;
+  lastName: string;
+  token: string | null;
+};
+
+const UserContext = React.createContext({} as UserContext);
+
+
+const UserProvider = ({ children }: UserProviderType) => {
+  const [user, setUser] = useState<User>({
+    firstName: "",
+    lastName: "",
+    token: "",
+  });
+
+  const values = useMemo(() => ({
+    user,
+    setUser,
+  }), [user, setUser])
+
+  return (
+    <UserContext.Provider value={values}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export { UserContext, UserProvider };

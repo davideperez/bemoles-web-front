@@ -62,7 +62,7 @@ const EventDetail = () => {
           <Formik
             initialValues={{
               title: event?.title || "",
-              flyer: event?.flyer || "",
+              flyer: event?.image || "",
               date: event?.date || new Date(),
               info: event?.info || "",
               price: event?.price || 0,
