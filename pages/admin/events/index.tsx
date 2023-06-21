@@ -15,8 +15,10 @@ import {
   Text,
   Th,
   Thead,
+  Toast,
   Tooltip,
   Tr,
+  useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, ChangeEvent } from "react";
@@ -36,6 +38,7 @@ const EventsPage = () => {
   const { page: PageQuery, items } = router.query;
   const [itemsPerPage, setItemsPerPage] = useState<number>(Number(items) || 20);
   const [page, setPage] = useState<number>(Number(PageQuery) || 1);
+  const toast = useToast();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -56,6 +59,28 @@ const EventsPage = () => {
 
   const handleChangePageItems = (e: ChangeEvent<HTMLSelectElement>) => {
     setItemsPerPage(+e.target.value);
+  };
+
+  const deleteEvent = async (id: string) => {
+    try {
+      const eventDeleted = await eventService.deleteEvent(id);
+      if (eventDeleted) {
+        setEvents((prev) =>
+          prev?.values
+            ? { ...prev, values: prev?.values?.filter((e) => e?._id !== id) }
+            : prev
+        );
+        toast({
+          description: "Event deleted successfully",
+          status: "success",
+        });
+      }
+    } catch (err) {
+      toast({
+        description: "Error deleting event",
+        status: "error",
+      });
+    }
   };
 
   useEffect(() => {
@@ -98,58 +123,67 @@ const EventsPage = () => {
             Agregar evento
           </Button>
         </Flex>
-        <TableContainer bg="white"  px={2} borderRadius="md" mb={2}>
+        <TableContainer bg="white" px={2} borderRadius="md" mb={2}>
           <Table fontSize="15px">
             <Thead h="40px">
               <Tr>
-                <Th p={2}>Título</Th>
                 <Th p={2}>Imágen</Th>
+                <Th p={2}>Título</Th>
                 <Th p={2}>Fecha</Th>
                 <Th p={2}>Cupo maximo</Th>
                 <Th p={2}>Precio</Th>
-                <Th p={2} textAlign="center">Acciones</Th>
+                <Th p={2} textAlign="center">
+                  Acciones
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
               {events?.values?.map((event) => (
                 <Tr key={event._id}>
                   <Td p={2}>
-                    <Image src={event.image || '/images/noavail.jpg'} alt={event.title} w="50px" />
+                    <Image
+                      src={event.image || "/images/noavail.jpg"}
+                      alt={event.title}
+                      w="50px"
+                      h="50px"
+                      objectFit={"contain"}
+                    />
                   </Td>
-                  <Td p={2}>{event.title}</Td>
+                  <Td p={2} onClick={() =>
+                            router.push(`/admin/events/${event._id}`)
+                          } cursor="pointer" _hover={{
+                            opacity: 0.5,
+                          }}>{event.title}</Td>
                   <Td p={2}>{new Date(event.date).toLocaleString()}</Td>
                   <Td p={2}>{event.maxAttendance}</Td>
                   <Td p={2}>{event.price}</Td>
                   <Td p={2}>
                     <Flex w="100%" justifyContent={"center"}>
-                    <Tooltip label="Editar evento">
-
-                    <Button
-                      onClick={() => router.push(`/admin/events/${event._id}`)}
-                      size="md"
-                      bg="transparent"
-                      p={0}
-                      >
-                      <FiEdit color="#9D6E33" size={18}/>
-                    </Button>
-                        </Tooltip>
-                        <Tooltip label="Eliminar evento">
-                    <Button
-                      size="md"
-                      bg="transparent"
-                      p={0}
-                      >
-                      <FiTrash2 color="red" size={18}/>
-                    </Button>
-                    </Tooltip>
-                      </Flex>
+                      <Tooltip label="Editar evento">
+                        <Button
+                          onClick={() =>
+                            router.push(`/admin/events/${event._id}`)
+                          }
+                          size="md"
+                          bg="transparent"
+                          p={0}
+                        >
+                          <FiEdit color="#9D6E33" size={18} />
+                        </Button>
+                      </Tooltip>
+                      <Tooltip label="Eliminar evento">
+                        <Button size="md" bg="transparent" p={0} onClick={() => deleteEvent(`${event?._id}`)}>
+                          <FiTrash2 color="red" size={18} />
+                        </Button>
+                      </Tooltip>
+                    </Flex>
                   </Td>
                 </Tr>
               ))}
             </Tbody>
           </Table>
         </TableContainer>
-        <Pagination
+        {Boolean(events?.count) && <Pagination
           postsPerPage={itemsPerPage}
           totalPosts={events?.count || 0}
           currentPage={page}
@@ -160,7 +194,7 @@ const EventsPage = () => {
           justify="center"
           align="flex-end"
           showPageItem
-        />
+        />}
       </Skeleton>
     </Stack>
   );

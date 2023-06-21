@@ -26,7 +26,6 @@ const LeftBar = () => {
         </Drawer>
         {/* mobilenav */}
         <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
-       
       </>  
      )
 }

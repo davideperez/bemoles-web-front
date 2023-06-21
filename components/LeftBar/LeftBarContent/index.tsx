@@ -74,9 +74,9 @@ const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
             </NavItem>
           ))}
           </Stack>
-          {/* <Button colorScheme="orange" leftIcon={<FiLogOut />} size="sm" onClick={logout} mt="auto">
+          <Button colorScheme="orange" leftIcon={<FiLogOut />} size="sm" onClick={logout} mt="auto">
               Logout
-            </Button> */}
+            </Button> 
         </Box>
             </>
       );

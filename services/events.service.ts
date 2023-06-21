@@ -1,4 +1,5 @@
 import axios from "../config/axios";
+import { Event } from "../models/event";
 
 export const eventService = {
   getEvents: (
@@ -12,4 +13,7 @@ export const eventService = {
       }${items ? `&items=${items}` : ""}`
     ),
   getEvent: (id: string) => axios.get(`/api/eventos/${id}`),
+  createEvent: (event: FormData) => axios.post(`/api/eventos`, event),
+  updateEvent: (id: string, event: FormData) => axios.put(`/api/eventos/${id}`, event),
+  deleteEvent: (id: string) => axios.delete(`/api/eventos/${id}`),
 };

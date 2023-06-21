@@ -7,6 +7,7 @@ import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const router = useRouter();
+  
   useEffect(() => {
     router.push('/admin/events');
   }, [router])
