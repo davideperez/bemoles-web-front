@@ -23,6 +23,11 @@ import { Event } from "../../../../models/event";
 import Head from "next/head";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
+const formatDate = (date: any) => {
+  const newDate = new Date(date)
+  return newDate.toISOString().substring(0, 16)
+}
+
 const EventDetail = () => {
   const [event, setEvent] = useState<Event>();
   const [image, setImage] = useState<File>();
@@ -116,8 +121,8 @@ const EventDetail = () => {
                 title: event?.title || "",
                 image: event?.image || "",
                 date: event?.date
-                  ? new Date(event?.date).toISOString().substring(0, 16)
-                  : new Date().toISOString().substring(0, 16),
+                  ? formatDate(event?.date)
+                  : formatDate(new Date()),
                 info: event?.info || "",
                 price: event?.price || 0,
                 maxAttendance: event?.maxAttendance || 0,
@@ -125,7 +130,7 @@ const EventDetail = () => {
               }}
               onSubmit={handleSubmit}
             >
-              {({ handleSubmit, values, isSubmitting }) => (
+              {({ handleSubmit, values, isSubmitting, setFieldValue }) => (
                 <form onSubmit={handleSubmit}>
                   <Stack spacing={2}>
                     <FormControl>
@@ -148,6 +153,12 @@ const EventDetail = () => {
                         size="md"
                         type="datetime-local"
                         w="400px"
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                          const selectedDate = new Date(e.target.value);
+                          // Establecer los componentes de la fecha por separado
+                          selectedDate.setFullYear(selectedDate.getFullYear());
+                          setFieldValue('date',selectedDate.toISOString());
+                        }}
                       />
                     </FormControl>
                     <FormControl>
@@ -174,7 +185,7 @@ const EventDetail = () => {
                     </FormControl>
                     <FormControl>
                       <FormLabel>Información del evento</FormLabel>
-                      <Field as={Textarea} name="info" required w="600px" />
+                      <Field as={Textarea} name="info" required maxW="800px" minH="300px" />
                     </FormControl>
                     <FormControl>
                       <FormLabel>Valor de la entrada</FormLabel>
