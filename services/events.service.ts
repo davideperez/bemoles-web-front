@@ -1,14 +1,14 @@
 import axios from "../config/axios";
-import { Event } from "../models/event";
 
 export const eventService = {
   getEvents: (
+    isWorkshop?: boolean,
     search?: string | undefined,
     page?: number | undefined,
     items?: number | undefined
   ) =>
     axios.get(
-      `/api/eventos?${search ? `search=${search}` : ""}${
+      `/api/eventos?isWorkshop=${isWorkshop}&${search ? `search=${search}` : ""}${
         page ? `&page=${page}` : ""
       }${items ? `&items=${items}` : ""}`
     ),

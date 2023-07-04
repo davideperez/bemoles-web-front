@@ -1,4 +1,10 @@
 import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
   Button,
   Flex,
   Heading,
@@ -18,11 +24,12 @@ import {
   Toast,
   Tooltip,
   Tr,
+  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { FiEdit, FiEdit2, FiTrash2 } from "react-icons/fi";
+import { FiExternalLink, FiTrash2 } from "react-icons/fi";
 import { MdOutlineSearch } from "react-icons/md";
 import { Pagination } from "../../../components/Pagination";
 import useDebounce from "../../../hooks/useDebounce";
@@ -38,12 +45,16 @@ const EventsPage = () => {
   const { page: PageQuery, items } = router.query;
   const [itemsPerPage, setItemsPerPage] = useState<number>(Number(items) || 20);
   const [page, setPage] = useState<number>(Number(PageQuery) || 1);
+  const [selectedEvent, setSelectedEvent] = useState<Event>();
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef(null)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       (async () => {
         const { data: result } = await eventService.getEvents(
+          false,
           debouncedValue,
           page,
           itemsPerPage
@@ -61,13 +72,19 @@ const EventsPage = () => {
     setItemsPerPage(+e.target.value);
   };
 
-  const deleteEvent = async (id: string) => {
+  const handleDeleteEvent = (event: Event) => {
+    onOpen();
+    setSelectedEvent(event);
+  }
+
+  const deleteEvent = async () => {
     try {
-      const eventDeleted = await eventService.deleteEvent(id);
+      if(!selectedEvent) return;
+      const eventDeleted = await eventService.deleteEvent(selectedEvent._id);
       if (eventDeleted) {
         setEvents((prev) =>
           prev?.values
-            ? { ...prev, values: prev?.values?.filter((e) => e?._id !== id) }
+            ? { ...prev, values: prev?.values?.filter((e) => e?._id !== selectedEvent._id) }
             : prev
         );
         toast({
@@ -113,7 +130,7 @@ const EventsPage = () => {
           </Stack>
           <Button
             ml="auto"
-            onClick={() => router.push(`/admin/events/add`)}
+            onClick={() => router.push(`/admin/events/edit/add`)}
             colorScheme={"telegram"}
             bg="#9D6E33"
             lineHeight={0}
@@ -154,12 +171,12 @@ const EventsPage = () => {
                           } cursor="pointer" _hover={{
                             opacity: 0.5,
                           }}>{event.title}</Td>
-                  <Td p={2}>{new Date(event.date).toLocaleString()}</Td>
+                  <Td p={2}>{event.date.toLocaleString()}</Td>
                   <Td p={2}>{event.maxAttendance}</Td>
                   <Td p={2}>{event.price}</Td>
                   <Td p={2}>
                     <Flex w="100%" justifyContent={"center"}>
-                      <Tooltip label="Editar evento">
+                      <Tooltip label="Ver detalle de evento">
                         <Button
                           onClick={() =>
                             router.push(`/admin/events/${event._id}`)
@@ -168,11 +185,11 @@ const EventsPage = () => {
                           bg="transparent"
                           p={0}
                         >
-                          <FiEdit color="#9D6E33" size={18} />
+                          <FiExternalLink color="#9D6E33" size={18} />
                         </Button>
                       </Tooltip>
                       <Tooltip label="Eliminar evento">
-                        <Button size="md" bg="transparent" p={0} onClick={() => deleteEvent(`${event?._id}`)}>
+                        <Button size="md" bg="transparent" p={0} onClick={() => handleDeleteEvent(event)}>
                           <FiTrash2 color="red" size={18} />
                         </Button>
                       </Tooltip>
@@ -196,6 +213,32 @@ const EventsPage = () => {
           showPageItem
         />}
       </Skeleton>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Eliminar evento: {selectedEvent?.title}
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              ¿Esta seguro que desea eliminar este evento? No podras revertir este cambio luego.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancelar
+              </Button>
+              <Button colorScheme='red' onClick={deleteEvent} ml={3}>
+                Eliminar
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Stack>
   );
 };

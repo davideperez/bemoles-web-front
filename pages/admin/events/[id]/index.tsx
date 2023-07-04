@@ -1,5 +1,12 @@
 import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
   Button,
+  Divider,
   Flex,
   FormControl,
   FormLabel,
@@ -12,7 +19,9 @@ import {
   InputRightElement,
   Skeleton,
   Stack,
+  Text,
   Textarea,
+  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import { Field, Formik } from "formik";
@@ -22,17 +31,21 @@ import { eventService } from "../../../../services/events.service";
 import { Event } from "../../../../models/event";
 import Head from "next/head";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import Link from "next/link";
 
 const formatDate = (date: any) => {
-  const newDate = new Date(date)
-  return newDate.toISOString().substring(0, 16)
-}
+  if (!date) return '';
+  const newDate = new Date(date);
+  return newDate?.toISOString().substring(0, 16);
+};
 
 const EventDetail = () => {
   const [event, setEvent] = useState<Event>();
-  const [image, setImage] = useState<File>();
   const router = useRouter();
   const toast = useToast();
+  const [selectedEvent, setSelectedEvent] = useState<Event>();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef(null)
 
   useEffect(() => {
     if (
@@ -47,37 +60,29 @@ const EventDetail = () => {
     }
   }, [router.query.id]);
 
-  const handleSubmit = async (values: Partial<Event>) => {
+  const handleDeleteEvent = (event?: Event) => {
+    if (!event) return;
+    onOpen();
+    setSelectedEvent(event);
+  }
+
+  const deleteEvent = async () => {
     try {
-      let event;
-      const form = new FormData();
-      if (image) form.append("image", image);
-      for (const value of Object.keys(values)) {
-        if (value !== "image") 
-          form.append(value, `${values[value as keyof typeof values]}`);
-      }
-      if (router.query.id !== 'add') {
-        event = await eventService.updateEvent(`${router.query.id}`, form);
-      } else {
-        event = await eventService.createEvent(form);
-      }
-      if (event) {
+      if(!selectedEvent) return;
+      const eventDeleted = await eventService.deleteEvent(selectedEvent._id);
+      if (eventDeleted) {
         toast({
-          description: `El evento se ha ${
-            router.query.id !== 'add' ? "editado" : "creado"
-          } exitosamente`,
+          description: "Event deleted successfully",
           status: "success",
         });
-        router.push("/admin/events");
       }
     } catch (err) {
       toast({
-        description: `Ha ocurrido un error y el evento no se ha podido ${
-          router.query.id !== 'add' ? "editar" : "crear"
-        } exitosamente`,
+        description: "Error deleting event",
         status: "error",
       });
     }
+    router.replace('/admin/events')
   };
 
   return (
@@ -85,12 +90,9 @@ const EventDetail = () => {
       <Head>
         <title>
           {!event
-            ? "Cargando..."
-            : `${
-                router.query.id === "add"
-                  ? "Crear evento"
-                  : `Editar evento: ${event.title}`
-              }}`}{" "}
+            ? "Cargando... "
+            : `${event.title} `
+              }
           | Los bemoles
         </title>
       </Head>
@@ -110,144 +112,62 @@ const EventDetail = () => {
               onClick={() => router.push("/admin/events")}
             />
             <Heading>
-              {router.query.id === "add"
-                ? "Crear evento"
-                : `Editar evento: ${event?.title}`}
+              Event: {`${event?.title}`}
             </Heading>
           </Flex>
-          <Stack bg={"white"} p={8} borderRadius="xl">
-            <Formik
-              initialValues={{
-                title: event?.title || "",
-                image: event?.image || "",
-                date: event?.date
-                  ? formatDate(event?.date)
-                  : formatDate(new Date()),
-                info: event?.info || "",
-                price: event?.price || 0,
-                maxAttendance: event?.maxAttendance || 0,
-                paymentLink: event?.paymentLink || "",
-              }}
-              onSubmit={handleSubmit}
-            >
-              {({ handleSubmit, values, isSubmitting, setFieldValue }) => (
-                <form onSubmit={handleSubmit}>
-                  <Stack spacing={2}>
-                    <FormControl>
-                      <FormLabel>Titulo</FormLabel>
-                      <Field
-                        as={Input}
-                        type="text"
-                        name="title"
-                        required
-                        w="400px"
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Fecha</FormLabel>
-                      <Field
-                        as={Input}
-                        value={values.date}
-                        name="date"
-                        placeholder="Select Date and Time"
-                        size="md"
-                        type="datetime-local"
-                        w="400px"
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                          const selectedDate = new Date(e.target.value);
-                          // Establecer los componentes de la fecha por separado
-                          selectedDate.setFullYear(selectedDate.getFullYear());
-                          setFieldValue('date',selectedDate.toISOString());
-                        }}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel pb={2}>Imagen (Tamaño máximo 2 mb)</FormLabel>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        maxLength={2097152}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                          if (e?.target?.files?.[0])
-                            setImage(e.target.files[0]);
-                        }}
-                      />
-                      <Image
-                        src={image ? URL.createObjectURL(image) : values?.image || ''}
-                        alt={values.title}
-                        boxSize="150px"
-                        mt={4}
-                        border="1px solid"
-                        borderColor="gray.300"
-                        borderRadius="xl"
-                        objectFit={"contain"}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Información del evento</FormLabel>
-                      <Field as={Textarea} name="info" required maxW="800px" minH="300px" />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Valor de la entrada</FormLabel>
-                      <InputGroup>
-                        <InputLeftElement
-                          pointerEvents="none"
-                          color="gray.300"
-                          fontSize="1.2em"
-                          children="$" //eslint-disable-line react/no-children-prop
-                        />
-                        <Field
-                          as={Input}
-                          name="price"
-                          type="number"
-                          required
-                          w="120px"
-                          pl={10}
-                        />
-                      </InputGroup>
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Cupo máximo</FormLabel>
-                      <Field
-                        as={Input}
-                        name="maxAttendance"
-                        type="number"
-                        required
-                        w="120px"
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Link de pago</FormLabel>
-                      <Field
-                        as={Input}
-                        name="paymentLink"
-                        type="text"
-                        required
-                        w="400px"
-                      />
-                    </FormControl>
-                    <Flex justifyContent={"flex-end"}>
-                      <Button
-                        type="submit"
-                        w="fit-content"
-                        ml="auto"
-                        mt={4}
-                        bg="#9D6E33"
-                        color="white"
-                        _hover={{
-                          opacity: 0.5,
-                        }}
-                        isLoading={isSubmitting}
-                      >
-                        Guardar
-                      </Button>
-                    </Flex>
-                  </Stack>
-                </form>
-              )}
-            </Formik>
+          <Stack bg={"white"} p={8} borderRadius="xl" spacing={6}>
+            <Flex>
+            <Image src={event?.image} alt={event?.title} w={500} h={300} objectFit="contain" objectPosition={"top"} mr={8} />
+            <Stack spacing={4}>
+              <Stack>
+              <Heading as="h2" fontSize="3xl">{event?.title}</Heading>
+              <Text as="span" mt="0px !important" fontSize="15px" fontStyle={"italic"}>Creado el {formatDate(event?.date)}</Text>
+              </Stack>
+              <Text as="pre" fontFamily="unset" fontSize="md"  minH="100px">{event?.info}</Text>
+              <Divider />
+              <Stack spacing={0}>
+              <Text as="span"><b>Cupo:</b> {event?.maxAttendance}</Text>
+              <Text as="span"><b>Precio:</b> ${event?.price}</Text>
+              <Text as="span"><b>Link de pago:</b> {event?.paymentLink}</Text>
+              </Stack>
+            </Stack>
+            
+            </Flex>
+            <Flex justifyContent={"center"} gap={4}>
+              <Link href={`/admin/events/edit/${event?._id}`}>
+              <Button bg="#9D6E33" color="white" _hover={{opacity: 0.5}}>Editar evento</Button>
+              </Link>
+              <Button bg="#9D6E33" color="white" _hover={{opacity: 0.5}}>Ver reservas</Button>
+              <Button colorScheme="red" onClick={() => handleDeleteEvent(event)}>Eliminar evento</Button>
+            </Flex>
           </Stack>
         </Stack>
+        <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Eliminar evento: {selectedEvent?.title}
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              ¿Esta seguro que desea eliminar este evento? No podras revertir este cambio luego.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancelar
+              </Button>
+              <Button colorScheme='red' onClick={deleteEvent} ml={3}>
+                Eliminar
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
       </Skeleton>
     </>
   );
