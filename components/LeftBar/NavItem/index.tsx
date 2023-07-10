@@ -8,14 +8,14 @@ import { toASCII } from "punycode";
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: React.ReactNode;
-  to: string;
+  to?: string;
   isSelected: boolean;
 }
 
 const NavItem = ({ icon, to, isSelected, children, ...rest }: NavItemProps) => {
   return (
+    to ? 
     <NextLink href={to}>
-
       <Flex
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
@@ -42,7 +42,32 @@ const NavItem = ({ icon, to, isSelected, children, ...rest }: NavItemProps) => {
         )}
         {children}
       </Flex>
-    </NextLink>
+    </NextLink> :   
+    <Flex
+      style={{ textDecoration: "none" }}
+      _focus={{ boxShadow: "none" }}
+        align="center"
+        p="3"
+        mx="4"
+        my={1}
+        borderRadius="2xl"
+        role="group"
+        cursor="pointer"
+        w="100%"
+        _hover={{
+          bg: "gray.200",
+        }}
+        {...rest}
+      >
+        {icon && (
+          <Icon
+            mr="4"
+            fontSize="16"
+            as={icon}
+          />
+        )}
+        {children}
+      </Flex>
   );
 };
 
