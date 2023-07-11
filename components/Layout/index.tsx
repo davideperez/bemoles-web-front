@@ -7,6 +7,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { removeToken, setToken } from "../../config/localStorage";
 import { UserContext } from "../../context/userContext";
 import { authService } from "../../services/auth.service";
 import LeftBar from "../LeftBar";
@@ -27,7 +28,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
           setUser((oldValues) => {
             return { ...oldValues, token: data.token, firstName: data.firstName, lastName: data.lastName};
           });
+          setToken(data.token)
         } else {
+          setToken('')
           setUser((oldValues) => {
             return { ...oldValues, token: null };
           });
@@ -38,6 +41,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       })
       .catch((error) => {
         console.log(error);
+        setToken('')
         router.replace("/admin/login");
       });
   }, [setUser, router]);
@@ -50,18 +54,21 @@ const Layout = ({ children }: { children: ReactNode }) => {
     }
   }, [verifyUser]);
 
-     const syncLogout = useCallback((event: any) => {
+     const syncLogout = (event: any) => {
+      console.log('eventKey', event.key)
       if (event.key === "logout") {
-        window.location.reload()
+        removeToken();
+        router.replace('/admin/login');
+        setIsLoading(false);
       }
-    }, [])
+    }
   
     useEffect(() => {
       window.addEventListener("storage", syncLogout)
       return () => {
         window.removeEventListener("storage", syncLogout)
       }
-    }, [syncLogout])
+    }, [])
 
   return (
     <div>

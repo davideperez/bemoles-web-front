@@ -250,6 +250,7 @@ const EventDetail = () => {
                         name="active"
                         size="md"
                         ml={2}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => setFieldValue('active', event.target.checked)}
                       />
                     </FormControl>
                     <Flex justifyContent={"flex-end"}>

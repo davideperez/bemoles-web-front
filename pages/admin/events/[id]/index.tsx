@@ -130,7 +130,7 @@ const EventDetail = () => {
               onClick={() => router.push("/admin/events")}
             />
             <Heading>
-              Event: {`${event?.title}`}
+              Evento: {`${event?.title}`}
             </Heading>
           </Flex>
           <Stack bg={"white"} p={8} borderRadius="xl" spacing={6}>
@@ -190,10 +190,10 @@ const EventDetail = () => {
       <Modal isOpen={modalIsOpen} onClose={modalOnClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Reservas de evento: {event?.title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody mb={8}>
-          {event?.reserves?.length ? <Table fontSize="15px">
+         <Table fontSize="15px">
                   <Thead h="40px">
                     <Tr>
                       <Th p={2}>Nombre y apellido</Th>
@@ -207,7 +207,7 @@ const EventDetail = () => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {event?.reserves?.map((reserve) => (
+                    {event?.reserves?.length ? event?.reserves?.map((reserve) => (
                       <Tr key={event._id}>
                         <Td p={2}>
                           {`${reserve.firstName} ${reserve.lastName}`}
@@ -240,9 +240,9 @@ const EventDetail = () => {
                           </Flex>
                         </Td>
                       </Tr>
-                    ))}
+                    )) : <Tr><Td colSpan={10} textAlign="center">No hay reservas en el evento.</Td></Tr>}
                   </Tbody>
-                </Table> : <div>No hay reservaciones para el evento seleccionado.</div>}
+                </Table>
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -32,6 +32,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { UserContext } from "../../../context/userContext";
 import { authService } from "../../../services/auth.service";
+import { removeToken } from "../../../config/localStorage";
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;
@@ -60,13 +61,14 @@ const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
   const { setUser } = useContext(UserContext);
 
   const logout = async () => {
-
     try {
       await authService.logout();
       setUser((oldValues: any) => {
         return { ...oldValues, details: undefined, token: null }
       })
       window.localStorage.setItem("logout", `${Date.now()}`)
+      removeToken();
+      router.replace('/admin/login');
     } catch (e) {
       console.log(e);
     }

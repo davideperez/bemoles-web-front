@@ -20,6 +20,7 @@ import { useFormik } from "formik";
 import { authService } from "../../../services/auth.service";
 import { UserContext } from "../../../context/userContext";
 import { useRouter } from "next/router";
+import { setToken } from "../../../config/localStorage";
 
 const AdminLoginPage = () => {
   const router = useRouter();
@@ -33,6 +34,7 @@ const AdminLoginPage = () => {
       const { data: userData } = await authService.login(userCredentials);
       if (userData) {
         setUser(userData);
+        setToken(userData.token)
         console.log({ userData });
         router.push("/");
       }

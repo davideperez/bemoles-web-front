@@ -104,7 +104,7 @@ const EventsPage = () => {
             });
         } else {
           if (oldEvents)
-            setNextEvents({
+            setOldEvents({
               ...oldEvents,
               values: oldEvents?.values.map((e) =>
                 e._id === eventId ? { ...e, active } : e
