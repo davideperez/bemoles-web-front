@@ -29,12 +29,7 @@ import Head from "next/head";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Link from "next/link";
 import { FiExternalLink } from "react-icons/fi";
-
-const formatDate = (date: any) => {
-  if (!date) return "";
-  const newDate = new Date(date);
-  return newDate?.toISOString().substring(0, 16);
-};
+import { formatDate } from "../../../../utils/functions";
 
 const ProjectDetail = () => {
   const [project, setProject] = useState<Project>();

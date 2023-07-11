@@ -12,6 +12,8 @@ import {
   InputRightElement,
   Skeleton,
   Stack,
+  Switch,
+  Text,
   Textarea,
   useToast,
 } from "@chakra-ui/react";
@@ -109,7 +111,7 @@ const EventDetail = () => {
               _hover={{
                 opacity: 0.5,
               }}
-              onClick={() => router.push(`/admin/events/${event?._id || ''}`)}
+              onClick={() => router.push(`/admin/events/${event?._id || ""}`)}
             />
             <Heading>
               {router.query.id === "add"
@@ -127,6 +129,7 @@ const EventDetail = () => {
                   : formatDate(new Date()),
                 info: event?.info || "",
                 price: event?.price || 0,
+                active: event?.active || false,
                 maxAttendance: event?.maxAttendance || 0,
                 paymentLink: event?.paymentLink || "",
                 isWorkshop: false,
@@ -161,6 +164,7 @@ const EventDetail = () => {
                         }}
                       />
                     </FormControl>
+                    
                     <FormControl>
                       <FormLabel pb={2}>Imagen (Tamaño máximo 2 mb)</FormLabel>
                       <input
@@ -176,7 +180,7 @@ const EventDetail = () => {
                         src={
                           image
                             ? URL.createObjectURL(image)
-                            : values?.image || ""
+                            : values?.image || "/images/noavail.jpg"
                         }
                         alt={values.title}
                         boxSize="150px"
@@ -184,7 +188,8 @@ const EventDetail = () => {
                         border="1px solid"
                         borderColor="gray.300"
                         borderRadius="xl"
-                        objectFit={"contain"}
+                        objectFit="contain"
+                        objectPosition="center"
                       />
                     </FormControl>
                     <FormControl>
@@ -226,6 +231,7 @@ const EventDetail = () => {
                         w="120px"
                       />
                     </FormControl>
+
                     <FormControl>
                       <FormLabel>Link de pago</FormLabel>
                       <Field
@@ -233,6 +239,17 @@ const EventDetail = () => {
                         name="paymentLink"
                         type="text"
                         w="400px"
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>
+                        Activo
+                      </FormLabel>
+                      <Switch
+                        defaultChecked={values.active}
+                        name="active"
+                        size="md"
+                        ml={2}
                       />
                     </FormControl>
                     <Flex justifyContent={"flex-end"}>

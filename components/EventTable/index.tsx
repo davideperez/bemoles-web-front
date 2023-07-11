@@ -31,9 +31,10 @@ import {
   } from "@chakra-ui/react";
 import { FiExternalLink, FiTrash2 } from 'react-icons/fi';
 import { EventTableProps } from './types';
+import { formatDate } from '../../utils/functions';
 
 
-const EventTable: FC<EventTableProps> = ({events, handleLinkDetailEvent, updateActive, handleDeleteEvent}) => {
+const EventTable: FC<EventTableProps> = ({events, handleLinkDetailEvent, updateActive, handleDeleteEvent, isWorkshop}) => {
   return (
     <TableContainer bg="white" px={2} borderRadius="md" mb={2}>
     <Table fontSize="15px">
@@ -62,10 +63,10 @@ const EventTable: FC<EventTableProps> = ({events, handleLinkDetailEvent, updateA
                 objectFit={"contain"}
               />
             </Td>
-            <Td p={2} onClick={() => handleLinkDetailEvent(`/admin/events/${event._id}`)} cursor="pointer" _hover={{
+            <Td p={2} onClick={() => handleLinkDetailEvent(`/admin/${isWorkshop ? 'workshops': 'events'}/${event._id}`)} cursor="pointer" _hover={{
                       opacity: 0.5,
                     }}>{event.title}</Td>
-            <Td p={2}>{event.date.toLocaleString()}</Td>
+            <Td p={2}>{formatDate(event.date)}</Td>
             <Td p={2}>{event.maxAttendance}</Td>
             <Td p={2}>{event.price}</Td>
             <Td p={2} textAlign="center"><Switch
@@ -78,10 +79,10 @@ const EventTable: FC<EventTableProps> = ({events, handleLinkDetailEvent, updateA
 
             <Td p={2}>
               <Flex w="100%" justifyContent={"center"}>
-                <Tooltip label="Ver detalle de evento">
+                <Tooltip label={`Ver detalle de ${isWorkshop ? 'taller': 'evento'}`}>
                   <Button
                     onClick={() =>
-                        handleLinkDetailEvent(`/admin/events/${event._id}`)
+                        handleLinkDetailEvent(`/admin/${isWorkshop ? 'workshops': 'events'}/${event._id}`)
                     }
                     size="md"
                     bg="transparent"
@@ -90,7 +91,7 @@ const EventTable: FC<EventTableProps> = ({events, handleLinkDetailEvent, updateA
                     <FiExternalLink color="#9D6E33" size={18} />
                   </Button>
                 </Tooltip>
-                <Tooltip label="Eliminar evento">
+                <Tooltip label={`Eliminar ${isWorkshop ? 'taller': 'evento'}`}>
                   <Button size="md" bg="transparent" p={0} onClick={() => handleDeleteEvent(event)}>
                     <FiTrash2 color="red" size={18} />
                   </Button>

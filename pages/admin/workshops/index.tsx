@@ -14,6 +14,7 @@ import {
   InputLeftElement,
   Skeleton,
   Stack,
+  Switch,
   Table,
   TableContainer,
   Tbody,
@@ -31,14 +32,17 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { FiExternalLink, FiTrash2 } from "react-icons/fi";
 import { MdOutlineSearch } from "react-icons/md";
+import EventTable from "../../../components/EventTable";
 import { Pagination } from "../../../components/Pagination";
 import useDebounce from "../../../hooks/useDebounce";
 import { ApiBase } from "../../../models/apiBase";
 import { Event } from "../../../models/event";
 import { eventService } from "../../../services/events.service";
+import { formatDate } from "../../../utils/functions";
 
 const WorkshopsPage = () => {
-  const [events, setEvents] = useState<ApiBase<Event>>();
+  const [oldEvents, setOldEvents] = useState<ApiBase<Event>>();
+  const [nextEvents, setNextEvents] = useState<ApiBase<Event>>();
   const [searchValue, setSearchValue] = useState<string>("");
   const debouncedValue = useDebounce(searchValue, 300);
   const router = useRouter();
@@ -59,7 +63,21 @@ const WorkshopsPage = () => {
           page,
           itemsPerPage
         );
-        setEvents(result);
+        if (result) {
+          const today = new Date();
+          setOldEvents({
+            ...result,
+            values: result.values.filter(
+              (value: Event) => new Date(value.date) < today
+            ),
+          });
+          setNextEvents({
+            ...result,
+            values: result.values.filter(
+              (value: Event) => new Date(value.date) >= today
+            ),
+          });
+        }
       })();
     }
   }, [debouncedValue, page, itemsPerPage]);
@@ -77,16 +95,69 @@ const WorkshopsPage = () => {
     setSelectedEvent(event);
   }
 
+  const updateActive = async (eventId: string, active: boolean) => {
+    try {
+      if (!(nextEvents || oldEvents) || !eventId) return;
+      const eventUpdated = await eventService.updateEventStatus(eventId);
+      if (eventUpdated) {
+        if (nextEvents?.values?.some((v) => v._id === eventId)) {
+          if (nextEvents)
+            setNextEvents({
+              ...nextEvents,
+              values: nextEvents?.values.map((e) =>
+                e._id === eventId ? { ...e, active } : e
+              ),
+            });
+        } else {
+          if (oldEvents)
+            setNextEvents({
+              ...oldEvents,
+              values: oldEvents?.values.map((e) =>
+                e._id === eventId ? { ...e, active } : e
+              ),
+            });
+        }
+        toast({
+          description: `¡El evento se ha editado exitosamente!`,
+          status: "success",
+        });
+      }
+    } catch (err) {
+      toast({
+        description: `Ha ocurrido un error y el evento no se ha podido editar.`,
+        status: "error",
+      });
+    }
+  };
+
   const deleteEvent = async () => {
     try {
       if(!selectedEvent) return;
       const eventDeleted = await eventService.deleteEvent(selectedEvent._id);
       if (eventDeleted) {
-        setEvents((prev) =>
-          prev?.values
-            ? { ...prev, values: prev?.values?.filter((e) => e?._id !== selectedEvent._id) }
-            : prev
-        );
+        if (nextEvents?.values?.some((v) => v._id === selectedEvent._id)) {
+          setNextEvents((prev) =>
+            prev?.values
+              ? {
+                  ...prev,
+                  values: prev?.values?.filter(
+                    (e) => e?._id !== selectedEvent._id
+                  ),
+                }
+              : prev
+          );
+        } else {
+          setOldEvents((prev) =>
+            prev?.values
+              ? {
+                  ...prev,
+                  values: prev?.values?.filter(
+                    (e) => e?._id !== selectedEvent._id
+                  ),
+                }
+              : prev
+          );
+        }
         toast({
           description: "Event deleted successfully",
           status: "success",
@@ -108,7 +179,7 @@ const WorkshopsPage = () => {
   return (
     <Stack spacing={4}>
       <Heading>Talleres</Heading>
-      <Skeleton isLoaded={!!events?.values}>
+      <Skeleton isLoaded={!!(oldEvents || nextEvents)?.values}>
         <Flex justifyContent={"space-between"} mb={4} alignItems="center">
           <Stack w="100%">
             <InputGroup w="300px">
@@ -140,69 +211,40 @@ const WorkshopsPage = () => {
             Agregar taller
           </Button>
         </Flex>
-        <TableContainer bg="white" px={2} borderRadius="md" mb={2}>
-          <Table fontSize="15px">
-            <Thead h="40px">
-              <Tr>
-                <Th p={2}>Imágen</Th>
-                <Th p={2}>Título</Th>
-                <Th p={2}>Fecha</Th>
-                <Th p={2}>Cupo maximo</Th>
-                <Th p={2}>Precio</Th>
-                <Th p={2} textAlign="center">
-                  Acciones
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {events?.values?.map((event) => (
-                <Tr key={event._id}>
-                  <Td p={2}>
-                    <Image
-                      src={event.image || "/images/noavail.jpg"}
-                      alt={event.title}
-                      w="50px"
-                      h="50px"
-                      objectFit={"contain"}
-                    />
-                  </Td>
-                  <Td p={2} onClick={() =>
-                            router.push(`/admin/workshops/${event._id}`)
-                          } cursor="pointer" _hover={{
-                            opacity: 0.5,
-                          }}>{event.title}</Td>
-                  <Td p={2}>{event.date.toLocaleString()}</Td>
-                  <Td p={2}>{event.maxAttendance}</Td>
-                  <Td p={2}>{event.price}</Td>
-                  <Td p={2}>
-                    <Flex w="100%" justifyContent={"center"}>
-                      <Tooltip label="Ver detalle de taller">
-                        <Button
-                          onClick={() =>
-                            router.push(`/admin/workshops/${event._id}`)
-                          }
-                          size="md"
-                          bg="transparent"
-                          p={0}
-                        >
-                          <FiExternalLink color="#9D6E33" size={18} />
-                        </Button>
-                      </Tooltip>
-                      <Tooltip label="Eliminar taller">
-                        <Button size="md" bg="transparent" p={0} onClick={() => handleDeleteEvent(event)}>
-                          <FiTrash2 color="red" size={18} />
-                        </Button>
-                      </Tooltip>
-                    </Flex>
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
-        {Boolean(events?.count) && <Pagination
+        <Stack spacing={5} mb={4}>
+          {Boolean(nextEvents?.values?.length) && (
+            <Stack spacing={3}>
+              <Heading as="h2" fontSize="lg">
+                Proximos talleres
+              </Heading>
+              <EventTable
+                events={nextEvents}
+                handleLinkDetailEvent={(eventId: string) =>
+                  router.push(eventId)
+                }
+                updateActive={updateActive}
+                handleDeleteEvent={handleDeleteEvent}
+                isWorkshop
+              />
+            </Stack>
+          )}
+          <Stack spacing={3}>
+            <Heading as="h2" fontSize="lg">
+              Talleres anteriores
+            </Heading>
+            <EventTable
+              events={oldEvents}
+              handleLinkDetailEvent={(eventId: string) => router.push(eventId)}
+              updateActive={updateActive}
+              handleDeleteEvent={handleDeleteEvent}
+              isWorkshop
+
+            />
+          </Stack>
+        </Stack>
+        {Boolean(oldEvents?.count) && <Pagination
           postsPerPage={itemsPerPage}
-          totalPosts={events?.count || 0}
+          totalPosts={oldEvents?.count || 0}
           currentPage={page}
           pageNeighbours={3}
           changePage={handleChangePage}

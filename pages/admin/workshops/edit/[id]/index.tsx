@@ -12,6 +12,7 @@ import {
   InputRightElement,
   Skeleton,
   Stack,
+  Switch,
   Textarea,
   useToast,
 } from "@chakra-ui/react";
@@ -130,6 +131,7 @@ const EventDetail = () => {
                 maxAttendance: event?.maxAttendance || 0,
                 paymentLink: event?.paymentLink || "",
                 isWorkshop: true,
+                active: event?.active || false
               }}
               onSubmit={handleSubmit}
             >
@@ -233,6 +235,17 @@ const EventDetail = () => {
                         name="paymentLink"
                         type="text"
                         w="400px"
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>
+                        Activo
+                      </FormLabel>
+                      <Switch
+                        defaultChecked={values.active}
+                        name="active"
+                        size="md"
+                        ml={2}
                       />
                     </FormControl>
                     <Flex justifyContent={"flex-end"}>

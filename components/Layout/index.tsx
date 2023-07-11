@@ -50,6 +50,19 @@ const Layout = ({ children }: { children: ReactNode }) => {
     }
   }, [verifyUser]);
 
+     const syncLogout = useCallback((event: any) => {
+      if (event.key === "logout") {
+        window.location.reload()
+      }
+    }, [])
+  
+    useEffect(() => {
+      window.addEventListener("storage", syncLogout)
+      return () => {
+        window.removeEventListener("storage", syncLogout)
+      }
+    }, [syncLogout])
+
   return (
     <div>
       <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>

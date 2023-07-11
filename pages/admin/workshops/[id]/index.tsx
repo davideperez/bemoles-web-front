@@ -157,9 +157,6 @@ const EventDetail = () => {
                   Editar taller
                 </Button>
               </Link>
-              <Button bg="#9D6E33" color="white" _hover={{ opacity: 0.5 }}>
-                Ver reservas
-              </Button>
               <Button
                 colorScheme="red"
                 onClick={() => handleDeleteEvent(event)}

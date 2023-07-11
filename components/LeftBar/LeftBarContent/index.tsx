@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import {
   Accordion,
   AccordionItem,
@@ -30,6 +30,8 @@ import { HiOutlineTicket } from "react-icons/hi";
 import Logo from "../../Login/Logo";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { UserContext } from "../../../context/userContext";
+import { authService } from "../../../services/auth.service";
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;
@@ -39,7 +41,6 @@ interface LinkItemProps {
   name: string;
   icon: IconType;
   link: string;
-  subOptions?: LinkItemProps[];
 }
 
 const LinkItems: Array<LinkItemProps> = [
@@ -49,29 +50,28 @@ const LinkItems: Array<LinkItemProps> = [
   {
     name: "Reservas",
     icon: HiOutlineTicket,
-    link: "/admin/reserves",
-    subOptions: [
-      {
-        name: "Eventos",
-        icon: HiOutlineTicket,
-        link: "/admin/reserves/events",
-      },
-      {
-        name: "Talleres",
-        icon: HiOutlineTicket,
-        link: "/admin/reserves/workshops",
-      },
-    ],
+    link: "/admin/reserves/events",
   },
   { name: "Proyectos", icon: MdLightbulbOutline, link: "/admin/projects" },
 ];
 
 const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
   const router = useRouter();
+  const { setUser } = useContext(UserContext);
 
-  const logout = () => {
-    console.log("logout");
+  const logout = async () => {
+
+    try {
+      await authService.logout();
+      setUser((oldValues: any) => {
+        return { ...oldValues, details: undefined, token: null }
+      })
+      window.localStorage.setItem("logout", `${Date.now()}`)
+    } catch (e) {
+      console.log(e);
+    }
   };
+
   return (
     <>
       <Box
@@ -96,61 +96,40 @@ const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
             onClick={onClose}
           />
         </Flex>
-        <Stack spacing={0} h="90%">
-          {LinkItems.map((link) =>
-            !link.subOptions?.length ? (
-              <NavItem
-                key={link.name}
-                icon={link.icon}
-                to={link.link}
-                isSelected={router.asPath.includes(link.link)}
-              >
-                {link.name}
-              </NavItem>
-            ) : (
-              <Accordion w="full" allowToggle key={"link" + link.name}>
-                <AccordionItem border={0}>
-                  <AccordionButton
-                    p={0}
-                    w="full"
-                    justifyContent="space-between"
-                    _hover={{bg: "transparent"}}
-                  >
-                    <NavItem
-                      key={link.name}
-                      icon={link.icon}
-                      isSelected={router.asPath.includes(link.link)}
-                    >
-                      {link.name}
-                    <AccordionIcon ml="auto" />
-                    </NavItem>
-                  </AccordionButton>
-                  <AccordionPanel p={0} pl={5} pr={5}>
-                    {link.subOptions?.map((item, index) => (
-                      <NavItem
-                        key={item.name}
-                        icon={item.icon}
-                        to={item.link}
-                        isSelected={router.asPath.includes(item.link)}
-                    >
-                      {item.name}
-                    </NavItem>
-                    ))}
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
-            )
-          )}
+        <Stack spacing={0} flexGrow={1}>
+          {LinkItems.map((link) => (
+            <NavItem
+              key={link.name}
+              icon={link.icon}
+              to={link.link}
+              isSelected={router.asPath.includes(link.link)}
+            >
+              {link.name}
+            </NavItem>
+          ))}
         </Stack>
-        <Button
-          colorScheme="orange"
-          leftIcon={<FiLogOut />}
-          size="sm"
-          onClick={logout}
-          mt="auto"
+        <Flex
+          w="100%"
+          bottom="10px"
+          left="0px"
+          position="absolute"
+          justifyContent={"center"}
         >
-          Logout
-        </Button>
+          <Button
+            colorScheme="orange"
+            leftIcon={<FiLogOut />}
+            size="md"
+            onClick={logout}
+            mt="auto"
+            bg="#9D6E33"
+            _hover={{
+              bg:"#9D6E33",
+              opacity: 0.5,
+            }}
+          >
+            Cerrar sesión
+          </Button>
+        </Flex>
       </Box>
     </>
   );

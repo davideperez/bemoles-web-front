@@ -17,9 +17,25 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   Skeleton,
   Stack,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
   Text,
+  Th,
+  Thead,
+  Toast,
+  Tooltip,
+  Tr,
   Textarea,
   useDisclosure,
   useToast,
@@ -32,6 +48,7 @@ import { Event } from "../../../../models/event";
 import Head from "next/head";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Link from "next/link";
+import { FiExternalLink } from "react-icons/fi";
 
 const formatDate = (date: any) => {
   if (!date) return '';
@@ -45,6 +62,7 @@ const EventDetail = () => {
   const toast = useToast();
   const [selectedEvent, setSelectedEvent] = useState<Event>();
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: modalIsOpen, onOpen: modalOnOpen, onClose: modalOnClose } = useDisclosure()
   const cancelRef = React.useRef(null)
 
   useEffect(() => {
@@ -137,7 +155,7 @@ const EventDetail = () => {
               <Link href={`/admin/events/edit/${event?._id}`}>
               <Button bg="#9D6E33" color="white" _hover={{opacity: 0.5}}>Editar evento</Button>
               </Link>
-              <Button bg="#9D6E33" color="white" _hover={{opacity: 0.5}}>Ver reservas</Button>
+              <Button bg="#9D6E33" color="white" _hover={{opacity: 0.5}} onClick={modalOnOpen}>Ver reservas</Button>
               <Button colorScheme="red" onClick={() => handleDeleteEvent(event)}>Eliminar evento</Button>
             </Flex>
           </Stack>
@@ -169,6 +187,65 @@ const EventDetail = () => {
         </AlertDialogOverlay>
       </AlertDialog>
       </Skeleton>
+      <Modal isOpen={modalIsOpen} onClose={modalOnClose} size="6xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody mb={8}>
+          {event?.reserves?.length ? <Table fontSize="15px">
+                  <Thead h="40px">
+                    <Tr>
+                      <Th p={2}>Nombre y apellido</Th>
+                      <Th p={2}>Dni</Th>
+                      <Th p={2}>Email</Th>
+                      <Th p={2}>Cantidad de entradas</Th>
+                      <Th p={2}>Fecha</Th>
+                      <Th p={2} textAlign="center">
+                        Acciones
+                      </Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {event?.reserves?.map((reserve) => (
+                      <Tr key={event._id}>
+                        <Td p={2}>
+                          {`${reserve.firstName} ${reserve.lastName}`}
+                        </Td>
+                        <Td p={2}>{reserve.dni}</Td>
+                        <Td p={2}>{reserve.email}</Td>
+                        <Td p={2}>{`${reserve.ticketQuantity}`}</Td>
+                        <Td p={2}>
+                          {event?.date ? formatDate(reserve.createdAt) : ""}
+                        </Td>
+                        <Td p={2}>
+                          <Flex w="100%" justifyContent={"center"}>
+                            <Tooltip label="Ver detalle de evento">
+                              <Button
+                                onClick={() =>
+                                  router.push(`/admin/events/${event._id}`)
+                                }
+                                size="md"
+                                bg="transparent"
+                                p={0}
+                              >
+                                <FiExternalLink color="#9D6E33" size={18} />
+                              </Button>
+                            </Tooltip>
+                            {/* <Tooltip label="Eliminar evento">
+                        <Button size="md" bg="transparent" p={0} onClick={() => handleDeleteEvent(event)}>
+                          <FiTrash2 color="red" size={18} />
+                        </Button>
+                      </Tooltip> */}
+                          </Flex>
+                        </Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table> : <div>No hay reservaciones para el evento seleccionado.</div>}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
