@@ -12,6 +12,7 @@ import {
   Input,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import Logo from "../../../components/Login/Logo";
 import { PasswordField } from "../../../components/Login/PasswordField";
@@ -21,10 +22,12 @@ import { authService } from "../../../services/auth.service";
 import { UserContext } from "../../../context/userContext";
 import { useRouter } from "next/router";
 import { setToken } from "../../../config/localStorage";
+import { AxiosError } from "axios";
 
 const AdminLoginPage = () => {
   const router = useRouter();
   const { user, setUser } = useContext(UserContext);
+  const toast = useToast();
 
   const handleSubmit = async (userCredentials: {
     username: string;
@@ -39,12 +42,18 @@ const AdminLoginPage = () => {
         router.push("/");
       }
     } catch (error) {
+      if ((error as AxiosError)?.response?.status === 401) {
+        toast({
+          status: 'error',
+          description: "Las credenciales son incorrectas"
+        })
+      }
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if (user.token) router.replace('/admin');
+    if (user.token) router.replace('/admin/events');
   }, [router, user])
 
   return (

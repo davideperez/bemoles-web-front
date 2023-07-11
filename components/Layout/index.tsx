@@ -59,7 +59,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
       if (event.key === "logout") {
         removeToken();
         router.replace('/admin/login');
-        setIsLoading(false);
       }
     }
   
@@ -75,7 +74,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
         {!router.asPath.includes("/login") ? (
           <>
-            {!user.token && !isLoading ? (
+            {!user.token ? (
               <div />
             ) : (
               <>
