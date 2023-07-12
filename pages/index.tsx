@@ -13,9 +13,9 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { AiOutlineInstagram } from "react-icons/ai";
-import Logo from "../components/Login/Logo";
 import styles from "../styles/Home.module.css";
 import { GrFacebookOption } from "react-icons/gr";
+import Logo from "../components/admin/Login/Logo";
 
 const Home: NextPage = () => {
   const router = useRouter();
