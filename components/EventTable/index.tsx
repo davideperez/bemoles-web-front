@@ -31,7 +31,7 @@ import {
 } from "@chakra-ui/react";
 import { FiExternalLink, FiTrash2 } from "react-icons/fi";
 import { EventTableProps } from "./types";
-import { formatDate } from "../../utils/functions";
+import { formatDate, formatDateTime } from "../../utils/functions";
 
 const EventTable: FC<EventTableProps> = ({
   events,
@@ -97,7 +97,7 @@ const EventTable: FC<EventTableProps> = ({
               </Td>
               {!isWorkshop && (
                 <>
-                  <Td p={2}>{formatDate(event.date)}</Td>
+                  <Td p={2}>{formatDateTime(event.date)}</Td>
                   <Td p={2}>{event.maxAttendance}</Td>
                   <Td p={2}>{event.price}</Td>
                 </>

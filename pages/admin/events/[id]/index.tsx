@@ -49,7 +49,7 @@ import Head from "next/head";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Link from "next/link";
 import { FiExternalLink } from "react-icons/fi";
-import { formatDate } from "../../../../utils/functions";
+import { formatDate, formatDateTime } from "../../../../utils/functions";
 
 const EventDetail = () => {
   const [event, setEvent] = useState<Event>();
@@ -139,6 +139,7 @@ const EventDetail = () => {
               <Text as="pre" fontFamily="unset" fontSize="md"  minH="100px">{event?.info}</Text>
               <Divider />
               <Stack spacing={0}>
+              <Text as="span"><b>Fecha:</b> {formatDateTime(event?.date)}</Text>
               <Text as="span"><b>Cupo:</b> {event?.maxAttendance}</Text>
               <Text as="span"><b>Precio:</b> ${event?.price}</Text>
               <Text as="span"><b>Link de pago:</b> {event?.paymentLink}</Text>
