@@ -27,7 +27,10 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const formatDate = (date: any) => {
   const newDate = new Date(date);
-  return newDate.toISOString().substring(0, 16);
+  const offset = newDate.getTimezoneOffset() * 60000; // Calcula el offset en milisegundos
+  const adjustedDate = new Date(newDate.getTime() - offset); // Ajusta la fecha restando el offset
+  const adjustedISOString = adjustedDate.toISOString().substring(0, 16); 
+  return adjustedISOString;
 };
 
 const EventDetail = () => {
@@ -152,17 +155,17 @@ const EventDetail = () => {
                       <Field
                         as={Input}
                         value={values.date}
-                        name="date"
                         placeholder="Select Date and Time"
                         size="md"
                         type="datetime-local"
                         w="400px"
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                          setFieldValue("date", formatDate(e.target.value));
+                          console.log(e.target.value)
+                          setFieldValue("date",e.target.value);
                         }}
                       />
                     </FormControl>
-                    
+
                     <FormControl>
                       <FormLabel pb={2}>Imagen (Tamaño máximo 2 mb)</FormLabel>
                       <input
@@ -240,15 +243,15 @@ const EventDetail = () => {
                       />
                     </FormControl>
                     <FormControl>
-                      <FormLabel>
-                        Activo
-                      </FormLabel>
+                      <FormLabel>Activo</FormLabel>
                       <Switch
                         defaultChecked={values.active}
                         name="active"
                         size="md"
                         ml={2}
-                        onChange={(event: ChangeEvent<HTMLInputElement>) => setFieldValue('active', event.target.checked)}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                          setFieldValue("active", event.target.checked)
+                        }
                       />
                     </FormControl>
                     <Flex justifyContent={"flex-end"}>
