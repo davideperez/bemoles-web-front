@@ -131,7 +131,8 @@ const EventDetail = () => {
                 maxAttendance: event?.maxAttendance || 0,
                 paymentLink: event?.paymentLink || "",
                 isWorkshop: true,
-                active: event?.active || false
+                active: event?.active || false,
+                published: event?.published || false,
               }}
               onSubmit={handleSubmit}
             >
@@ -148,7 +149,7 @@ const EventDetail = () => {
                         w="400px"
                       />
                     </FormControl>
-                    <FormControl>
+                    {/* <FormControl>
                       <FormLabel>Fecha</FormLabel>
                       <Field
                         as={Input}
@@ -162,7 +163,7 @@ const EventDetail = () => {
                           setFieldValue("date", formatDate(e.target.value));
                         }}
                       />
-                    </FormControl>
+                    </FormControl> */}
                     <FormControl>
                       <FormLabel pb={2}>Imagen (Tamaño máximo 2 mb)</FormLabel>
                       <input
@@ -200,44 +201,6 @@ const EventDetail = () => {
                       />
                     </FormControl>
                     <FormControl>
-                      <FormLabel>Valor de la entrada</FormLabel>
-                      <InputGroup>
-                        <InputLeftElement
-                          pointerEvents="none"
-                          color="gray.300"
-                          fontSize="1.2em"
-                          children="$" //eslint-disable-line react/no-children-prop
-                        />
-                        <Field
-                          as={Input}
-                          name="price"
-                          type="number"
-                          required
-                          w="120px"
-                          pl={10}
-                        />
-                      </InputGroup>
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Cupo máximo</FormLabel>
-                      <Field
-                        as={Input}
-                        name="maxAttendance"
-                        type="number"
-                        required
-                        w="120px"
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Link de pago</FormLabel>
-                      <Field
-                        as={Input}
-                        name="paymentLink"
-                        type="text"
-                        w="400px"
-                      />
-                    </FormControl>
-                    <FormControl>
                       <FormLabel>
                         Activo
                       </FormLabel>
@@ -246,6 +209,19 @@ const EventDetail = () => {
                         name="active"
                         size="md"
                         ml={2}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => setFieldValue('active', event.target.checked)}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>
+                        Published
+                      </FormLabel>
+                      <Switch
+                        defaultChecked={values.published}
+                        name="published"
+                        size="md"
+                        ml={2}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => setFieldValue('published', event.target.checked)}
                       />
                     </FormControl>
                     <Flex justifyContent={"flex-end"}>

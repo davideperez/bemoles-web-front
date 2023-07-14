@@ -15,6 +15,6 @@ export const eventService = {
   getEvent: (id: string) => axios.get(`/api/eventos/${id}`),
   createEvent: (event: FormData) => axios.post(`/api/eventos`, event),
   updateEvent: (id: string, event: FormData) => axios.put(`/api/eventos/${id}`, event),
-  updateEventStatus: (id: string) => axios.put(`/api/eventos/${id}/toggle-status`),
+  updateEventStatus: (id: string, type: string) => axios.put(`/api/eventos/${id}/toggle-status?type=${type || ''}`),
   deleteEvent: (id: string) => axios.delete(`/api/eventos/${id}`),
 };

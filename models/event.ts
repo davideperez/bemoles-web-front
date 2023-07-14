@@ -9,6 +9,7 @@ export type Event = {
   paymentLink: string;
   reserves: Reserve[];
   active: boolean;
+  published: boolean;
 };
 
 export type Reserve = {

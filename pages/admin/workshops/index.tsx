@@ -41,8 +41,9 @@ import { eventService } from "../../../services/events.service";
 import { formatDate } from "../../../utils/functions";
 
 const WorkshopsPage = () => {
-  const [oldEvents, setOldEvents] = useState<ApiBase<Event>>();
-  const [nextEvents, setNextEvents] = useState<ApiBase<Event>>();
+  const [allEvents, setAllEvents] = useState<ApiBase<Event>>();
+  const [activeEvents, setActiveEvents] = useState<ApiBase<Event>>();
+  const [inactiveEvents, setInactiveEvents] = useState<ApiBase<Event>>();
   const [searchValue, setSearchValue] = useState<string>("");
   const debouncedValue = useDebounce(searchValue, 300);
   const router = useRouter();
@@ -64,17 +65,17 @@ const WorkshopsPage = () => {
           itemsPerPage
         );
         if (result) {
-          const today = new Date();
-          setOldEvents({
+          setAllEvents(result)
+          setActiveEvents({
             ...result,
             values: result.values.filter(
-              (value: Event) => new Date(value.date) < today
+              (value: Event) => value.active
             ),
           });
-          setNextEvents({
+          setInactiveEvents({
             ...result,
             values: result.values.filter(
-              (value: Event) => new Date(value.date) >= today
+              (value: Event) => !value.active
             ),
           });
         }
@@ -95,28 +96,30 @@ const WorkshopsPage = () => {
     setSelectedEvent(event);
   }
 
-  const updateActive = async (eventId: string, active: boolean) => {
+  const updateActive = async (eventId: string, type: string, value: boolean) => {
     try {
-      if (!(nextEvents || oldEvents) || !eventId) return;
-      const eventUpdated = await eventService.updateEventStatus(eventId);
-      if (eventUpdated) {
-        if (nextEvents?.values?.some((v) => v._id === eventId)) {
-          if (nextEvents)
-            setNextEvents({
-              ...nextEvents,
-              values: nextEvents?.values.map((e) =>
-                e._id === eventId ? { ...e, active } : e
-              ),
-            });
-        } else {
-          if (oldEvents)
-            setOldEvents({
-              ...oldEvents,
-              values: oldEvents?.values.map((e) =>
-                e._id === eventId ? { ...e, active } : e
-              ),
-            });
-        }
+      if (!(inactiveEvents || activeEvents) || !eventId) return;
+      const eventUpdated = await eventService.updateEventStatus(eventId, type);
+      if (eventUpdated && allEvents) {
+        const allEventsToUpdate = {
+          ...allEvents,
+          values: allEvents?.values.map((e) =>
+            e._id === eventId ? { ...e, [type]: value } : e
+          ),
+        };
+        setAllEvents(allEventsToUpdate);
+        setActiveEvents({
+          ...allEventsToUpdate,
+          values: allEventsToUpdate.values.filter(
+            (value: Event) => value.active
+          ),
+        });
+        setInactiveEvents({
+          ...allEventsToUpdate,
+          values: allEventsToUpdate.values.filter(
+            (value: Event) => !value.active
+          ),
+        });
         toast({
           description: `¡El evento se ha editado exitosamente!`,
           status: "success",
@@ -134,9 +137,10 @@ const WorkshopsPage = () => {
     try {
       if(!selectedEvent) return;
       const eventDeleted = await eventService.deleteEvent(selectedEvent._id);
-      if (eventDeleted) {
-        if (nextEvents?.values?.some((v) => v._id === selectedEvent._id)) {
-          setNextEvents((prev) =>
+      if (eventDeleted && allEvents) {
+        setAllEvents({...allEvents, values: allEvents.values.filter(e => e._id !== selectedEvent._id )})
+        if (inactiveEvents?.values?.some((v) => v._id === selectedEvent._id)) {
+          setInactiveEvents((prev) =>
             prev?.values
               ? {
                   ...prev,
@@ -147,7 +151,7 @@ const WorkshopsPage = () => {
               : prev
           );
         } else {
-          setOldEvents((prev) =>
+          setActiveEvents((prev) =>
             prev?.values
               ? {
                   ...prev,
@@ -169,6 +173,7 @@ const WorkshopsPage = () => {
         status: "error",
       });
     }
+    onClose();
   };
 
   useEffect(() => {
@@ -179,7 +184,7 @@ const WorkshopsPage = () => {
   return (
     <Stack spacing={4}>
       <Heading>Talleres</Heading>
-      <Skeleton isLoaded={!!(oldEvents || nextEvents)?.values}>
+      <Skeleton isLoaded={!!(activeEvents || inactiveEvents)?.values}>
         <Flex justifyContent={"space-between"} mb={4} alignItems="center">
           <Stack w="100%">
             <InputGroup w="300px">
@@ -212,38 +217,39 @@ const WorkshopsPage = () => {
           </Button>
         </Flex>
         <Stack spacing={5} mb={4}>
-          {Boolean(nextEvents?.values?.length) && (
+          {Boolean(activeEvents?.values?.length) && (
             <Stack spacing={3}>
               <Heading as="h2" fontSize="lg">
-                Proximos talleres
+                Talleres activos
               </Heading>
               <EventTable
-                events={nextEvents}
+                events={activeEvents}
                 handleLinkDetailEvent={(eventId: string) =>
                   router.push(eventId)
                 }
-                updateActive={updateActive}
+                updateActive={(eventId: string, type: string, value: boolean) => updateActive(eventId, type, value)}
                 handleDeleteEvent={handleDeleteEvent}
+                hiddenColumns={[]}
                 isWorkshop
               />
             </Stack>
           )}
           <Stack spacing={3}>
             <Heading as="h2" fontSize="lg">
-              Talleres anteriores
+              Talleres latentes
             </Heading>
             <EventTable
-              events={oldEvents}
+              events={inactiveEvents}
               handleLinkDetailEvent={(eventId: string) => router.push(eventId)}
-              updateActive={updateActive}
+              updateActive={(eventId: string, type: string, value: boolean) => updateActive(eventId, type, value)}
               handleDeleteEvent={handleDeleteEvent}
               isWorkshop
             />
           </Stack>
         </Stack>
-        {Boolean(oldEvents?.count) && <Pagination
+        {Boolean(allEvents?.count) && <Pagination
           postsPerPage={itemsPerPage}
-          totalPosts={oldEvents?.count || 0}
+          totalPosts={allEvents?.count || 0}
           currentPage={page}
           pageNeighbours={3}
           changePage={handleChangePage}

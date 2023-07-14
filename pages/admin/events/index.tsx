@@ -89,10 +89,10 @@ const EventsPage = () => {
     setItemsPerPage(+e.target.value);
   };
 
-  const updateActive = async (eventId: string, active: boolean) => {
+  const updateActive = async (eventId: string, type: string, active: boolean) => {
     try {
       if (!(nextEvents || oldEvents) || !eventId) return;
-      const eventUpdated = await eventService.updateEventStatus(eventId);
+      const eventUpdated = await eventService.updateEventStatus(eventId, 'active');
       if (eventUpdated) {
         if (nextEvents?.values?.some((v) => v._id === eventId)) {
           if (nextEvents)
@@ -168,6 +168,7 @@ const EventsPage = () => {
         status: "error",
       });
     }
+    onClose();
   };
 
   useEffect(() => {

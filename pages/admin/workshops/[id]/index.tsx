@@ -137,18 +137,6 @@ const EventDetail = () => {
                 <Text as="pre" fontFamily="unset" fontSize="md" minH="100px">
                   {event?.info}
                 </Text>
-                <Divider />
-                <Stack spacing={0}>
-                  <Text as="span">
-                    <b>Cupo:</b> {event?.maxAttendance}
-                  </Text>
-                  <Text as="span">
-                    <b>Precio:</b> ${event?.price}
-                  </Text>
-                  <Text as="span">
-                    <b>Link de pago:</b> {event?.paymentLink}
-                  </Text>
-                </Stack>
               </Stack>
             </Flex>
             <Flex justifyContent={"center"} gap={4}>

@@ -27,8 +27,6 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const formatDate = (date: any) => {
   const newDate = new Date(date);
-  console.log(newDate.toISOString().substring(0, 16));
-  console.log(new Date(newDate.toISOString().substring(0, 16)));
   return newDate.toISOString().substring(0, 16);
 };
 
