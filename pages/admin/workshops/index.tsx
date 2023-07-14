@@ -229,7 +229,6 @@ const WorkshopsPage = () => {
                 }
                 updateActive={(eventId: string, type: string, value: boolean) => updateActive(eventId, type, value)}
                 handleDeleteEvent={handleDeleteEvent}
-                hiddenColumns={[]}
                 isWorkshop
               />
             </Stack>
