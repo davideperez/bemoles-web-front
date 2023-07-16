@@ -24,7 +24,7 @@ const Logo = (props: HTMLChakraProps<'svg'>) => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#C5A266" />
-          <stop offset="1" stop-color="#956429" />
+          <stop offset="1" stopColor="#956429" />
         </linearGradient>
       </defs>
     </chakra.svg>
