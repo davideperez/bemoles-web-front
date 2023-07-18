@@ -7,7 +7,8 @@ const MainCategories = () => {
     as="section"
       flexWrap={"wrap"}
       gap={{ base: "16px", sm: "72px" }}
-      justifyContent="center"
+      justifyContent="space-around"
+      px={{base: "16px", lg: "80px"}}
     >
       <Flex
         minW={{ base: "100%", sm: "403px" }}

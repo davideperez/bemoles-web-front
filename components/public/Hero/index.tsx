@@ -4,6 +4,7 @@ import BemolesHeroLogo from "../BemolesHeroLogo";
 
 const Hero = () => {
   return (
+    <Stack as="section" px={{base: "16px", lg: "80px"}}>
     <Stack w="100%" color="white" position="relative" pt={{base: "80px", lg:"45px"}} pr={{base:"auto", lg:"14rem"}} mb={{lg: "6rem"}}>
     <Heading
       as="h1"
@@ -56,6 +57,7 @@ const Hero = () => {
         transform={{base:"translate(30%, -74%)", "xl":"translate(44%, -44%)"}}
       />
       </Box>
+  </Stack>
   </Stack>
   )
 }

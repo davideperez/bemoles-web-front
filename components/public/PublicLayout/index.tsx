@@ -10,6 +10,7 @@ const PublicLayout = ({ children }: { children: ReactNode }) => {
       <>
       {children}
       </>
+      <Footer />
     </div>
   )
 }
