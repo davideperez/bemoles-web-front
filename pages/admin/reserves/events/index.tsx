@@ -118,7 +118,7 @@ const EventReservesPage = () => {
                 <AccordionButton>
                   <Flex flex="1" textAlign="left" py={2} alignItems="center">
                     <Box
-                      border="3px solid"
+                      border="2px solid"
                       borderColor="gray.300"
                       borderRadius={"lg"}
                       mr="4"
@@ -129,6 +129,7 @@ const EventReservesPage = () => {
                         w="60px"
                         h="50px"
                         objectFit={"cover"}
+                        borderRadius={"md"}
                       />
                     </Box>
                     <Text

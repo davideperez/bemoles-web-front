@@ -9,6 +9,10 @@ body {
   background-size: 100% 240px;
   background-position: initial;
   background-repeat: no-repeat;
+
+  @media screen and (max-width: 768px) {
+    background-size: 100% 152px;
+  }
 }
 
 a {

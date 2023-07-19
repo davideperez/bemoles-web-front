@@ -33,3 +33,5 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+//Version de entrega de admin.

@@ -32,12 +32,7 @@ import { Event } from "../../../../models/event";
 import Head from "next/head";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Link from "next/link";
-
-const formatDate = (date: any) => {
-  if (!date) return "";
-  const newDate = new Date(date);
-  return newDate?.toISOString().substring(0, 16);
-};
+import { formatDate } from "../../../../utils/functions";
 
 const EventDetail = () => {
   const [event, setEvent] = useState<Event>();
@@ -137,18 +132,6 @@ const EventDetail = () => {
                 <Text as="pre" fontFamily="unset" fontSize="md" minH="100px">
                   {event?.info}
                 </Text>
-                <Divider />
-                <Stack spacing={0}>
-                  <Text as="span">
-                    <b>Cupo:</b> {event?.maxAttendance}
-                  </Text>
-                  <Text as="span">
-                    <b>Precio:</b> ${event?.price}
-                  </Text>
-                  <Text as="span">
-                    <b>Link de pago:</b> {event?.paymentLink}
-                  </Text>
-                </Stack>
               </Stack>
             </Flex>
             <Flex justifyContent={"center"} gap={4}>

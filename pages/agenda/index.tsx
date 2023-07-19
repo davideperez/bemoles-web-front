@@ -16,9 +16,9 @@ import { ApiBase } from "../../models/apiBase";
 import { Event } from "../../models/event";
 import { eventService } from "../../services/events.service";
 
-const TalleresPage = () => {
-  const [activeEvents, setActiveEvents] = useState<Event[]>();
-  const [inactiveEvents, setInactiveEvents] = useState<Event[]>();
+const AgendaPage = () => {
+  const [oldEvents, setOldEvents] = useState<Event[]>();
+  const [nextEvents, setNextEvents] = useState<Event[]>();
   const [isLoading, setIsLoading] = useState(false);
   const [activePage, setActivePage] = useState<number>(1);
   const [inactivePage, setInactivePage] = useState<number>(1);
@@ -29,14 +29,15 @@ const TalleresPage = () => {
       (async () => {
         setIsLoading(true)
         const { data: result } = await eventService.getEvents(
-          true,
+          false,
           undefined,
           activePage,
           8,
-          "true"
+          undefined,
+          "true",
         );
         if (result) {
-          setActiveEvents([...(activeEvents || []), ...result.values]);
+          setNextEvents([...(nextEvents || []), ...result.values]);
         }
         setIsLoading(false)
       })();
@@ -48,14 +49,15 @@ const TalleresPage = () => {
       (async () => {
         setIsLoading(true)
         const { data: result } = await eventService.getEvents(
-          true,
+          false,
           undefined,
           inactivePage,
           10,
-          "false"
+          undefined,
+          "false",
         );
         if (result) {
-          setInactiveEvents([...(inactiveEvents || []), ...result.values]);
+          setOldEvents([...(oldEvents || []), ...result.values]);
         }
         setIsLoading(false)
       })();
@@ -79,9 +81,9 @@ const TalleresPage = () => {
         lineHeight={{base: "50px",lg:"72px"}}
         letterSpacing={{base: "0.3px", lg:"0.7px"}}
       >
-        Talleres
+        Agenda
       </Heading>
-      {activeEvents && inactiveEvents ? <><Stack pt={{lg: "2rem"}} spacing="1.5rem">
+      {nextEvents && oldEvents ? <><Stack pt={{lg: "2rem"}} spacing="1.5rem">
         <Heading
           as="h3"
           color="#C5A266"
@@ -91,10 +93,10 @@ const TalleresPage = () => {
           lineHeight={{base: "42px", lg:"54px"}}
           letterSpacing={{base:"0.4px",lg:"0.54px"}}
         >
-          Activos
+          Próximos eventos
         </Heading>
         <Grid templateColumns={{base: "1fr 1fr" ,lg:"repeat(auto-fill, minmax(295px, 1fr))"}} gap={{base: "16px",lg:"44px"}}>
-          {activeEvents?.map((e) => (
+          {nextEvents?.map((e) => (
             <GridItem key={e._id}>
                <Flex h="100%" flexDirection="column" justifyContent={"space-between"}>
                 <Flex alignItems={"center"} h="100%">
@@ -130,10 +132,10 @@ const TalleresPage = () => {
           lineHeight={{base: "42px", lg:"54px"}}
           letterSpacing={{base:"0.4px",lg:"0.54px"}}
         >
-          Latentes
+          Pasados
         </Heading>
         <Grid templateColumns={{base: "1fr 1fr" ,lg:"repeat(auto-fill, minmax(295px, 1fr))"}} gap={{base: "16px",lg:"44px"}}>
-          {inactiveEvents?.map((e) => (
+          {oldEvents?.map((e) => (
             <GridItem key={e._id}>
               <Flex h="100%" flexDirection="column" justifyContent={"space-between"}>
                 <Flex alignItems={"center"} h="100%">
@@ -163,4 +165,4 @@ const TalleresPage = () => {
   );
 };
 
-export default TalleresPage;
+export default AgendaPage;
