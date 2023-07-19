@@ -8,6 +8,7 @@ import { Manrope } from "next/font/google";
 import PublicLayout from "../components/public/PublicLayout";
 
 const manrope = Manrope({ subsets: ["latin"] });
+// export const dm_serif_display = DM_Serif_Display({ weight: "400", subsets: ["latin"], display: 'swap' });
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
