@@ -70,7 +70,7 @@ const LeftBarContent = ({ onClose, ...rest }: SidebarProps) => {
       removeToken();
       router.replace('/admin/login');
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
 

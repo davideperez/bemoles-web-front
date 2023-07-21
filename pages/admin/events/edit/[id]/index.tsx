@@ -160,7 +160,6 @@ const EventDetail = () => {
                         type="datetime-local"
                         w="400px"
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                          console.log(e.target.value)
                           setFieldValue("date",e.target.value);
                         }}
                       />
@@ -181,6 +180,7 @@ const EventDetail = () => {
                                 title: 'Archivo demasiado grande',
                                 description: 'El archivo excede el límite de 4 MB. Por favor, seleccione un archivo más pequeño.',
                                 status: 'error',
+                                isClosable: true,
                               })
                               e.target.value = '';
                             } else {
@@ -229,7 +229,7 @@ const EventDetail = () => {
                           name="price"
                           type="number"
                           required
-                          w="120px"
+                          w="200px"
                           pl={10}
                         />
                       </InputGroup>
@@ -241,7 +241,7 @@ const EventDetail = () => {
                         name="maxAttendance"
                         type="number"
                         required
-                        w="120px"
+                        w="200px"
                       />
                     </FormControl>
 

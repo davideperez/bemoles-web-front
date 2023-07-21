@@ -26,8 +26,6 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const formatDate = (date: any) => {
   const newDate = new Date(date);
-  console.log(newDate.toISOString().substring(0, 16));
-  console.log(new Date(newDate.toISOString().substring(0, 16)));
   return newDate.toISOString().substring(0, 16);
 };
 
@@ -179,6 +177,7 @@ const EventDetail = () => {
                                 title: 'Archivo demasiado grande',
                                 description: 'El archivo excede el límite de 4 MB. Por favor, seleccione un archivo más pequeño.',
                                 status: 'error',
+                                isClosable: true
                               })
                               e.target.value = '';
                             } else {

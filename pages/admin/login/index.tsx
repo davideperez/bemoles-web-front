@@ -38,7 +38,6 @@ const AdminLoginPage = () => {
       if (userData) {
         setUser(userData);
         setToken(userData.token)
-        console.log({ userData });
         router.push("/");
       }
     } catch (error) {
@@ -48,7 +47,6 @@ const AdminLoginPage = () => {
           description: "Las credenciales son incorrectas"
         })
       }
-      console.log(error);
     }
   };
 

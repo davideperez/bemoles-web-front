@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Link,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Link, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import Logo from "../../admin/Login/Logo";
 import NextLink from "next/link";
@@ -12,7 +6,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 
 const Navbar = () => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
   const router = useRouter();
 
   return (
@@ -22,7 +16,12 @@ const Navbar = () => {
       h="56px"
       zIndex={3}
     >
-      <Link as={NextLink} _hover={{ opacity: "0.7" }} href="/home">
+      <Link
+        as={NextLink}
+        _hover={{ opacity: "0.7" }}
+        href="/home"
+        onClick={onClose}
+      >
         <Box p={{ base: "16px", lg: "24px" }}>
           <Logo
             w={{ base: "128px", lg: "186px" }}
@@ -50,13 +49,17 @@ const Navbar = () => {
         minH={{ base: "100vh", lg: "fit-content" }}
         whiteSpace="nowrap"
         zIndex={3}
-        transition={{base: "transform 0.5s ease-in-out, opacity 0.5s ease-in-out", lg: "none"}}
+        transition={{
+          base: "transform 0.5s ease-in-out, opacity 0.5s ease-in-out",
+          lg: "none",
+        }}
       >
         <Link
           as={NextLink}
           href="/posibilidades"
           _hover={{ color: "#DDC692" }}
           color={router.asPath.includes("posibilidades") ? "#DDC692" : "unset"}
+          onClick={onClose}
         >
           Posibilidades
         </Link>
@@ -73,6 +76,7 @@ const Navbar = () => {
           href="/sum-arte"
           _hover={{ color: "#DDC692" }}
           color={router.asPath.includes("sum-arte") ? "#DDC692" : "unset"}
+          onClick={onClose}
         >
           Sum-arte
         </Link>
@@ -81,6 +85,7 @@ const Navbar = () => {
           href="/estudio"
           _hover={{ color: "#DDC692" }}
           color={router.asPath.includes("estudio") ? "#DDC692" : "unset"}
+          onClick={onClose}
         >
           Estudio
         </Link>
@@ -89,6 +94,7 @@ const Navbar = () => {
           href="/proyectos"
           _hover={{ color: "#DDC692" }}
           color={router.asPath.includes("proyectos") ? "#DDC692" : "unset"}
+          onClick={onClose}
         >
           Proyectos
         </Link>
@@ -98,6 +104,7 @@ const Navbar = () => {
             color="#3B424A"
             p={{ base: "16px", lg: "12px", xl: "16px" }}
             borderRadius="4px"
+            onClick={onClose}
           >
             Talleres
           </Box>
@@ -108,6 +115,7 @@ const Navbar = () => {
             color="#3B424A"
             p={{ base: "16px", lg: "12px", xl: "16px" }}
             borderRadius="4px"
+            onClick={onClose}
           >
             Agenda
           </Box>
@@ -132,7 +140,7 @@ const Navbar = () => {
           borderRadius={"sm"}
           transform={isOpen ? "rotate(45deg)" : "rotate(0)"}
           transition="transform 0.25s ease-in-out"
-          />
+        />
         <Box
           h="3px"
           w="24px"
@@ -141,7 +149,6 @@ const Navbar = () => {
           transform={isOpen ? "rotate(-45deg)" : "rotate(0)"}
           position={isOpen ? "absolute" : "relative"}
           transition="transform 0.25s ease-in-out"
-
         />
         {/* {isOpen ? (
           <CloseButton color="#DDC692" size="24px" />

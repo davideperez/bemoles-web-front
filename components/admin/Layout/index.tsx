@@ -23,7 +23,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
     authService
       .refreshToken()
       .then(async ({ data }) => {
-        console.log({data})
         if (data.success) {
           setUser((oldValues) => {
             return { ...oldValues, token: data.token, firstName: data.firstName, lastName: data.lastName};
@@ -40,7 +39,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
         setTimeout(verifyUser, 5 * 60 * 1000);
       })
       .catch((error) => {
-        console.log(error);
         setToken('')
         router.replace("/admin/login");
       });
@@ -55,7 +53,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
   }, [verifyUser]);
 
      const syncLogout = (event: any) => {
-      console.log('eventKey', event.key)
       if (event.key === "logout") {
         removeToken();
         router.replace('/admin/login');

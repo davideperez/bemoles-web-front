@@ -12,7 +12,6 @@ const manrope = Manrope({ subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  console.log(router.asPath);
   return (
     <ChakraProvider>
       <UserProvider>

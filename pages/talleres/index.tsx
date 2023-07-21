@@ -111,7 +111,7 @@ const TalleresPage = () => {
                   lineHeight="normal"
                   letterSpacing={{base: "2.4px", lg:"3.2px"}}
                   textAlign="center"
-                  cursor="pointer" _hover={{opacity: 0.7}} onClick={() => router.push(e._id)}
+                  cursor="pointer" _hover={{opacity: 0.7}} onClick={() => router.push(`/talleres/${e._id}`)}
                 >
                   Ver detalles
                 </Box>
@@ -133,27 +133,13 @@ const TalleresPage = () => {
         >
           Latentes
         </Heading>
-        <Grid templateColumns={{base: "1fr 1fr" ,lg:"repeat(auto-fill, minmax(295px, 1fr))"}} gap={{base: "16px",lg:"44px"}}>
+        <Grid templateColumns={{base: "1fr 1fr" ,lg:"repeat(auto-fill, minmax(227px, 1fr))"}} gap={{base: "16px",lg:"44px"}}>
           {inactiveEvents?.map((e) => (
             <GridItem key={e._id}>
               <Flex h="100%" flexDirection="column" justifyContent={"space-between"}>
-                <Flex alignItems={"center"} h="100%">
+                <Flex alignItems={"center"} h="100%" filter="grayscale(100%)">
                 <Image src={e.image} alt={e.title} w="100%" objectFit={"contain"} />
                 </Flex>
-                <Box
-                  textTransform={"uppercase"}
-                  bg="#3B424A"
-                  color="white"
-                  p="12px 16px"
-                  fontSize={{base: "12px",lg:"16px"}}
-                  fontWeight={700}
-                  lineHeight="normal"
-                  letterSpacing={{base: "2.4px", lg:"3.2px"}}
-                  textAlign="center"
-                  cursor="pointer" _hover={{opacity: 0.7}} onClick={() => router.push(e._id)}
-                >
-                  Ver detalles
-                </Box>
               </Flex>
             </GridItem>
           ))}

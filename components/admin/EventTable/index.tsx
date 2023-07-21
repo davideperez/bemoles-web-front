@@ -83,7 +83,7 @@ const EventTable: FC<EventTableProps> = ({
                 <>
                   <Td p={2}>{formatDateTime(event.date)}</Td>
                   <Td p={2}>{event.maxAttendance}</Td>
-                  <Td p={2}>{event.price}</Td>
+                  <Td p={2}>${event.price}</Td>
                 </>
               )}
               <Td p={2} textAlign="center">

@@ -55,7 +55,6 @@ const ProjectsPage = () => {
     if (typeof window !== "undefined") {
       (async () => {
         try {
-          console.log({projectService})
           const { data: result } = await projectService.getProjects(
             debouncedValue,
             page,
@@ -63,7 +62,7 @@ const ProjectsPage = () => {
           );
           setProjects(result);
         } catch (error) {
-          console.log(error);
+          // console.log(error);
         }
       })();
     }
