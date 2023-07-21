@@ -14,8 +14,8 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import Logo from "../../../components/Login/Logo";
-import { PasswordField } from "../../../components/Login/PasswordField";
+import Logo from "../../../components/admin/Login/Logo";
+import { PasswordField } from "../../../components/admin/Login/PasswordField";
 import { Formik, Field } from "formik";
 import { useFormik } from "formik";
 import { authService } from "../../../services/auth.service";

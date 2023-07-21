@@ -32,7 +32,7 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { FiExternalLink, FiTrash2 } from "react-icons/fi";
 import { MdOutlineSearch } from "react-icons/md";
-import { Pagination } from "../../../components/Pagination";
+import { Pagination } from "../../../components/admin/Pagination";
 import useDebounce from "../../../hooks/useDebounce";
 import { ApiBase } from "../../../models/apiBase";
 import { Project } from "../../../models/project";

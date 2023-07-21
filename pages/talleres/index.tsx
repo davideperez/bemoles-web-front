@@ -69,6 +69,7 @@ const TalleresPage = () => {
       padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
       overflow="hidden"
       spacing={{base:"2rem", lg:"4rem"}}
+      backgroundImage={{base: "none",lg:"url('/images/talleres.png')"}} objectFit={"cover"} objectPosition="center" backgroundPosition={{base:'top', 'lg':"-40px 130px"}} backgroundRepeat={"no-repeat"}
     >
       <Heading
         as="h1"
@@ -93,7 +94,7 @@ const TalleresPage = () => {
         >
           Activos
         </Heading>
-        <Grid templateColumns={{base: "1fr 1fr" ,lg:"repeat(auto-fill, minmax(295px, 1fr))"}} gap={{base: "16px",lg:"44px"}}>
+        <Grid templateColumns={{base: "1fr 1fr" ,lg:"repeat(auto-fill, minmax(295px, 1fr))"}} gap={{base: "16px",lg:"44px"}} >
           {activeEvents?.map((e) => (
             <GridItem key={e._id}>
                <Flex h="100%" flexDirection="column" justifyContent={"space-between"}>

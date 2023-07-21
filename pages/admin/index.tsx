@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import React, {useEffect} from 'react'
-import Layout from '../../components/Layout';
 
 const Home = () => {
   const router = useRouter();

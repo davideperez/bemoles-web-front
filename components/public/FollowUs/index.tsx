@@ -28,7 +28,7 @@ const FollowUS = () => {
           as="h4"
           fontFamily={"DM Serif Display"}
           fontSize="54px"
-          fontWeight={600}
+          fontWeight={400}
           lineHeight="54px"
           letterSpacing={"2.2px"}
         >

@@ -4,11 +4,11 @@ import React from "react";
 const MainCategories = () => {
   return (
     <Flex
-    as="section"
+      as="section"
       flexWrap={"wrap"}
       gap={{ base: "16px", sm: "72px" }}
       justifyContent="space-around"
-      px={{base: "16px", lg: "80px"}}
+      px={{ base: "16px", lg: "80px" }}
     >
       <Flex
         minW={{ base: "100%", sm: "403px" }}
@@ -39,7 +39,7 @@ const MainCategories = () => {
         justifyContent={"center"}
         alignItems="center"
       >
-        <Img src="/images/musica.png" alt="Musica"/>
+        <Img src="/images/musica.png" alt="Musica" />
         <Flex
           position="absolute"
           textTransform={"uppercase"}

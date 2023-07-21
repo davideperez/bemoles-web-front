@@ -71,6 +71,8 @@ const AgendaPage = () => {
       padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
       overflow="hidden"
       spacing={{base:"2rem", lg:"4rem"}}
+      backgroundImage={{base: "none",lg:"url('/images/talleres.png')"}} objectFit={"cover"} objectPosition="center" backgroundPosition={{base:'top', 'lg':"-40px 130px"}} backgroundRepeat={"no-repeat"}
+
     >
       <Heading
         as="h1"
@@ -112,7 +114,7 @@ const AgendaPage = () => {
                   lineHeight="normal"
                   letterSpacing={{base: "2.4px", lg:"3.2px"}}
                   textAlign="center"
-                  cursor="pointer" _hover={{opacity: 0.7}} onClick={() => router.push(e._id)}
+                  cursor="pointer" _hover={{opacity: 0.7}} onClick={() => router.push(`/agenda/${e._id}`)}
                 >
                   Ver detalles
                 </Box>
@@ -151,7 +153,7 @@ const AgendaPage = () => {
                   lineHeight="normal"
                   letterSpacing={{base: "2.4px", lg:"3.2px"}}
                   textAlign="center"
-                  cursor="pointer" _hover={{opacity: 0.7}} onClick={() => router.push(e._id)}
+                  cursor="pointer" _hover={{opacity: 0.7}} onClick={() => router.push(`/agenda/${e._id}`)}
                 >
                   Ver detalles
                 </Box>

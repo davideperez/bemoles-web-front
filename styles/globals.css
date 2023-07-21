@@ -5,14 +5,10 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: transparent !important;
-  background-image: url('/images/hero.png');
+  background-image: url("/images/hero.png");
   background-size: 100% 240px;
   background-position: initial;
   background-repeat: no-repeat;
-
-  @media screen and (max-width: 768px) {
-    background-size: 100% 152px;
-  }
 }
 
 a {
@@ -22,4 +18,10 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  html {
+    background-size: 100% 152px;
+  }
 }

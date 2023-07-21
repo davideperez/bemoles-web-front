@@ -1,72 +1,21 @@
 import React, { ChangeEvent, FC } from "react";
 import {
-<<<<<<< HEAD:components/admin/EventTable/index.tsx
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogContent,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogOverlay,
     Button,
     Flex,
-    Heading,
     Image,
-    Input,
-    InputGroup,
-    InputLeftElement,
-    Skeleton,
-    Stack,
     Switch,
     Table,
     TableContainer,
     Tbody,
     Td,
-    Text,
     Th,
     Thead,
-    Toast,
     Tooltip,
     Tr,
-    useDisclosure,
-    useToast,
   } from "@chakra-ui/react";
 import { FiExternalLink, FiTrash2 } from 'react-icons/fi';
-import { EventTableProps } from './types';
-import { formatDate } from '../../../utils/functions';
-=======
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Skeleton,
-  Stack,
-  Switch,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Toast,
-  Tooltip,
-  Tr,
-  useDisclosure,
-  useToast,
-} from "@chakra-ui/react";
-import { FiExternalLink, FiTrash2 } from "react-icons/fi";
 import { EventTableProps } from "./types";
-import { formatDate, formatDateTime } from "../../utils/functions";
->>>>>>> main:components/EventTable/index.tsx
+import { formatDateTime } from "../../../utils/functions";
 
 const EventTable: FC<EventTableProps> = ({
   events,
@@ -104,8 +53,8 @@ const EventTable: FC<EventTableProps> = ({
           {events?.values?.map((event) => (
             <Tr
               key={event._id}
-              opacity={event.active ? "1" : "0.7"}
-              bg={event.active ? "white" : "gray.50"}
+              opacity={isWorkshop ? `${event.published ? "1" : "0.7"}` : `${event.active ? "1" : "0.7"}`}
+              bg={isWorkshop ? `${event.published ? "white" : "gray.50"}` : `${event.active ? "white" : "gray.50"}`}
             >
               <Td p={2}>
                 <Image

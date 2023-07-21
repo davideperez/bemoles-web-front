@@ -4,7 +4,7 @@ import React from "react";
 const Services = () => {
   return (
     <Flex as="section" px={{base: "16px", lg: "80px"}} justifyContent="center">
-    <Grid maxW="1700px" templateColumns={{base: "1fr", xl:"1.2fr 0.8fr"}} templateRows={{base: "auto", xl: "0.5fr 1fr 1fr"}} gap="2rem" pt="7rem">
+    <Grid maxW="1700px" templateColumns={{base: "1fr", xl:"1.2fr 0.8fr"}} templateRows={{base: "auto", xl: "0.5fr 1fr 1fr"}} gap="2rem" pt={{base: "0px", lg: "7rem"}}>
       <GridItem>
       <Text
         color="#3B424A"
@@ -29,7 +29,7 @@ const Services = () => {
           textShadow={"0px 4px 4px 0px rgba(0, 0, 0, 0.10)"}
           fontFamily="DM Serif Display"
           fontSize={{base: "50px", lg:"70px"}}
-          fontWeight="600"
+          fontWeight="400"
           lineHeight="72px"
           letterSpacing="0.7px"
         >
@@ -71,7 +71,7 @@ const Services = () => {
           textShadow={"0px 4px 4px 0px rgba(0, 0, 0, 0.10)"}
           fontFamily="DM Serif Display"
           fontSize={{base: "50px", lg:"70px"}}
-          fontWeight="600"
+          fontWeight="400"
           lineHeight="72px"
           letterSpacing="0.7px"
         >
@@ -113,7 +113,7 @@ const Services = () => {
           textShadow={"0px 4px 4px 0px rgba(0, 0, 0, 0.10)"}
           fontFamily="DM Serif Display"
           fontSize={{base: "50px", lg:"70px"}}
-          fontWeight="600"
+          fontWeight="400"
           lineHeight="72px"
           letterSpacing="0.7px"
         >

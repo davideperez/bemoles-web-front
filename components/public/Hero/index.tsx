@@ -13,7 +13,7 @@ const Hero = () => {
       left="24px"
       zIndex="1"
       fontFamily="DM Serif Display"
-      fontWeight={600}
+      fontWeight={400}
       fontSize={{ base: "50px", lg: "70px" }}
       lineHeight={{base: "50px", lg:"72px"}}
       letterSpacing="0.7px"

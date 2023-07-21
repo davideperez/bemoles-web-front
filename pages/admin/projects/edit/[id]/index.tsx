@@ -143,14 +143,26 @@ const ProjectDetail = () => {
                     </FormControl>
                     
                     <FormControl>
-                      <FormLabel pb={2}>Imagen (Tamaño máximo 2 mb)</FormLabel>
+                      <FormLabel pb={2}>Imagen (Tamaño máximo 4 mb)</FormLabel>
                       <input
                         type="file"
                         accept="image/*"
-                        maxLength={2097152}
+                        maxLength={4194304}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                           if (e?.target?.files?.[0])
-                            setImage(e.target.files[0]);
+                          {
+                            const maxSize = 4 * 1024 * 1024;
+                            if (e?.target?.files?.[0].size > maxSize) {
+                              toast({
+                                title: 'Archivo demasiado grande',
+                                description: 'El archivo excede el límite de 4 MB. Por favor, seleccione un archivo más pequeño.',
+                                status: 'error',
+                              })
+                              e.target.value = '';
+                            } else {
+                              setImage(e.target.files[0]);
+                            }
+                          }
                         }}
                       />
                       <Image
@@ -169,14 +181,26 @@ const ProjectDetail = () => {
                       />
                     </FormControl>
                     <FormControl>
-                      <FormLabel pb={2}>Pdf (Tamaño máximo 2 mb)</FormLabel>
+                      <FormLabel pb={2}>Pdf (Tamaño máximo 10 mb)</FormLabel>
                       <input
                         type="file"
                         accept="application/pdf"
-                        maxLength={2097152}
+                        maxLength={10485760}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                           if (e?.target?.files?.[0])
-                            setPdf(e.target.files[0]);
+                          {
+                            const maxSize = 10 * 1024 * 1024;
+                            if (e?.target?.files?.[0].size > maxSize) {
+                              toast({
+                                title: 'Archivo demasiado grande',
+                                description: 'El archivo excede el límite de 10 MB. Por favor, seleccione un archivo más pequeño.',
+                                status: 'error',
+                              })
+                              e.target.value = '';
+                            } else {
+                              setPdf(e.target.files[0]);
+                            }
+                          }
                         }}
                       />
                     </FormControl>
