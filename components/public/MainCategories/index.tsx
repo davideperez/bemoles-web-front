@@ -1,4 +1,5 @@
 import { Flex, Img } from "@chakra-ui/react";
+import Link from "next/link";
 import React from "react";
 
 const MainCategories = () => {
@@ -10,12 +11,14 @@ const MainCategories = () => {
       justifyContent="space-around"
       px={{ base: "16px", lg: "80px" }}
     >
+      <Link href="/espacios">
       <Flex
         minW={{ base: "100%", sm: "403px" }}
         minH={{ base: "100%", sm: "403px" }}
         position="relative"
         justifyContent={"center"}
         alignItems="center"
+        _hover={{opacity: 0.7}}
       >
         <Img src="/images/consultorios.png" alt="Consultorios" />
         <Flex
@@ -32,12 +35,16 @@ const MainCategories = () => {
           Consultorios
         </Flex>
       </Flex>
+      </Link>
+      <Link href="/estudio">
+
       <Flex
         minW={{ base: "100%", sm: "403px" }}
         minH={{ base: "100%", sm: "403px" }}
         position="relative"
         justifyContent={"center"}
         alignItems="center"
+        _hover={{opacity: 0.7}}
       >
         <Img src="/images/musica.png" alt="Musica" />
         <Flex
@@ -54,12 +61,15 @@ const MainCategories = () => {
           Música
         </Flex>
       </Flex>
+      </Link>
+      <Link href="/sum-arte">
       <Flex
         minW={{ base: "100%", sm: "403px" }}
         minH={{ base: "100%", sm: "403px" }}
         position="relative"
         justifyContent={"center"}
         alignItems="center"
+        _hover={{opacity: 0.7}}
       >
         <Img src="/images/sum-arte.png" alt="Sum-arte" />
         <Flex
@@ -76,6 +86,7 @@ const MainCategories = () => {
           Sum-arte
         </Flex>
       </Flex>
+      </Link>
     </Flex>
   );
 };

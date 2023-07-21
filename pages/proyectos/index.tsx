@@ -4,6 +4,7 @@ import {
   GridItem,
   Heading,
   Image,
+  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -13,27 +14,28 @@ import { ApiBase } from "../../models/apiBase";
 import { Project, ProjectCategory } from "../../models/project";
 import { projectService } from "../../services/projects.service";
 
-const projectCategories = [{
+const projectCategories = [
+  {
     name: "Planificaciones anuales",
     type: ProjectCategory.ANUALES,
-    bg: "#79A342"
-},
-{
+    bg: "#79A342",
+  },
+  {
     name: "Solicitando apoyos",
     type: ProjectCategory.SOLICITANDO_APOYOS,
-    bg: "#1B3A66"
-},
-{
+    bg: "#1B3A66",
+  },
+  {
     name: "Nuestros proyectos",
     type: ProjectCategory.NUESTROS_PROYECTOS,
-    bg: "#F58220"
-},
-{
+    bg: "#F58220",
+  },
+  {
     name: "Informes",
     type: ProjectCategory.INFORMES,
-    bg: "#3B424A"
-},
-]
+    bg: "#3B424A",
+  },
+];
 
 const ProyectosPage = () => {
   const [projects, setProjects] = useState<ApiBase<Project>>();
@@ -72,7 +74,7 @@ const ProyectosPage = () => {
       objectPosition="center"
       backgroundPosition={{ base: "-20px 96px", lg: "-151px 184px" }}
       backgroundRepeat={"no-repeat"}
-      pb={{ base: "16rem", lg: "16rem" }}
+      pb={{ base: "18rem", lg: "16rem" }}
     >
       <Heading
         as="h1"
@@ -122,9 +124,13 @@ const ProyectosPage = () => {
             sodales id, porttitor vitae est. Donec laoreet rutrum libero sed
             pharetra.
           </Text>
-          <Grid templateColumns="1fr 1fr" gap={{ base: "16px", lg: "40px" }} pt="2rem">
+          <Grid
+            templateColumns={{ base: "1fr", lg: "1fr 1fr" }}
+            gap={{ base: "40px", lg: "40px" }}
+            pt="2rem"
+          >
             {projectCategories.map((category) => (
-                <GridItem key={category.name}>
+              <GridItem key={category.name}>
                 <Flex
                   p="16px"
                   w="100%"
@@ -144,20 +150,25 @@ const ProyectosPage = () => {
                     .filter((p) => p.category === category.type)
                     .slice(0, 2)
                     .map((project) => (
-                      <Image
+                      <Link
+                        isExternal
+                        href={project.pdf}
                         key={project._id}
-                        src={project.image}
-                        alt={project.title}
-                        w="138px"
-                        h="178"
-                        objectFit={"cover"}
-                        objectPosition="top"
-                      />
+                        _hover={{ opacity: 0.7 }}
+                      >
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          w="138px"
+                          h="178"
+                          objectFit={"cover"}
+                          objectPosition="top"
+                        />
+                      </Link>
                     ))}
                 </Flex>
               </GridItem>
             ))}
-            
           </Grid>
         </Stack>
       </Flex>

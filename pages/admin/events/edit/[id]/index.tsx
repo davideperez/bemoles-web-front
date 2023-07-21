@@ -255,7 +255,7 @@ const EventDetail = () => {
                       />
                     </FormControl>
                     <FormControl>
-                      <FormLabel>Activo</FormLabel>
+                      <FormLabel>Publicado</FormLabel>
                       <Switch
                         defaultChecked={values.active}
                         name="active"

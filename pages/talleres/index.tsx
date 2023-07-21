@@ -33,6 +33,8 @@ const TalleresPage = () => {
           undefined,
           activePage,
           8,
+          "true",
+          undefined,
           "true"
         );
         if (result) {
@@ -52,7 +54,9 @@ const TalleresPage = () => {
           undefined,
           inactivePage,
           10,
-          "false"
+          "false",
+          undefined,
+          "true"
         );
         if (result) {
           setInactiveEvents([...(inactiveEvents || []), ...result.values]);

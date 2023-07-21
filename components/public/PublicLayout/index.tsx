@@ -20,7 +20,7 @@ const PublicLayout = ({ children }: { children: ReactNode }) => {
     const widthForDocument =
       !router.asPath.includes("home")
         ? `${
-            windowWidth > 768
+            windowWidth > 992
               ? headerHeight.restPage
               : headerHeight.restPageResponsive
           }`
@@ -30,6 +30,7 @@ const PublicLayout = ({ children }: { children: ReactNode }) => {
             : headerHeight.homePageResponsive
         }`;
     document.documentElement.style.backgroundSize = `100% ${widthForDocument}`;
+    // document.documentElement.style.backgroundImage = `url(/images/hero${!router.asPath.includes("home") ? '' : '-responsive'}.png);`;
   }
 
 

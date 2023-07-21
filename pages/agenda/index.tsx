@@ -33,8 +33,9 @@ const AgendaPage = () => {
           undefined,
           activePage,
           8,
-          undefined,
           "true",
+          "true",
+          undefined,
         );
         if (result) {
           setNextEvents([...(nextEvents || []), ...result.values]);
@@ -53,8 +54,9 @@ const AgendaPage = () => {
           undefined,
           inactivePage,
           10,
-          undefined,
+          "true",
           "false",
+          undefined
         );
         if (result) {
           setOldEvents([...(oldEvents || []), ...result.values]);
