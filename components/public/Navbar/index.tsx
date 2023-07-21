@@ -132,6 +132,7 @@ const Navbar = () => {
         flexDirection="column"
         justifyContent={"center"}
         gap={!isOpen ? "4px" : "0px"}
+        border="none"
       >
         <Box
           h="3px"

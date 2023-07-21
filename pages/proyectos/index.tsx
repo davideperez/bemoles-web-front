@@ -99,7 +99,7 @@ const ProyectosPage = () => {
           maxW={{ base: 317, sm: 540 }}
           mx={{ base: "auto", lg: "0px" }}
         />
-        <Stack spacing="16px" flex={1}>
+        <Stack spacing="16px" flex={1} pt={{base: '7rem', lg: '0px'}}>
           <Text
             as="h3"
             color="#3B424A"
