@@ -68,6 +68,7 @@ const Navbar = () => {
           href="/espacios"
           _hover={{ color: "#DDC692" }}
           color={router.asPath.includes("espacios") ? "#DDC692" : "unset"}
+          onClick={onClose}
         >
           Espacios
         </Link>

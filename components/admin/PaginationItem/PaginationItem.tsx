@@ -35,7 +35,7 @@ const PaginationItem: FC<Props> = ({ page, isCurrent, paginate }) => {
       size="sm"
       fontSize="xs"
       width="4"
-      bg="gray.100"
+      bg="white"
       _hover={{
         bg: 'gray.300',
       }}

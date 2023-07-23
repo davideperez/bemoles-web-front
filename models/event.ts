@@ -10,6 +10,7 @@ export type Event = {
   reserves: Reserve[];
   active: boolean;
   published: boolean;
+  createdAt: Date;
 };
 
 export type Reserve = {

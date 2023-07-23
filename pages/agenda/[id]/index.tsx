@@ -9,18 +9,50 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { Field, Formik } from "formik";
+import { AxiosError } from "axios";
+import { Field, Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { Event, Reserve } from "../../../models/event";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { Event } from "../../../models/event";
 import { eventService } from "../../../services/events.service";
 import { reserveService } from "../../../services/reserves.service";
+
+function limitInputToRange(
+  event: any,
+  setIsLimitedTickets: (value: boolean) => void
+) {
+  const input = event.target;
+  const value = parseInt(input.value, 10);
+  if (!input) return;
+  const min = parseInt(input.getAttribute("min"), 10);
+  const max = parseInt(input.getAttribute("max"), 10);
+
+  if (isNaN(value)) {
+    input.value = min;
+    setIsLimitedTickets(true);
+    setTimeout(() => {
+      setIsLimitedTickets(false);
+    }, 2000);
+  } else if (value < min) {
+    input.value = min;
+    setIsLimitedTickets(true);
+    setTimeout(() => {
+      setIsLimitedTickets(false);
+    }, 2000);
+  } else if (value > max) {
+    input.value = max;
+    setIsLimitedTickets(true);
+    setTimeout(() => {
+      setIsLimitedTickets(false);
+    }, 2000);
+  }
+}
 
 const AgendaDetail = () => {
   const [event, setEvent] = useState<Event>();
   const router = useRouter();
   const toast = useToast();
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isLimitedTickets, setIsLimitedTickets] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined" && router.query.id) {
@@ -31,9 +63,9 @@ const AgendaDetail = () => {
     }
   }, [router.query.id]);
 
-  const handleSubmit = async (reserve: any) => {
+  const handleSubmit = async (reserve: any, actions: FormikHelpers<any>) => {
     try {
-      const reserveCreated = await reserveService.createReserve({...reserve});
+      const reserveCreated = await reserveService.createReserve({ ...reserve });
       if (reserveCreated) {
         toast({
           title: "Reserva exitosa",
@@ -44,6 +76,18 @@ const AgendaDetail = () => {
         });
       }
     } catch (err) {
+      if ((err as AxiosError)?.response?.status === 409)
+        return toast({
+          title: "Cupo completo",
+          description: `Lo sentimos, el evento no cuenta con disponibilidad para la cantidad de entradas solicitadas. ${
+            reserve.ticketQuantity > 1
+              ? `Si lo desea, puede intententarlo nuevamente con un número menor de entradas.`
+              : ""
+          }`,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       toast({
         title: "Reserva no realizada",
         description: `Ha ocurrido un error y la reserva no se ha podido realizar. Por favor vuelva a intentarlo en unos minutos.`,
@@ -52,29 +96,8 @@ const AgendaDetail = () => {
         isClosable: true,
       });
     }
-    setIsFormSubmitted(true);
+    actions.resetForm();
   };
-
-  const initialValues={
-    firstName: "",
-    lastName: "",
-    email: "",
-    dni: "",
-    ticketQuantity: "",
-    event: router.query.id as string,
-  }
-
-  useEffect(() => {
-    if (isFormSubmitted) {
-      initialValues.firstName = "";
-      initialValues.lastName = "";
-      initialValues.email = "";
-      initialValues.dni = "";
-      initialValues.ticketQuantity = "";
-
-      setIsFormSubmitted(false)
-    }
-  }, [isFormSubmitted])
 
   return (
     <Stack
@@ -87,7 +110,7 @@ const AgendaDetail = () => {
       objectPosition="center"
       backgroundPosition={{ base: "top", lg: "-40px 250px" }}
       backgroundRepeat={"no-repeat"}
-      mb={{base: "16rem", lg: "16rem"}}
+      mb={{ base: "16rem", lg: "16rem" }}
     >
       <Heading
         as="h1"
@@ -101,7 +124,12 @@ const AgendaDetail = () => {
         Agenda
       </Heading>
       {event && (
-        <Flex pt={{base: "0px", lg:"2rem"}} alignItems={"flex-end"} gap="24px" flexWrap={"wrap"}>
+        <Flex
+          pt={{ base: "0px", lg: "2rem" }}
+          alignItems={"flex-end"}
+          gap="24px"
+          flexWrap={"wrap"}
+        >
           <Image
             src={event.image}
             alt={event.title}
@@ -143,11 +171,18 @@ const AgendaDetail = () => {
             </Text>
           </Stack>
           <Formik
-            initialValues={initialValues}
+            initialValues={{
+              firstName: "",
+              lastName: "",
+              email: "",
+              dni: "",
+              ticketQuantity: "",
+              event: router.query.id as string,
+            }}
             onSubmit={handleSubmit}
           >
             {({ handleSubmit, errors, isSubmitting }) => (
-              <form onSubmit={handleSubmit} >
+              <form onSubmit={handleSubmit} autoComplete="off">
                 <Stack spacing="16px" p="16px" w="370px" bg="#3B424A">
                   <Text
                     as="h4"
@@ -169,6 +204,8 @@ const AgendaDetail = () => {
                     placeholder="Nombre"
                     h="50px"
                     color="white"
+                    minLength="2"
+                    maxLength="60"
                     border="1px solid rgba(255, 255, 255, 0.40)"
                     borderRadius="4px"
                     focusBorderColor="white"
@@ -190,6 +227,8 @@ const AgendaDetail = () => {
                     placeholder="Apellido"
                     h="50px"
                     color="white"
+                    minLength="2"
+                    maxLength="60"
                     border="1px solid rgba(255, 255, 255, 0.40)"
                     borderRadius="4px"
                     focusBorderColor="white"
@@ -211,6 +250,7 @@ const AgendaDetail = () => {
                     placeholder="Email"
                     h="50px"
                     color="white"
+                    maxLength="60"
                     border="1px solid rgba(255, 255, 255, 0.40)"
                     borderRadius="4px"
                     focusBorderColor="white"
@@ -229,8 +269,10 @@ const AgendaDetail = () => {
                       flex="1"
                       type="text"
                       required
-                      p=" 8px 16px"
+                      p="8px 16px"
                       name="dni"
+                      minLength="2"
+                      maxLength="15"
                       placeholder="DNI"
                       h="50px"
                       color="white"
@@ -246,28 +288,49 @@ const AgendaDetail = () => {
                         opacity: 0.5,
                       }}
                     ></Field>
-                    <Field
-                      as={Input}
-                      flex="1"
-                      type="number"
-                      required
-                      p=" 8px 16px"
-                      name="ticketQuantity"
-                      placeholder="Entradas"
-                      h="50px"
-                      color="white"
-                      border="1px solid rgba(255, 255, 255, 0.40)"
-                      borderRadius="4px"
-                      focusBorderColor="white"
-                      _placeholder={{
-                        color: "white",
-                        fontSize: { base: "16px", lg: "16px" },
-                        fontWeight: 400,
-                        lineHeight: { base: "34px", lg: "34px" },
-                        letterSpacing: { base: "0.8px", lg: "0.8px" },
-                        opacity: 0.5,
-                      }}
-                    ></Field>
+                    <Flex position="relative" flex="1">
+                      <Field
+                        as={Input}
+                        type="number"
+                        required
+                        p=" 8px 16px"
+                        name="ticketQuantity"
+                        min="1"
+                        max="7"
+                        placeholder="Entradas"
+                        h="50px"
+                        color="white"
+                        border="1px solid rgba(255, 255, 255, 0.40)"
+                        borderRadius="4px"
+                        focusBorderColor="white"
+                        onInput={(e: any) =>
+                          limitInputToRange(e, (value: boolean) =>
+                            setIsLimitedTickets(value)
+                          )
+                        }
+                        _placeholder={{
+                          color: "white",
+                          fontSize: { base: "16px", lg: "16px" },
+                          fontWeight: 400,
+                          lineHeight: { base: "34px", lg: "34px" },
+                          letterSpacing: { base: "0.8px", lg: "0.8px" },
+                          opacity: 0.5,
+                        }}
+                        position="relative"
+                      ></Field>
+                      {isLimitedTickets && (
+                        <Text
+                          as="span"
+                          position="absolute"
+                          top="55px"
+                          left="5px"
+                          color="white"
+                          fontSize="14px"
+                        >
+                          El limite de entradas por reserva es de 7.
+                        </Text>
+                      )}
+                    </Flex>
                   </Flex>
                   <Button
                     type="submit"

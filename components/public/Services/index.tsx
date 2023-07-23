@@ -4,7 +4,7 @@ import React from "react";
 const Services = () => {
   return (
     <Flex as="section" px={{base: "16px", lg: "80px"}} justifyContent="center">
-    <Grid maxW="1700px" templateColumns={{base: "1fr", xl:"1.2fr 0.8fr"}} templateRows={{base: "auto", xl: "0.5fr 1fr 1fr"}} gap="2rem" pt={{base: "0px", lg: "7rem"}}>
+    <Grid maxW="1700px" templateColumns={{base: "auto", xl:"1.2fr 0.8fr"}} templateRows={{base: "auto", xl: "0.5fr 1fr 1fr"}} gap="2rem" pt={{base: "0px", lg: "7rem"}}>
       <GridItem>
       <Text
         color="#3B424A"
@@ -28,7 +28,7 @@ const Services = () => {
           color="#C5A266"
           textShadow={"0px 4px 4px 0px rgba(0, 0, 0, 0.10)"}
           fontFamily="DM Serif Display"
-          fontSize={{base: "50px", lg:"70px"}}
+          fontSize={{base: "36px", sm:"50px", lg:"70px"}}
           fontWeight="400"
           lineHeight="72px"
           letterSpacing="0.7px"
@@ -39,9 +39,10 @@ const Services = () => {
           fontSize="16px"
           lineHeight={"34px"}
           letterSpacing="0.8px"
-          w="100%"
+          // w="100%"
+          sx={{'@media screen and (max-width: 407px)': { flexDirection: "column"}}}
         >
-          <UnorderedList mr={{base: "1rem", sm:"4rem"}}>
+          <UnorderedList mr={{base: "1rem", sm:"4rem"}} >
             <ListItem>Música</ListItem>
             <ListItem>Canto</ListItem>
             <ListItem>Instrumentos</ListItem>
@@ -70,7 +71,7 @@ const Services = () => {
           color="#C5A266"
           textShadow={"0px 4px 4px 0px rgba(0, 0, 0, 0.10)"}
           fontFamily="DM Serif Display"
-          fontSize={{base: "50px", lg:"70px"}}
+          fontSize={{base: "36px", sm:"50px", lg:"70px"}}
           fontWeight="400"
           lineHeight="72px"
           letterSpacing="0.7px"
@@ -81,7 +82,8 @@ const Services = () => {
           fontSize="16px"
           lineHeight={"34px"}
           letterSpacing="0.8px"
-          w="100%"
+          // w="100%"
+          sx={{'@media screen and (max-width: 407px)': { flexDirection: "column"}}}
         >
           <UnorderedList  mr={{base: "1rem", sm:"4rem"}}>
             <ListItem>Psicología</ListItem>
@@ -112,7 +114,7 @@ const Services = () => {
           color="#C5A266"
           textShadow={"0px 4px 4px 0px rgba(0, 0, 0, 0.10)"}
           fontFamily="DM Serif Display"
-          fontSize={{base: "50px", lg:"70px"}}
+          fontSize={{base: "36px", sm:"50px", lg:"70px"}}
           fontWeight="400"
           lineHeight="72px"
           letterSpacing="0.7px"
@@ -123,7 +125,8 @@ const Services = () => {
           fontSize="16px"
           lineHeight={"34px"}
           letterSpacing="0.8px"
-          w="100%"
+          // w="100%"
+          sx={{'@media screen and (max-width: 407px)': { flexDirection: "column"}}}
         >
           <UnorderedList  mr={{base: "1rem", sm:"4rem"}}>
             <ListItem>Talleres</ListItem>

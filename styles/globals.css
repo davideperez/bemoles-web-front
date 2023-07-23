@@ -25,6 +25,10 @@ a {
   box-sizing: border-box;
 }
 
+button {
+  border: none;
+}
+
 @media (max-width: 768px) {
   html {
     background-size: 100% 152px;

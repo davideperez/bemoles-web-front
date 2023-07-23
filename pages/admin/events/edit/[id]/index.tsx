@@ -242,6 +242,7 @@ const EventDetail = () => {
                         type="number"
                         required
                         w="200px"
+                        minlength="0"
                       />
                     </FormControl>
 

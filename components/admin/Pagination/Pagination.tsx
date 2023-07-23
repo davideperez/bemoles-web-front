@@ -32,6 +32,7 @@ const Pagination: FC<PaginationProps> = ({
   itemsPerPage,
   showPageItem,
   numberOfItems = [10, 20, 30],
+  urlSyncronized = true,
 }) => {
   const [pageNumbers, setPageNumbers] = useState<number[]>(
     calculatePageNumbers(totalPosts, postsPerPage)
@@ -39,6 +40,7 @@ const Pagination: FC<PaginationProps> = ({
   const router = useRouter();
 
   useEffect(() => {
+    if (!urlSyncronized) return;
     const arrayOfPageNumbers = calculatePageNumbers(totalPosts, postsPerPage);
     setPageNumbers(arrayOfPageNumbers);
     router.push(

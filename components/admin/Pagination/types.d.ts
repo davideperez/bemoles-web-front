@@ -12,4 +12,5 @@ export type PaginationProps = {
   itemsPerPage?: number;
   showPageItem?: boolean;
   numberOfItems?: number[];
+  urlSyncronized?: boolean;
 };

@@ -10,7 +10,7 @@ const WeSearch = () => {
             <Image src="/images/weSearch1.png" alt="Buscamos" w={{base: "215px", md: "370px"}} h={{base: "215px", md: "370px"}} position="absolute" top={0} left={0} />
         </Stack>
         </Flex>
-        <Flex flex="0.7" minW="403px">
+        <Flex flex="0.7" maxW="403px">
         <Stack spacing="2rem" textAlign={{base: "center", xl: "start"}}>
             <Text as="h4" fontFamily={"DM Serif Display"} px="2" fontSize="54px" fontWeight={400} lineHeight="54px" letterSpacing={"2.2px"}>Buscamos jugar más y hacerlo juntos</Text>
             <Text as="p" fontSize="16px" fontWeight={400} lineHeight="34px" letterSpacing={"0.8px"}>Queremos encontrarnos en lo que somos, pero fundamentalmente en lo que hacemos. Nos encontraremos en lo que ofrecemos y en lo que requerimos de otros, dispuestos a jugar el mismo juego.</Text>
