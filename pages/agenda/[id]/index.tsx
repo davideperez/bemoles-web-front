@@ -103,7 +103,7 @@ const AgendaDetail = () => {
   return (
     <>
     <Head>
-      <title>Los bemoles | {event ? `Agenda: ${event?.title}` : 'Cargando...'}</title>
+      <title>{event ? `Agenda: ${event?.title}` : 'Cargando...'} | Los bemoles</title>
     </Head>
     <Stack
       as="main"

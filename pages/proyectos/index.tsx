@@ -64,7 +64,7 @@ const ProyectosPage = () => {
   return (
     <>
     <Head>
-      <title>Los bemoles | Proyectos</title>
+      <title>Proyectos | Los bemoles</title>
     </Head>
     <Stack
       as="main"

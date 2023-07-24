@@ -71,8 +71,7 @@ const TalleresPage = () => {
     <>
       <Head>
         <title>
-          Los bemoles |{" "}
-          {activeEvents && inactiveEvents ? `Talleres` : "Cargando..."}
+          {activeEvents && inactiveEvents ? `Talleres` : "Cargando..."} | Los bemoles
         </title>
       </Head>
 

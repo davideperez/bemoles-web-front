@@ -14,7 +14,7 @@ const SumArtePage = () => {
   return (
     <>
     <Head>
-      <title>Los bemoles | Sum-arte</title>
+      <title>Sum-arte | Los bemoles</title>
     </Head>
     <Stack
       as="main"

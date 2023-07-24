@@ -1,4 +1,5 @@
 import { Stack } from "@chakra-ui/react";
+import Head from "next/head";
 import React from "react";
 import FollowUS from "../../components/public/FollowUs";
 import Hero from "../../components/public/Hero";
@@ -9,6 +10,10 @@ import WeSearch from "../../components/public/WeSearch";
 
 const HomePage = () => {
   return (
+    <>
+    <Head>
+      <title>Inicio | Los bemoles</title>
+    </Head>
     <Stack
       as="main"
       padding={{ base: "60px 0px 20px 0px", lg: "340px 0px 120px 0px" }}
@@ -22,6 +27,7 @@ const HomePage = () => {
       <FollowUS />
       <VisitUs />
     </Stack>
+    </>
   );
 };
 
