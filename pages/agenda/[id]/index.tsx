@@ -23,8 +23,9 @@ function limitInputToRange(
   setIsLimitedTickets: (value: boolean) => void
 ) {
   const input = event.target;
-  const value = parseInt(input.value, 10);
   if (!input) return;
+  if (input.value.length === 0) return input.value = '';
+  const value = parseInt(input.value, 10);
   const min = parseInt(input.getAttribute("min"), 10);
   const max = parseInt(input.getAttribute("max"), 10);
 

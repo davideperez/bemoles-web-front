@@ -143,9 +143,7 @@ const EventReservesPage = () => {
                     </Text>
                     <Text as="span" fontSize="md" mr={20}>
                       <b>Cantidad de reservas: </b>
-                      {`${(event?.reserves || [])?.length} de ${
-                        event?.maxAttendance
-                      }`}
+                      {(event?.reserves || [])?.length}
                     </Text>
                     <Text as="span" fontSize="md" mr={4}>
                       <b>Fecha: </b>
