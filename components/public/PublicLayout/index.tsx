@@ -1,7 +1,7 @@
 import { Stack } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 
@@ -14,10 +14,11 @@ const headerHeight = {
 
 const PublicLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
+  const bgRef = useRef<HTMLDivElement>(null);
 
   const setWidthPage = () => {
     const windowWidth = window.innerWidth;
-    const widthForDocument =
+    const bgHeight =
       !router.asPath.includes("home")
         ? `${
             windowWidth > 992
@@ -29,8 +30,10 @@ const PublicLayout = ({ children }: { children: ReactNode }) => {
             ? headerHeight.homePage
             : headerHeight.homePageResponsive
         }`;
-    document.documentElement.style.backgroundSize = `100% ${widthForDocument}`;
-    // document.documentElement.style.backgroundImage = `url(/images/hero${!router.asPath.includes("home") ? '' : '-responsive'}.png);`;
+    if (bgRef.current) {
+      bgRef.current.style.height = bgHeight;
+      bgRef.current.style.background = `url('/images/hero${windowWidth > 768 ? '' : '-mobile'}.png')`;
+    }
   }
 
 
@@ -48,11 +51,12 @@ const PublicLayout = ({ children }: { children: ReactNode }) => {
     <Head>
       <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
     </Head>
-    <div>
+    <Stack spacing="0px" position="relative">
+      <Stack ref={bgRef} h="600px" w="100%" bg="url('/images/hero.png')" bgSize="cover" bgRepeat="no-repeat" bgPosition="initial" position="absolute" top="0px" left="0px" zIndex="-1"></Stack>
       <Navbar />
       <>{children}</>
       <Footer />
-    </div>
+    </Stack>
     </>
   );
 };

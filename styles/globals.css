@@ -4,11 +4,11 @@ body {
   margin: 0px;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: transparent !important;
+  /* background-color: transparent !important;
   background-image: url("/images/hero.png");
   background-size: 100% 240px;
   background-position: initial;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
 }
 
 h1, h2, h3, h4, h5, h6 {
