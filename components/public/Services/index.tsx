@@ -40,9 +40,9 @@ const Services = () => {
           lineHeight={"34px"}
           letterSpacing="0.8px"
           // w="100%"
-          sx={{'@media screen and (max-width: 407px)': { flexDirection: "column"}}}
+          sx={{'@media screen and (max-width: 415px)': { flexDirection: "column"}}}
         >
-          <UnorderedList mr={{base: "1rem", sm:"4rem"}} >
+          <UnorderedList mr={{base: "1rem", sm:"4rem"}} my="0px" p="0px">
             <ListItem>Música</ListItem>
             <ListItem>Canto</ListItem>
             <ListItem>Instrumentos</ListItem>
@@ -50,7 +50,7 @@ const Services = () => {
             <ListItem>Literatura</ListItem>
             <ListItem>Dibujo</ListItem>
           </UnorderedList>
-          <UnorderedList>
+          <UnorderedList my="0px" p="0px">
             <ListItem>Pintura</ListItem>
             <ListItem>Arte</ListItem>
             <ListItem>Teatro</ListItem>
@@ -83,9 +83,9 @@ const Services = () => {
           lineHeight={"34px"}
           letterSpacing="0.8px"
           // w="100%"
-          sx={{'@media screen and (max-width: 407px)': { flexDirection: "column"}}}
+          sx={{'@media screen and (max-width: 415px)': { flexDirection: "column"}}}
         >
-          <UnorderedList  mr={{base: "1rem", sm:"4rem"}}>
+          <UnorderedList  mr={{base: "1rem", sm:"4rem"}} my="0px" p="0px">
             <ListItem>Psicología</ListItem>
             <ListItem>Psiquiatría</ListItem>
             <ListItem>Musicoterapia</ListItem>
@@ -93,7 +93,7 @@ const Services = () => {
             <ListItem>Psicomotricidad</ListItem>
             <ListItem>Psicopedagogía</ListItem>
           </UnorderedList>
-          <UnorderedList>
+          <UnorderedList my="0px" p="0px">
             <ListItem>Nutrición</ListItem>
             <ListItem>Neurología</ListItem>
             <ListItem>Kinesiología</ListItem>
@@ -126,14 +126,14 @@ const Services = () => {
           lineHeight={"34px"}
           letterSpacing="0.8px"
           // w="100%"
-          sx={{'@media screen and (max-width: 407px)': { flexDirection: "column"}}}
+          sx={{'@media screen and (max-width: 415px)': { flexDirection: "column"}}}
         >
-          <UnorderedList  mr={{base: "1rem", sm:"4rem"}}>
+          <UnorderedList  mr={{base: "1rem", sm:"4rem"}} my="0px" p="0px">
             <ListItem>Talleres</ListItem>
             <ListItem>Clases</ListItem>
             <ListItem> Apoyo escolar</ListItem>
           </UnorderedList>
-          <UnorderedList>
+          <UnorderedList my="0px" p="0px">
             <ListItem>Orientación a padres</ListItem>
             <ListItem>Orientación a docentes</ListItem>
             <ListItem>Orientación a alumnos</ListItem>
