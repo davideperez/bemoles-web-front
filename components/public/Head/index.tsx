@@ -8,7 +8,7 @@ const HeadLayout: React.FC<Props> = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Los bemoles</title>
+        <title>Los Bemoles</title>
         <meta name="description" content="Somos un espacio donde la Cultura y el Encuentro tienen lugar."></meta>
         <meta property="og:image" itemProp="image" content='https://res.cloudinary.com/dlwra6psn/image/upload/c_scale,h_299/v1690219293/bemoles-og_pcfyxa.png' />
         <link

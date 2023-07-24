@@ -104,7 +104,7 @@ const AgendaDetail = () => {
   return (
     <>
     <Head>
-      <title>{event ? `Agenda: ${event?.title}` : 'Cargando...'} | Los bemoles</title>
+      <title>{event ? `Agenda: ${event?.title}` : 'Cargando...'} | Los Bemoles</title>
     </Head>
     <Stack
       as="main"

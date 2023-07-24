@@ -84,7 +84,7 @@ const EventDetail = () => {
     <>
       <Head>
         <title>
-          {!event ? "Cargando... " : `${event.title} `}| Los bemoles
+          {!event ? "Cargando... " : `${event.title} `}| Los Bemoles
         </title>
       </Head>
 

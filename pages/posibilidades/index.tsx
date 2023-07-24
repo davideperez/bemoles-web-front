@@ -16,7 +16,7 @@ const PosibilidadesPage = () => {
   return (
     <>
     <Head>
-    <title>Posibilidades | Los bemoles</title>
+    <title>Posibilidades | Los Bemoles</title>
     </Head>
     <Stack
       as="main"

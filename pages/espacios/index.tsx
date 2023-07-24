@@ -16,7 +16,7 @@ import Head from "next/head";
     return (
       <>
       <Head>
-        <title>Espacios | Los bemoles</title>
+        <title>Espacios | Los Bemoles</title>
       </Head>
       <Stack
       as="main"

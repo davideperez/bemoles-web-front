@@ -83,7 +83,7 @@ const ProjectDetail = () => {
     <>
       <Head>
         <title>
-          {!project ? "Cargando... " : `${project.title} `}| Los bemoles
+          {!project ? "Cargando... " : `${project.title} `}| Los Bemoles
         </title>
       </Head>
 

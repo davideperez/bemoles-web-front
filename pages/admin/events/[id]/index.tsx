@@ -106,7 +106,7 @@ const EventDetail = () => {
             ? "Cargando... "
             : `${event.title} `
               }
-          | Los bemoles
+          | Los Bemoles
         </title>
       </Head>
 

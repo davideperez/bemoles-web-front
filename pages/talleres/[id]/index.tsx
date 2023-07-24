@@ -27,7 +27,7 @@ const ReservaDetail = () => {
   return (
     <>
     <Head>
-      <title>{event ? `Taller: ${event?.title}` : 'Cargando...'} | Los bemoles</title>
+      <title>{event ? `Taller: ${event?.title}` : 'Cargando...'} | Los Bemoles</title>
     </Head>
     <Stack
       as="main"

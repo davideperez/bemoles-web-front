@@ -12,7 +12,7 @@ const HomePage = () => {
   return (
     <>
     <Head>
-      <title>Inicio | Los bemoles</title>
+      <title>Inicio | Los Bemoles</title>
     </Head>
     <Stack
       as="main"

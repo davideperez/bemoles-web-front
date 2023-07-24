@@ -64,7 +64,7 @@ const ProyectosPage = () => {
   return (
     <>
     <Head>
-      <title>Proyectos | Los bemoles</title>
+      <title>Proyectos | Los Bemoles</title>
     </Head>
     <Stack
       as="main"
@@ -100,7 +100,7 @@ const ProyectosPage = () => {
       >
         <Image
           src="/images/proyectos.png"
-          alt="Los bemoles"
+          alt="Los Bemoles"
           maxW={{ base: 317, sm: 540 }}
           mx={{ base: "auto", lg: "0px" }}
         />

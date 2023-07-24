@@ -92,7 +92,7 @@ const ProjectDetail = () => {
                   ? "Crear proyecto"
                   : `Editar proyecto: ${project.title}`
               }`}
-          | Los bemoles
+          | Los Bemoles
         </title>
       </Head>
 

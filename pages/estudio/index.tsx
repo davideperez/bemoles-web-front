@@ -46,7 +46,7 @@ const EstudioPage = () => {
   return (
     <>
     <Head>
-      <title>Estudio | Los bemoles</title>
+      <title>Estudio | Los Bemoles</title>
     </Head>
     <Stack
       as="main"

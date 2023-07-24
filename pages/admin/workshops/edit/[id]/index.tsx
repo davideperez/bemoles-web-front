@@ -92,7 +92,7 @@ const EventDetail = () => {
                   ? "Crear taller"
                   : `Editar taller: ${event.title}`
               }`}
-          | Los bemoles
+          | Los Bemoles
         </title>
       </Head>
 

@@ -96,7 +96,7 @@ const EventDetail = () => {
                   ? "Crear evento"
                   : `Editar evento: ${event.title}`
               }`}
-          | Los bemoles
+          | Los Bemoles
         </title>
       </Head>
 

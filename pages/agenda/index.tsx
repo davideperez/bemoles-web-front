@@ -71,7 +71,7 @@ const AgendaPage = () => {
   return (
     <>
     <Head>
-      <title>{nextEvents && oldEvents ? `Agenda` : 'Cargando...'} | Los bemoles</title>
+      <title>Agenda | Los Bemoles</title>
     </Head>
     <Stack
       as="main"
