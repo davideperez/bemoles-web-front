@@ -24,6 +24,8 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Los bemoles</title>
+        <meta name="description" content="Somos un espacio donde la Cultura y el Encuentro tienen lugar."></meta>
+        <meta property="og:image" itemProp="image" content='https://res.cloudinary.com/dlwra6psn/image/upload/c_scale,h_299/v1689966858/web_resources/iso_w4m7tx.png' />
       </Head>
       <Stack
         bg="#3B424A"

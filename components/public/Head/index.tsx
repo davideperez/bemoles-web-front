@@ -8,6 +8,9 @@ const HeadLayout: React.FC<Props> = ({ children }) => {
   return (
     <>
       <Head>
+        <title>Los bemoles</title>
+        <meta name="description" content="Somos un espacio donde la Cultura y el Encuentro tienen lugar."></meta>
+        <meta property="og:image" itemProp="image" content='https://res.cloudinary.com/dlwra6psn/image/upload/c_scale,h_299/v1689966858/web_resources/iso_w4m7tx.png' />
         <link
           rel="apple-touch-icon"
           sizes="120x120"
@@ -31,7 +34,6 @@ const HeadLayout: React.FC<Props> = ({ children }) => {
         <meta name="theme-color" content="#ffffff" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="losbemoles.com.ar" />
-        <title>Los bemoles</title>
       </Head>
       {children}
     </>
