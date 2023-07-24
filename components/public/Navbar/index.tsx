@@ -45,7 +45,7 @@ const Navbar = () => {
         left="0px"
         w={{ base: "100%", lg: "auto" }}
       >
-        <Flex h="70px" bg="#1E1E1E">
+        <Flex h="70px" bg="#1E1E1E" display={{base: "flex", lg: "none"}}>
           <Link
             as={NextLink}
             _hover={{ opacity: "0.7" }}
@@ -72,7 +72,7 @@ const Navbar = () => {
           gap={{ base: "32px", lg: "16px", xl: "32px" }}
           bg={{ base: "#3B424A", lg: "transparent" }}
           w={{ base: "100%", lg: "auto" }}
-          p={{ base: "16px", lg: "48px 24px" }}
+          p={{ base: "16px", lg: "24px" }}
           minH={{ base: "100vh", lg: "fit-content" }}
           whiteSpace="nowrap"
           zIndex={3}
