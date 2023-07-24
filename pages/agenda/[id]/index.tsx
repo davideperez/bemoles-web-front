@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { AxiosError } from "axios";
 import { Field, Formik, FormikHelpers } from "formik";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Event } from "../../../models/event";
@@ -100,6 +101,10 @@ const AgendaDetail = () => {
   };
 
   return (
+    <>
+    <Head>
+      <title>Los bemoles | {event ? `Agenda: ${event?.title}` : 'Cargando...'}</title>
+    </Head>
     <Stack
       as="main"
       padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
@@ -357,6 +362,7 @@ const AgendaDetail = () => {
         </Flex>
       )}
     </Stack>
+    </>
   );
 };
 

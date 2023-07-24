@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { ApiBase } from "../../models/apiBase";
@@ -61,6 +62,10 @@ const ProyectosPage = () => {
   }, [page, itemsPerPage]);
 
   return (
+    <>
+    <Head>
+      <title>Los bemoles | Proyectos</title>
+    </Head>
     <Stack
       as="main"
       padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
@@ -173,6 +178,7 @@ const ProyectosPage = () => {
         </Stack>
       </Flex>
     </Stack>
+    </>
   );
 };
 

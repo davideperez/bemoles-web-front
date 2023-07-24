@@ -10,6 +10,7 @@ import {
   Spinner,
   Stack,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { ApiBase } from "../../models/apiBase";
@@ -68,6 +69,10 @@ const AgendaPage = () => {
 
 
   return (
+    <>
+    <Head>
+      <title>Los bemoles | {nextEvents && oldEvents ? `Agenda` : 'Cargando...'}</title>
+    </Head>
     <Stack
       as="main"
       padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
@@ -152,6 +157,8 @@ const AgendaPage = () => {
         <Flex justifyContent={"center"}><Button bg="#DDC692" color="#3B424A" size="lg" my="2rem" onClick={() => setInactivePage(inactivePage + 1)} isLoading={isLoading}>Ver mas</Button></Flex>
       </Stack></> : <Center h="80vh"><Spinner color="#DDC692" size="xl" thickness='4px'/></Center>}
     </Stack>
+    </>
+
   );
 };
 

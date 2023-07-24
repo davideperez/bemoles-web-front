@@ -5,8 +5,8 @@ import Layout from "../components/admin/Layout";
 import { UserProvider } from "../context/userContext";
 import { useRouter } from "next/router";
 import { Manrope } from "next/font/google";
-import localFont from 'next/font/local'
 import PublicLayout from "../components/public/PublicLayout";
+import HeadLayout from "../components/public/Head";
 
 const manrope = Manrope({ subsets: ["latin"] });
 
@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <UserProvider>
+      <HeadLayout>
         {router.asPath.includes("/admin") ? (
           <Layout>
             <Component {...pageProps} />
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             )}
           </main>
         )}
+        </HeadLayout>
       </UserProvider>
     </ChakraProvider>
   );

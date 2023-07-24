@@ -5,6 +5,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Event } from "../../../models/event";
@@ -24,6 +25,10 @@ const ReservaDetail = () => {
   }, [router.query.id]);
 
   return (
+    <>
+    <Head>
+      <title>Los bemoles | {event ? `Taller: ${event?.title}` : 'Cargando...'}</title>
+    </Head>
     <Stack
       as="main"
       padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
@@ -79,6 +84,7 @@ const ReservaDetail = () => {
         </Flex>
       )}
     </Stack>
+    </>
   );
 };
 

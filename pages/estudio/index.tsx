@@ -9,6 +9,7 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import React from "react";
 
 const servicios = [{
@@ -43,6 +44,10 @@ const servicios = [{
 
 const EstudioPage = () => {
   return (
+    <>
+    <Head>
+      <title>Los bemoles | Estudio</title>
+    </Head>
     <Stack
       as="main"
       padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
@@ -232,6 +237,7 @@ const EstudioPage = () => {
             </Flex>
         </Flex>
     </Stack>
+    </>
   );
 };
 

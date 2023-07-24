@@ -7,10 +7,15 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import React from "react";
 
 const SumArtePage = () => {
   return (
+    <>
+    <Head>
+      <title>Los bemoles | Sum-arte</title>
+    </Head>
     <Stack
       as="main"
       padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
@@ -144,6 +149,7 @@ const SumArtePage = () => {
         </Stack>
       </Flex>
     </Stack>
+    </>
   );
 };
 

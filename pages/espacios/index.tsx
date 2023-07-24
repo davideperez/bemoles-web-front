@@ -9,10 +9,15 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
+import Head from "next/head";
   import React from "react";
 
   const EspaciosPage = () => {
     return (
+      <>
+      <Head>
+        <title>Los bemoles | Espacios</title>
+      </Head>
       <Stack
       as="main"
       padding={{ base: "44px 6px 20px 6px", lg: "96px 100px 120px 100px" }}
@@ -328,6 +333,7 @@ Amplio y luminoso taller para la realización de talleres, con instalaciones gas
       </Stack>
           
       </Stack>
+      </>
     );
   };
   

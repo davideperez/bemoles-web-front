@@ -9,10 +9,15 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import React from "react";
 
 const PosibilidadesPage = () => {
   return (
+    <>
+    <Head>
+      <title>Los bemoles | Posibilidades</title>
+    </Head>
     <Stack
       as="main"
       padding={{ base: "44px 6px 20px 6px", lg: "96px 100px 120px 100px" }}
@@ -406,6 +411,7 @@ const PosibilidadesPage = () => {
         />
       </Stack>
     </Stack>
+    </>
   );
 };
 
