@@ -66,6 +66,7 @@ const PosibilidadesPage = () => {
             py="10px"
             px="10px"
             order={{ base: "1", lg: "2" }}
+            mr={{base: "0px", lg: "2rem"}}
           >
             <Text
               as="h3"
