@@ -136,7 +136,7 @@ const EstudioPage = () => {
               lineHeight={{ base: "42px", lg: "54px" }}
               letterSpacing={{ base: "0.4px", lg: "2.7px" }}
             >
-              Título marketinero
+              ¡Bienvenidos al Estudio!
             </Text>
             <Text
               as="p"

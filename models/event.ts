@@ -14,11 +14,11 @@ export type Event = {
 };
 
 export type Reserve = {
-  firstName: String;
-  lastName: String;
-  dni: String;
-  ticketQuantity: Number;
-  email: String;
+  firstName: string;
+  lastName: string;
+  dni: string;
+  ticketQuantity: number;
+  email: string;
   event: Event | string;
   createdAt: Date;
 };

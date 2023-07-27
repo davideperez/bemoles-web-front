@@ -225,7 +225,7 @@ const EventDetail = () => {
                     </FormControl>
                     <FormControl>
                       <FormLabel>
-                        Published
+                        Publicado
                       </FormLabel>
                       <Switch
                         defaultChecked={values.published}

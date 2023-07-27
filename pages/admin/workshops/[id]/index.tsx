@@ -102,7 +102,7 @@ const EventDetail = () => {
               }}
               onClick={() => router.push("/admin/workshops")}
             />
-            <Heading>Event: {`${event?.title}`}</Heading>
+            <Heading>Taller: {`${event?.title}`}</Heading>
           </Flex>
           <Stack bg={"white"} p={8} borderRadius="xl" spacing={6}>
             <Flex>

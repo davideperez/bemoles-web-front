@@ -42,9 +42,14 @@ import { MdOutlineSearch } from "react-icons/md";
 import { Pagination } from "../../../../components/admin/Pagination";
 import useDebounce from "../../../../hooks/useDebounce";
 import { ApiBase } from "../../../../models/apiBase";
-import { Event } from "../../../../models/event";
+import { Event, Reserve } from "../../../../models/event";
 import { eventService } from "../../../../services/events.service";
 import { formatDate } from "../../../../utils/functions";
+
+const getReserveQuantity = (reserves: Reserve[]) => reserves.reduce((reserveQuantity: number, reserve: Reserve) => {
+  const reserveQuantityToUpdate = reserveQuantity + reserve.ticketQuantity;
+  return reserveQuantityToUpdate;
+}, 0)
 
 const EventReservesPage = () => {
   const [events, setEvents] = useState<ApiBase<Event>>();
@@ -142,8 +147,12 @@ const EventReservesPage = () => {
                       {event?.title}
                     </Text>
                     <Text as="span" fontSize="md" mr={20}>
-                      <b>Cantidad de reservas: </b>
-                      {(event?.reserves || [])?.length}
+                      <b>Cupo máximo: </b>
+                      {event?.maxAttendance} 
+                    </Text>
+                    <Text as="span" fontSize="md" mr={20}>
+                      <b>Reservadas: </b>
+                      {getReserveQuantity(event?.reserves || [])} 
                     </Text>
                     <Text as="span" fontSize="md" mr={4}>
                       <b>Fecha: </b>

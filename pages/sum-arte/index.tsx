@@ -14,7 +14,7 @@ const SumArtePage = () => {
   return (
     <>
     <Head>
-      <title>Sum-arte | Los bemoles</title>
+      <title>Sum-arte | Los Bemoles</title>
     </Head>
     <Stack
       as="main"
@@ -48,7 +48,7 @@ const SumArtePage = () => {
         alignItems={"flex-start"}
         gap={{ base: "0px", sm: "40px", lg: "90px" }}
         flexWrap={"wrap"}
-        justifyContent={{base: "center", lg: "flex-start"}}
+        justifyContent={{base: "center", lg: "center"}}
       >
         <Stack position="relative" h={{base: "580px", lg:"1100px"}}>
           <Image
@@ -102,7 +102,7 @@ const SumArtePage = () => {
             lineHeight={{ base: "42px", lg: "54px" }}
             letterSpacing={{ base: "0.4px", lg: "2.7px" }}
           >
-            Título marketinero
+            SUM-ARTE
           </Text>
           <Text
             as="p"
