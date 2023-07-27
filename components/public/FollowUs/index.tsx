@@ -16,10 +16,7 @@ import { BsFacebook, BsYoutube } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
 import instagramApi from "../../../services/instagram.service";
 
-const accessToken =
-  "IGQVJVbjNrZAlU0S1JUaGNHWUtzNmdDN3Fzalo0SUhHMHdrZA1pVZAldndndZAT09xd1lkaUtoQkxNdlR6Vm5QTnRBUkdrWEVfUG5KaEtmcTNIWXFaV3JUU1diVS0taHdqWmNJTjZAUbUU1U0NhVXRwTmRUdgZDZD";
-const userId = "5949594941812899";
-
+const accessToken = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
 interface IgPost {
   id: string;
   media_type: string;
@@ -49,7 +46,7 @@ const FollowUS = () => {
     (async () => {
       try {
         const { data: igPostsToShow } = await instagramApi.getPosts(
-          accessToken,
+          accessToken as string,
           isLgOrBigger ? 9 : 3
         );
         setIgPosts(igPostsToShow.media.data);
