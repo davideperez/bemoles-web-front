@@ -19,7 +19,7 @@ const Navbar = () => {
       <Link
         as={NextLink}
         _hover={{ opacity: "0.7" }}
-        href="/home"
+        href="/"
         onClick={onClose}
       >
         <Box p={{ base: "16px", lg: "24px" }}>
@@ -49,7 +49,7 @@ const Navbar = () => {
           <Link
             as={NextLink}
             _hover={{ opacity: "0.7" }}
-            href="/home"
+            href="/"
             onClick={onClose}
           >
             <Box p={{ base: "16px", lg: "24px" }}>

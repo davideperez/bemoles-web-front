@@ -15,22 +15,18 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <UserProvider>
-      <HeadLayout>
-        {router.asPath.includes("/admin") ? (
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        ) : (
-          <main className={manrope.className}>
-            {router.asPath === "/" ? (
+        <HeadLayout>
+          {router.asPath.includes("/admin") ? (
+            <Layout>
               <Component {...pageProps} />
-            ) : (
+            </Layout>
+          ) : (
+            <main className={manrope.className}>
               <PublicLayout>
                 <Component {...pageProps} />
               </PublicLayout>
-            )}
-          </main>
-        )}
+            </main>
+          )}
         </HeadLayout>
       </UserProvider>
     </ChakraProvider>

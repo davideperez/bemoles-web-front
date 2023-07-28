@@ -1,89 +1,58 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Image,
-  Link,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import type { NextPage } from "next";
+
+import { GetStaticProps } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { AiOutlineInstagram } from "react-icons/ai";
-import styles from "../styles/Home.module.css";
-import { GrFacebookOption } from "react-icons/gr";
-import Logo from "../components/admin/Login/Logo";
+import React from "react";
+import FollowUS from "../components/public/FollowUs";
+import Hero from "../components/public/Hero";
+import MainCategories from "../components/public/MainCategories";
+import Services from "../components/public/Services";
+import VisitUs from "../components/public/VisitUs";
+import WeSearch from "../components/public/WeSearch";
+import instagramApi from "../services/instagram.service";
 
-const Home: NextPage = () => {
-  const router = useRouter();
+interface IgPost {
+  id: string;
+  media_type: string;
+  media_url: string;
+  caption: string;
+}
 
+interface Props {
+  igPosts: IgPost[];
+}
+
+const HomePage: NextPage<Props> = ({ igPosts }) => {
   return (
     <>
       <Head>
-        <title>Los Bemoles</title>
-        <meta name="description" content="Somos un espacio donde la Cultura y el Encuentro tienen lugar."></meta>
-        <meta property="og:image" itemProp="image" content='https://res.cloudinary.com/dlwra6psn/image/upload/c_scale,h_299/v1690219293/bemoles-og_pcfyxa.png' />
+        <title>Inicio | Los Bemoles</title>
       </Head>
       <Stack
-        bg="#3B424A"
-        color="white"
-        minH="100vh"
-        display="flex"
-        alignItems={"center"}
+        as="main"
+        padding={{ base: "60px 0px 20px 0px", lg: "340px 0px 120px 0px" }}
+        overflow="hidden"
+        spacing="4rem"
       >
-        <Container maxW={"3xl"}>
-          <Stack
-            as={Box}
-            textAlign={"center"}
-            spacing={{ base: 8, md: 14 }}
-            py={{ base: 20, md: 36 }}
-          >
-            <Logo />
-            <Heading
-              fontWeight={600}
-              fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-              lineHeight={"110%"}
-            >
-              Proximamente
-              <Text as={"span"} color={"green.400"}>
-                .
-              </Text>
-            </Heading>
-            <Flex justifyContent={"center"}>
-              <Link
-                href="https://www.instagram.com/losbemoles/"
-                isExternal
-                bg="white"
-                borderRadius={"50%"}
-                p="13px"
-                mr={5}
-                color="black"
-                border="2px solid #fff"
-                _hover={{ color: "white", bg: "none", transform: "scale(1.2)", "-webkit-transform":  "scale(1.2)"}}
-              >
-                <AiOutlineInstagram />
-              </Link>
-              <Link
-                href="https://www.facebook.com/losbemoles"
-                isExternal
-                bg="white"
-                borderRadius={"50%"}
-                p="13px"
-                color="black"
-                border="2px solid #fff"
-                _hover={{ color: "white", bg: "none", transform: "scale(1.2)", "-webkit-transform":  "scale(1.2)"}}
-              >
-                <GrFacebookOption />
-              </Link>
-            </Flex>
-          </Stack>
-        </Container>
+        <Hero />
+        <MainCategories />
+        <Services />
+        <WeSearch />
+        <FollowUS igPosts={igPosts} />
+        <VisitUs />
       </Stack>
     </>
   );
 };
 
-export default Home;
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await instagramApi.getPostsFetch(
+    process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN as string,
+    9
+  );
+  const igPosts = await res.json();
+  return { props: { igPosts: igPosts.media.data }, revalidate: 3600 };
+};
+
+export default HomePage;

@@ -49,7 +49,7 @@ const PosibilidadesPage = () => {
           objectFit={"cover"}
           objectPosition="center"
           backgroundPosition={{
-            base: "-220px 29px",
+            base: "-220px -25px",
             sm: "400px 29px",
             lg: "0px 20px",
           }}
@@ -61,7 +61,7 @@ const PosibilidadesPage = () => {
             gap={{ base: "8px", lg: "24px" }}
             flexWrap={"wrap"}
           >
-            <Flex as="picture">
+            <Flex as="picture" order={{ base: "2", sm: "1" }}>
               <source
                 srcSet="/images/responsive/clases-y-cursos-1.png"
                 media="(max-width: 480px)"
@@ -71,7 +71,7 @@ const PosibilidadesPage = () => {
                 alt="Clases y cursos"
                 w={{ base: "208px", sm: "300px" }}
                 h={{ base: "228px", sm: "456px" }}
-                order={{ base: "2", sm: "1" }}
+                
               />{" "}
             </Flex>
 
@@ -134,7 +134,7 @@ const PosibilidadesPage = () => {
               </Text>
             </Stack>
 
-            <Flex as="picture">
+            <Flex as="picture" order={{ base: "3", sm: "3" }}>
               <source
                 srcSet="/images/responsive/clases-y-cursos-2.png"
                 media="(max-width: 480px)"
@@ -144,7 +144,7 @@ const PosibilidadesPage = () => {
                 alt="Clases y cursos"
                 w={{ base: "161px", sm: "300px" }}
                 h={{ base: "228px", sm: "456px" }}
-                order={{ base: "3", sm: "3" }}
+                
               />{" "}
             </Flex>
             <Flex as="picture" order={{ base: "4", lg: "4" }}>
@@ -459,12 +459,12 @@ const PosibilidadesPage = () => {
                   fontWeight={700}
                   lineHeight={{ base: "normal", lg: "34px" }}
                   letterSpacing={{ base: "0.8px", lg: "0.8px" }}
-                  maxW="590px"
+                  maxW={{base: "350px", sm: "590px"}}
                 >
                   Encuentro puntuales de una o media jornada
                 </Text>
               </Stack>
-              <Flex as="picture">
+              <Flex as="picture" mt={{base: "0px !important", sm: "0px"}}>
                 <source
                   srcSet="/images/responsive/talleres-intensivos-3.png"
                   media="(max-width: 480px)"
@@ -480,7 +480,7 @@ const PosibilidadesPage = () => {
             </Stack>
           </Flex>
 
-          <Flex as="picture">
+          <Flex as="picture" mt="0px !important">
             <source
               srcSet="/images/responsive/talleres-intensivos-3.png"
               media="(max-width: 480px)"
