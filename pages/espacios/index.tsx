@@ -85,42 +85,73 @@ const EspaciosPage = () => {
                   excelencia.
                 </Text>{" "}
               </Stack>
-              <Image
-                src="/images/aulas.png"
-                alt="Aulas"
-                w={{ base: "379px", lg: "576px" }}
-                h={{ base: "157px", lg: "208px" }}
-              />
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/aulas.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/aulas.png"
+                  alt="Aulas"
+                  w={{ base: "379px", lg: "576px" }}
+                  h={{ base: "157px", lg: "208px" }}
+                />{" "}
+              </Flex>
             </Stack>
             <Flex gap={{ base: "8px", lg: "24px" }}>
-              <Image
-                src="/images/aulas-2.png"
-                alt="Aulas"
-                w={{ base: "258px", lg: "512px" }}
-                h={{ base: "217px", lg: "456px" }}
-              />
-              <Image
-                src="/images/aulas-3.png"
-                alt="Aulas"
-                w={{ base: "113px", lg: "176px" }}
-                h={{ base: "217px", lg: "456px" }}
-              />
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/aulas-2.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/aulas-2.png"
+                  alt="Aulas"
+                  w={{ base: "258px", lg: "512px" }}
+                  h={{ base: "217px", lg: "456px" }}
+                />{" "}
+              </Flex>
+
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/aulas-3.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/aulas-3.png"
+                  alt="Aulas"
+                  w={{ base: "113px", lg: "176px" }}
+                  h={{ base: "217px", lg: "456px" }}
+                />
+              </Flex>
             </Flex>
           </Flex>
           <Flex gap={{ base: "8px", sm: "24px" }} flexWrap={"wrap-reverse"}>
             <Flex gap={{ base: "8px", lg: "24px" }}>
-              <Image
-                src="/images/consultorios-profesionales-1.png"
-                alt="Aulas"
-                w={{ base: "214px", lg: "567px" }}
-                h={{ base: "205px", lg: "543px" }}
-              />
-              <Image
-                src="/images/consultorios-profesionales-2.png"
-                alt="Aulas"
-                w={{ base: "157px", lg: "228px" }}
-                h={{ base: "205px", lg: "543px" }}
-              />
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/consultorios-profesionales-1.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/consultorios-profesionales-1.png"
+                  alt="Aulas"
+                  w={{ base: "214px", lg: "567px" }}
+                  h={{ base: "205px", lg: "543px" }}
+                />
+              </Flex>
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/consultorios-profesionales-2.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/consultorios-profesionales-2.png"
+                  alt="Aulas"
+                  w={{ base: "157px", lg: "228px" }}
+                  h={{ base: "205px", lg: "543px" }}
+                />
+              </Flex>
             </Flex>
             <Stack spacing={{ base: "8px", sm: "24px" }}>
               <Stack
@@ -153,12 +184,18 @@ const EspaciosPage = () => {
                   estacionamiento en la puerta, fácil acceso. Cámara Gesell.{" "}
                 </Text>{" "}
               </Stack>
-              <Image
-                src="/images/consultorios-profesionales-3.png"
-                alt="Aulas"
-                w={{ base: "379px", lg: "468px" }}
-                h={{ base: "229px", lg: "223px" }}
-              />
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/consultorios-profesionales-3.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/consultorios-profesionales-3.png"
+                  alt="Aulas"
+                  w={{ base: "379px", lg: "468px" }}
+                  h={{ base: "229px", lg: "223px" }}
+                />{" "}
+              </Flex>
             </Stack>
           </Flex>
           <Flex
@@ -166,13 +203,19 @@ const EspaciosPage = () => {
             gap={{ base: "8px", lg: "24px" }}
             flexWrap={"wrap"}
           >
-            <Image
-              src="/images/sala-de-ensayo-1.png"
-              alt="Clases y cursos"
-              w={{ base: "150px", sm: "300px" }}
-              h={{ base: "202px", sm: "466px" }}
-              order={{ base: "2", sm: "1" }}
-            />
+            <Flex as="picture" order={{ base: "2", sm: "1" }}>
+              <source
+                srcSet="/images/responsive/sala-de-ensayo-1.png"
+                media="(max-width: 480px)"
+              />
+              <Image
+                src="/images/sala-de-ensayo-1.png"
+                alt="Clases y cursos"
+                w={{ base: "150px", sm: "300px" }}
+                h={{ base: "202px", sm: "466px" }}
+              />
+            </Flex>
+
             <Stack
               h="100%"
               py="10px"
@@ -203,19 +246,26 @@ const EspaciosPage = () => {
                 correctamente acustizado y con las condiciones ténicas para que
                 al hacerlo podamo captar todo el potencial y brillo.
                 <br />
-                Ensayos. Grabación Multipista. Estudio dotado con equipos Fender, Laney, Monitores Makie, Consola
-                Allen & Heath, Microfonía Shure, Rode, AudioTechnica, Sennheiser.
+                Ensayos. Grabación Multipista. Estudio dotado con equipos
+                Fender, Laney, Monitores Makie, Consola Allen & Heath,
+                Microfonía Shure, Rode, AudioTechnica, Sennheiser.
                 <br />
                 Producciones Audiovisuales.
               </Text>
             </Stack>
-            <Image
-              src="/images/sala-de-ensayo-2.png"
-              alt="Clases y cursos"
-              w={{ base: "221px", sm: "563px" }}
-              h={{ base: "202px", sm: "466px" }}
-              order={{ base: "3", sm: "3" }}
-            />
+
+            <Flex as="picture" order={{ base: "3", sm: "3" }}>
+              <source
+                srcSet="/images/responsive/sala-de-ensayo-2.png"
+                media="(max-width: 480px)"
+              />
+              <Image
+                src="/images/sala-de-ensayo-2.png"
+                alt="Clases y cursos"
+                w={{ base: "221px", sm: "563px" }}
+                h={{ base: "202px", sm: "466px" }}
+              />
+            </Flex>
           </Flex>
           <Flex gap={{ base: "8px", sm: "24px" }} flexWrap={"wrap-reverse"}>
             <Grid
@@ -236,28 +286,45 @@ const EspaciosPage = () => {
                   order={{ base: "2", sm: "1" }}
                 />
               </Flex>
-              <Image
-                src="/images/salon-para-eventos-2.png"
-                alt="Clases y cursos"
-                w={{ base: "151px", lg: "325px" }}
-                h={{ base: "176px", lg: "378px" }}
-                order={{ base: "1", sm: "2" }}
-              />
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/salon-para-eventos-2.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/salon-para-eventos-2.png"
+                  alt="Clases y cursos"
+                  w={{ base: "151px", lg: "325px" }}
+                  h={{ base: "176px", lg: "378px" }}
+                />
+              </Flex>
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/salon-para-eventos-3.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/salon-para-eventos-3.png"
+                  alt="Clases y cursos"
+                  w={{ base: "220px", lg: "471px" }}
+                  h={{ base: "155px", lg: "332px" }}
+                  order={{ base: "3", sm: "3" }}
+                />
+              </Flex>
 
-              <Image
-                src="/images/salon-para-eventos-3.png"
-                alt="Clases y cursos"
-                w={{ base: "220px", lg: "471px" }}
-                h={{ base: "155px", lg: "332px" }}
-                order={{ base: "3", sm: "3" }}
-              />
-              <Image
-                src="/images/salon-para-eventos-4.png"
-                alt="Clases y cursos"
-                w={{ base: "151px", lg: "325px" }}
-                h={{ base: "155px", lg: "332px" }}
-                order={{ base: "4", sm: "4" }}
-              />
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/salon-para-eventos-4.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/salon-para-eventos-4.png"
+                  alt="Clases y cursos"
+                  w={{ base: "151px", lg: "325px" }}
+                  h={{ base: "155px", lg: "332px" }}
+                  order={{ base: "4", sm: "4" }}
+                />
+              </Flex>
             </Grid>
             <Stack spacing={{ base: "8px", sm: "24px" }}>
               <Stack
@@ -336,19 +403,33 @@ const EspaciosPage = () => {
                   actividades. Acceso al parque.{" "}
                 </Text>{" "}
               </Stack>
-              <Image
-                src="/images/quincho-1.png"
-                alt="Aulas"
-                w={{ base: "379px", lg: "576px" }}
-                h={{ base: "173px", lg: "242px" }}
-              />
+
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/quincho-1.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/quincho-1.png"
+                  alt="Aulas"
+                  w={{ base: "379px", lg: "576px" }}
+                  h={{ base: "173px", lg: "242px" }}
+                />{" "}
+              </Flex>
             </Stack>
-            <Image
-              src="/images/quincho-2.png"
-              alt="Aulas"
-              w={{ base: "379px", lg: "712px" }}
-              h={{ base: "244px", lg: "456px" }}
-            />
+
+            <Flex as="picture">
+              <source
+                srcSet="/images/responsive/quincho-2.png"
+                media="(max-width: 480px)"
+              />
+              <Image
+                src="/images/quincho-2.png"
+                alt="Aulas"
+                w={{ base: "379px", lg: "712px" }}
+                h={{ base: "244px", lg: "456px" }}
+              />
+            </Flex>
           </Flex>
         </Stack>
       </Stack>

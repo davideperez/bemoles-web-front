@@ -1,6 +1,7 @@
 import { Flex, Img } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
+import { scaleCloudinaryImageFromUrl } from "../../../utils/functions";
 
 const MainCategories = () => {
   return (
@@ -20,7 +21,13 @@ const MainCategories = () => {
         alignItems="center"
         _hover={{opacity: 0.7}}
       >
-        <Img src="/images/consultorios.png" alt="Consultorios" />
+        <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/consultorios.png"
+                  media="(max-width: 480px)"
+                />
+                <Img src="/images/consultorios.png" alt="Consultorios" />
+              </Flex>
         <Flex
           position="absolute"
           textTransform={"uppercase"}
@@ -46,7 +53,13 @@ const MainCategories = () => {
         alignItems="center"
         _hover={{opacity: 0.7}}
       >
-        <Img src="/images/musica.png" alt="Musica" />
+        <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/musica.png"
+                  media="(max-width: 480px)"
+                />
+                <Img src="/images/musica.png" alt="Consultorios" />
+              </Flex>
         <Flex
           position="absolute"
           textTransform={"uppercase"}
@@ -71,7 +84,13 @@ const MainCategories = () => {
         alignItems="center"
         _hover={{opacity: 0.7}}
       >
-        <Img src="/images/sum-arte.png" alt="Sum-arte" />
+        <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/sum-arte.png"
+                  media="(max-width: 480px)"
+                />
+                <Img src="/images/sum-arte.png" alt="Consultorios" />
+              </Flex>
         <Flex
           position="absolute"
           textTransform={"uppercase"}

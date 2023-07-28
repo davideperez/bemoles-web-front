@@ -54,20 +54,27 @@ const PosibilidadesPage = () => {
             lg: "0px 20px",
           }}
           backgroundRepeat={"no-repeat"}
-          alignItems="center"
+          alignItems={{base:"flex-start", lg: "center"}}
         >
           <Flex
             alignItems={"flex-end"}
             gap={{ base: "8px", lg: "24px" }}
             flexWrap={"wrap"}
           >
-            <Image
-              src="/images/clases-y-cursos-1.png"
-              alt="Clases y cursos"
-              w={{ base: "208px", sm: "300px" }}
-              h={{ base: "228px", sm: "456px" }}
-              order={{ base: "2", sm: "1" }}
-            />
+            <Flex as="picture">
+              <source
+                srcSet="/images/responsive/clases-y-cursos-1.png"
+                media="(max-width: 480px)"
+              />
+              <Image
+                src="/images/clases-y-cursos-1.png"
+                alt="Clases y cursos"
+                w={{ base: "208px", sm: "300px" }}
+                h={{ base: "228px", sm: "456px" }}
+                order={{ base: "2", sm: "1" }}
+              />{" "}
+            </Flex>
+
             <Stack
               w="363px"
               h="100%"
@@ -126,13 +133,20 @@ const PosibilidadesPage = () => {
                 Encuentros Semanales de 1 a 2 horas.
               </Text>
             </Stack>
-            <Image
-              src="/images/clases-y-cursos-2.png"
-              alt="Clases y cursos"
-              w={{ base: "161px", sm: "300px" }}
-              h={{ base: "228px", sm: "456px" }}
-              order={{ base: "3", sm: "3" }}
-            />
+
+            <Flex as="picture">
+              <source
+                srcSet="/images/responsive/clases-y-cursos-2.png"
+                media="(max-width: 480px)"
+              />
+              <Image
+                src="/images/clases-y-cursos-2.png"
+                alt="Clases y cursos"
+                w={{ base: "161px", sm: "300px" }}
+                h={{ base: "228px", sm: "456px" }}
+                order={{ base: "3", sm: "3" }}
+              />{" "}
+            </Flex>
             <Flex as="picture" order={{ base: "4", lg: "4" }}>
               <source
                 srcSet="/images/clases-y-cursos-3.png"
@@ -166,28 +180,45 @@ const PosibilidadesPage = () => {
                   order={{ base: "2", sm: "1" }}
                 />
               </Flex>
-              <Image
-                src="/images/clases-de-musica-2.png"
-                alt="Clases y cursos"
-                w={{ base: "182px", lg: "325px" }}
-                h={{ base: "220px", lg: "378px" }}
-                order={{ base: "1", sm: "2" }}
-              />
-
-              <Image
-                src="/images/clases-de-musica-3.png"
-                alt="Clases y cursos"
-                w={{ base: "181px", lg: "432px" }}
-                h={{ base: "185px", lg: "332px" }}
-                order={{ base: "4", sm: "3" }}
-              />
-              <Image
-                src="/images/clases-de-musica-4.png"
-                alt="Clases y cursos"
-                w={{ base: "190px", lg: "325px" }}
-                h={{ base: "185px", lg: "332px" }}
-                order={{ base: "3", sm: "4" }}
-              />
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/clases-de-musica-2.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/clases-de-musica-2.png"
+                  alt="Clases y cursos"
+                  w={{ base: "182px", lg: "325px" }}
+                  h={{ base: "220px", lg: "378px" }}
+                  order={{ base: "1", sm: "2" }}
+                />{" "}
+              </Flex>
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/clases-de-musica-3.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/clases-de-musica-3.png"
+                  alt="Clases y cursos"
+                  w={{ base: "181px", lg: "432px" }}
+                  h={{ base: "185px", lg: "332px" }}
+                  order={{ base: "4", sm: "3" }}
+                />{" "}
+              </Flex>
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/clases-de-musica-4.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/clases-de-musica-4.png"
+                  alt="Clases y cursos"
+                  w={{ base: "190px", lg: "325px" }}
+                  h={{ base: "185px", lg: "332px" }}
+                  order={{ base: "3", sm: "4" }}
+                />{" "}
+              </Flex>
             </Grid>
             <Stack spacing={{ base: "8px", sm: "24px" }}>
               <Stack
@@ -310,26 +341,46 @@ const PosibilidadesPage = () => {
                   </Flex>
                 </UnorderedList>{" "}
               </Stack>
-              <Image
-                src="/images/cuerpo-salud-y-acomp-1.png"
-                alt="Clases y cursos"
-                w={{ base: "379px", lg: "596px" }}
-                h={{ base: "104px", lg: "164px" }}
-              />
+
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/cuerpo-salud-y-acomp-1.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/cuerpo-salud-y-acomp-1.png"
+                  alt="Clases y cursos"
+                  w={{ base: "379px", lg: "596px" }}
+                  h={{ base: "104px", lg: "164px" }}
+                />{" "}
+              </Flex>
             </Stack>
             <Flex gap={{ base: "8px", lg: "24px" }}>
-              <Image
-                src="/images/cuerpo-salud-y-acomp-2.png"
-                alt="Clases y cursos"
-                w={{ base: "239px", lg: "458px" }}
-                h={{ base: "239px", lg: "484px" }}
-              />
-              <Image
-                src="/images/cuerpo-salud-y-acomp-3.png"
-                alt="Clases y cursos"
-                w={{ base: "129px", lg: "210px" }}
-                h={{ base: "239px", lg: "484px" }}
-              />
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/cuerpo-salud-y-acomp-2.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/cuerpo-salud-y-acomp-2.png"
+                  alt="Clases y cursos"
+                  w={{ base: "239px", lg: "458px" }}
+                  h={{ base: "239px", lg: "484px" }}
+                />{" "}
+              </Flex>
+
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/cuerpo-salud-y-acomp-3.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/cuerpo-salud-y-acomp-3.png"
+                  alt="Clases y cursos"
+                  w={{ base: "129px", lg: "210px" }}
+                  h={{ base: "239px", lg: "484px" }}
+                />{" "}
+              </Flex>
             </Flex>
           </Flex>
           <Flex
@@ -337,18 +388,30 @@ const PosibilidadesPage = () => {
             flexWrap={{ base: "wrap-reverse", sm: "wrap-reverse" }}
           >
             <Flex gap={{ base: "8px", sm: "24px" }}>
-              <Image
-                src="/images/talleres-intensivos-1.png"
-                alt="Talleres intensivos"
-                w={{ base: "202px", lg: "461px" }}
-                h={{ base: "252px", lg: "574px" }}
-              />
-              <Image
-                src="/images/talleres-intensivos-2.png"
-                alt="Talleres intensivos"
-                w={{ base: "169px", lg: "322px" }}
-                h={{ base: "252px", lg: "574px" }}
-              />
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/talleres-intensivos-1.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/talleres-intensivos-1.png"
+                  alt="Talleres intensivos"
+                  w={{ base: "202px", lg: "461px" }}
+                  h={{ base: "252px", lg: "574px" }}
+                />{" "}
+              </Flex>
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/talleres-intensivos-2.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/talleres-intensivos-2.png"
+                  alt="Talleres intensivos"
+                  w={{ base: "169px", lg: "322px" }}
+                  h={{ base: "252px", lg: "574px" }}
+                />{" "}
+              </Flex>
             </Flex>
             <Stack spacing="24px" maxW="501px">
               <Stack
@@ -401,23 +464,36 @@ const PosibilidadesPage = () => {
                   Encuentro puntuales de una o media jornada
                 </Text>
               </Stack>
-              <Image
-                src="/images/talleres-intensivos-3.png"
-                alt="Talleres intensivos"
-                w="480px"
-                h="204px"
-                display={{ base: "none", sm: "flex" }}
-              />
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/talleres-intensivos-3.png"
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src="/images/talleres-intensivos-3.png"
+                  alt="Talleres intensivos"
+                  w="480px"
+                  h="204px"
+                  display={{ base: "none", sm: "flex" }}
+                />{" "}
+              </Flex>
             </Stack>
           </Flex>
-          <Image
-            src="/images/talleres-intensivos-4.png"
-            alt="Talleres intensivos"
-            w="379px"
-            h="161px"
-            display={{ base: "flex", sm: "none" }}
-            mt="0px !important"
-          />
+
+          <Flex as="picture">
+            <source
+              srcSet="/images/responsive/talleres-intensivos-3.png"
+              media="(max-width: 480px)"
+            />
+            <Image
+              src="/images/talleres-intensivos-4.png"
+              alt="Talleres intensivos"
+              w="379px"
+              h="161px"
+              display={{ base: "flex", sm: "none" }}
+              mt="0px !important"
+            />{" "}
+          </Flex>
         </Stack>
       </Stack>
     </>

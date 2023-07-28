@@ -42,3 +42,5 @@ export function formatDateTime(date) {
   // Retorna la fecha formateada
   return day + ' de ' + month + ', ' + year + ' ' + hours + ':' + minutes;
 }
+
+export const scaleCloudinaryImageFromUrl = (url, width) => url.replace('/upload/', `/upload/c_fit,w_${width}/`);

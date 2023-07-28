@@ -17,6 +17,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { Event } from "../../../models/event";
 import { eventService } from "../../../services/events.service";
 import { reserveService } from "../../../services/reserves.service";
+import { scaleCloudinaryImageFromUrl } from "../../../utils/functions";
 
 function limitInputToRange(
   event: any,
@@ -24,7 +25,7 @@ function limitInputToRange(
 ) {
   const input = event.target;
   if (!input) return;
-  if (input.value.length === 0) return input.value = '';
+  if (input.value.length === 0) return (input.value = "");
   const value = parseInt(input.value, 10);
   const min = parseInt(input.getAttribute("min"), 10);
   const max = parseInt(input.getAttribute("max"), 10);
@@ -103,185 +104,130 @@ const AgendaDetail = () => {
 
   return (
     <>
-    <Head>
-      <title>{event ? `Agenda: ${event?.title}` : 'Cargando...'} | Los Bemoles</title>
-    </Head>
-    <Stack
-      as="main"
-      padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
-      overflow="hidden"
-      spacing={{ base: "2rem", lg: "4rem" }}
-      backgroundImage={{ base: "none", lg: "url('/images/agenda-detail.png')" }}
-      objectFit={"cover"}
-      objectPosition="center"
-      backgroundPosition={{ base: "top", lg: "-40px 250px" }}
-      backgroundRepeat={"no-repeat"}
-      mb={{ base: "16rem", lg: "16rem" }}
-    >
-      <Heading
-        as="h1"
-        color="white"
-        fontFamily={"DM Serif Display"}
-        fontSize={{ base: "30px", lg: "70px" }}
-        fontWeight={400}
-        lineHeight={{ base: "50px", lg: "72px" }}
-        letterSpacing={{ base: "0.3px", lg: "0.7px" }}
+      <Head>
+        <title>
+          {event ? `Agenda: ${event?.title}` : "Cargando..."} | Los Bemoles
+        </title>
+      </Head>
+      <Stack
+        as="main"
+        padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
+        overflow="hidden"
+        spacing={{ base: "2rem", lg: "4rem" }}
+        backgroundImage={{
+          base: "none",
+          lg: "url('/images/agenda-detail.png')",
+        }}
+        objectFit={"cover"}
+        objectPosition="center"
+        backgroundPosition={{ base: "top", lg: "-40px 250px" }}
+        backgroundRepeat={"no-repeat"}
+        mb={{ base: "16rem", lg: "16rem" }}
       >
-        Agenda
-      </Heading>
-      {event && (
-        <Flex
-          pt={{ base: "0px", lg: "2rem" }}
-          alignItems={"flex-end"}
-          gap="24px"
-          flexWrap={"wrap"}
+        <Heading
+          as="h1"
+          color="white"
+          fontFamily={"DM Serif Display"}
+          fontSize={{ base: "30px", lg: "70px" }}
+          fontWeight={400}
+          lineHeight={{ base: "50px", lg: "72px" }}
+          letterSpacing={{ base: "0.3px", lg: "0.7px" }}
         >
-          <Image
-            src={event.image}
-            alt={event.title}
-            maxW={{ base: 350, sm: 400 }}
-          />
-          <Stack maxW="470px" spacing="16px">
-            <Text
-              as="h3"
-              color="#3B424A"
-              fontFamily={"DM Serif Display"}
-              fontSize={{ base: "40px", lg: "54px" }}
-              fontWeight={400}
-              lineHeight={{ base: "42px", lg: "54px" }}
-              letterSpacing={{ base: "0.4px", lg: "2.7px" }}
-            >
-              {event.title}
-            </Text>
-            <Text
-              as="p"
-              color="#3B424A"
-              fontSize={{ base: "20px", lg: "24px" }}
-              fontWeight={400}
-              lineHeight={{ base: "34px", lg: "34px" }}
-              letterSpacing={{ base: "1px", lg: "1.2px" }}
-            >
-              Entrada:
-              <Text as="span" fontWeight={700} ml="2px">
-                ${event.price}
-              </Text>
-            </Text>
-            <Text
-              as="p"
-              fontSize={{ base: "16px", lg: "16px" }}
-              fontWeight={400}
-              lineHeight={{ base: "24px", lg: "34px" }}
-              letterSpacing={{ base: "0.8px", lg: "0.8px" }}
-            >
-              {event.info}
-            </Text>
-          </Stack>
-          <Formik
-            initialValues={{
-              firstName: "",
-              lastName: "",
-              email: "",
-              dni: "",
-              ticketQuantity: "",
-              event: router.query.id as string,
-            }}
-            onSubmit={handleSubmit}
+          Agenda
+        </Heading>
+        {event && (
+          <Flex
+            pt={{ base: "0px", lg: "2rem" }}
+            gap="24px"
+            flexWrap={"wrap"}
           >
-            {({ handleSubmit, errors, isSubmitting }) => (
-              <form onSubmit={handleSubmit} autoComplete="off">
-                <Stack spacing="16px" p="16px" w="370px" bg="#3B424A">
-                  <Text
-                    as="h4"
-                    color="white"
-                    fontFamily={"DM Serif Display"}
-                    fontSize={{ base: "32px", lg: "32px" }}
-                    fontWeight={400}
-                    lineHeight={{ base: "44px", lg: "44px" }}
-                    letterSpacing={{ base: "0.32px", lg: "0.32px" }}
-                  >
-                    Reservar Entrada
-                  </Text>
-                  <Field
-                    as={Input}
-                    required
-                    type="text"
-                    p="8px 16px"
-                    name="firstName"
-                    placeholder="Nombre"
-                    h="50px"
-                    color="white"
-                    minLength="2"
-                    maxLength="60"
-                    border="1px solid rgba(255, 255, 255, 0.40)"
-                    borderRadius="4px"
-                    focusBorderColor="white"
-                    _placeholder={{
-                      color: "white",
-                      fontSize: { base: "16px", lg: "16px" },
-                      fontWeight: 400,
-                      lineHeight: { base: "34px", lg: "34px" },
-                      letterSpacing: { base: "0.8px", lg: "0.8px" },
-                      opacity: 0.5,
-                    }}
-                  ></Field>
-                  <Field
-                    as={Input}
-                    type="text"
-                    required
-                    p="8px 16px"
-                    name="lastName"
-                    placeholder="Apellido"
-                    h="50px"
-                    color="white"
-                    minLength="2"
-                    maxLength="60"
-                    border="1px solid rgba(255, 255, 255, 0.40)"
-                    borderRadius="4px"
-                    focusBorderColor="white"
-                    _placeholder={{
-                      color: "white",
-                      fontSize: { base: "16px", lg: "16px" },
-                      fontWeight: 400,
-                      lineHeight: { base: "34px", lg: "34px" },
-                      letterSpacing: { base: "0.8px", lg: "0.8px" },
-                      opacity: 0.5,
-                    }}
-                  ></Field>
-                  <Field
-                    as={Input}
-                    type="email"
-                    required
-                    p=" 8px 16px"
-                    name="email"
-                    placeholder="Email"
-                    h="50px"
-                    color="white"
-                    maxLength="60"
-                    border="1px solid rgba(255, 255, 255, 0.40)"
-                    borderRadius="4px"
-                    focusBorderColor="white"
-                    _placeholder={{
-                      color: "white",
-                      fontSize: { base: "16px", lg: "16px" },
-                      fontWeight: 400,
-                      lineHeight: { base: "34px", lg: "34px" },
-                      letterSpacing: { base: "0.8px", lg: "0.8px" },
-                      opacity: 0.5,
-                    }}
-                  ></Field>
-                  <Flex w="100%" gap="16px">
+            <Flex
+              as="picture"
+            >
+              <source
+                srcSet={scaleCloudinaryImageFromUrl(event.image, 400)}
+                media="(max-width: 480px)"
+              />
+              <Image
+                src={event.image}
+                alt={event.title}
+                maxW={{ base: 350, sm: 400 }}
+                objectFit="contain"
+                objectPosition="top"
+              />
+            </Flex>
+            <Stack maxW="470px" spacing="16px" justifyContent={"flex-start"} mt="auto">
+              <Text
+                as="h3"
+                color="#3B424A"
+                fontFamily={"DM Serif Display"}
+                fontSize={{ base: "40px", lg: "54px" }}
+                fontWeight={400}
+                lineHeight={{ base: "42px", lg: "54px" }}
+                letterSpacing={{ base: "0.4px", lg: "2.7px" }}
+              >
+                {event.title}
+              </Text>
+              <Text
+                as="p"
+                color="#3B424A"
+                fontSize={{ base: "20px", lg: "24px" }}
+                fontWeight={400}
+                lineHeight={{ base: "34px", lg: "34px" }}
+                letterSpacing={{ base: "1px", lg: "1.2px" }}
+              >
+                Entrada:
+                <Text as="span" fontWeight={700} ml="2px">
+                  ${event.price}
+                </Text>
+              </Text>
+              <Text
+                as="p"
+                fontSize={{ base: "16px", lg: "16px" }}
+                fontWeight={400}
+                lineHeight={{ base: "24px", lg: "34px" }}
+                letterSpacing={{ base: "0.8px", lg: "0.8px" }}
+              >
+                {event.info}
+              </Text>
+            </Stack>
+            <Flex mt="auto">
+            <Formik
+              initialValues={{
+                firstName: "",
+                lastName: "",
+                email: "",
+                dni: "",
+                ticketQuantity: "",
+                event: router.query.id as string,
+              }}
+              onSubmit={handleSubmit}
+            >
+              {({ handleSubmit, errors, isSubmitting }) => (
+                <form onSubmit={handleSubmit} autoComplete="off">
+                  <Stack spacing="16px" p="16px" w="370px" bg="#3B424A">
+                    <Text
+                      as="h4"
+                      color="white"
+                      fontFamily={"DM Serif Display"}
+                      fontSize={{ base: "32px", lg: "32px" }}
+                      fontWeight={400}
+                      lineHeight={{ base: "44px", lg: "44px" }}
+                      letterSpacing={{ base: "0.32px", lg: "0.32px" }}
+                    >
+                      Reservar Entrada
+                    </Text>
                     <Field
                       as={Input}
-                      flex="1"
-                      type="text"
                       required
+                      type="text"
                       p="8px 16px"
-                      name="dni"
-                      minLength="2"
-                      maxLength="15"
-                      placeholder="DNI"
+                      name="firstName"
+                      placeholder="Nombre"
                       h="50px"
                       color="white"
+                      minLength="2"
+                      maxLength="60"
                       border="1px solid rgba(255, 255, 255, 0.40)"
                       borderRadius="4px"
                       focusBorderColor="white"
@@ -294,26 +240,67 @@ const AgendaDetail = () => {
                         opacity: 0.5,
                       }}
                     ></Field>
-                    <Flex position="relative" flex="1">
+                    <Field
+                      as={Input}
+                      type="text"
+                      required
+                      p="8px 16px"
+                      name="lastName"
+                      placeholder="Apellido"
+                      h="50px"
+                      color="white"
+                      minLength="2"
+                      maxLength="60"
+                      border="1px solid rgba(255, 255, 255, 0.40)"
+                      borderRadius="4px"
+                      focusBorderColor="white"
+                      _placeholder={{
+                        color: "white",
+                        fontSize: { base: "16px", lg: "16px" },
+                        fontWeight: 400,
+                        lineHeight: { base: "34px", lg: "34px" },
+                        letterSpacing: { base: "0.8px", lg: "0.8px" },
+                        opacity: 0.5,
+                      }}
+                    ></Field>
+                    <Field
+                      as={Input}
+                      type="email"
+                      required
+                      p=" 8px 16px"
+                      name="email"
+                      placeholder="Email"
+                      h="50px"
+                      color="white"
+                      maxLength="60"
+                      border="1px solid rgba(255, 255, 255, 0.40)"
+                      borderRadius="4px"
+                      focusBorderColor="white"
+                      _placeholder={{
+                        color: "white",
+                        fontSize: { base: "16px", lg: "16px" },
+                        fontWeight: 400,
+                        lineHeight: { base: "34px", lg: "34px" },
+                        letterSpacing: { base: "0.8px", lg: "0.8px" },
+                        opacity: 0.5,
+                      }}
+                    ></Field>
+                    <Flex w="100%" gap="16px">
                       <Field
                         as={Input}
-                        type="number"
+                        flex="1"
+                        type="text"
                         required
-                        p=" 8px 16px"
-                        name="ticketQuantity"
-                        min="1"
-                        max="7"
-                        placeholder="Entradas"
+                        p="8px 16px"
+                        name="dni"
+                        minLength="2"
+                        maxLength="15"
+                        placeholder="DNI"
                         h="50px"
                         color="white"
                         border="1px solid rgba(255, 255, 255, 0.40)"
                         borderRadius="4px"
                         focusBorderColor="white"
-                        onInput={(e: any) =>
-                          limitInputToRange(e, (value: boolean) =>
-                            setIsLimitedTickets(value)
-                          )
-                        }
                         _placeholder={{
                           color: "white",
                           fontSize: { base: "16px", lg: "16px" },
@@ -322,47 +309,77 @@ const AgendaDetail = () => {
                           letterSpacing: { base: "0.8px", lg: "0.8px" },
                           opacity: 0.5,
                         }}
-                        position="relative"
                       ></Field>
-                      {isLimitedTickets && (
-                        <Text
-                          as="span"
-                          position="absolute"
-                          top="55px"
-                          left="5px"
+                      <Flex position="relative" flex="1">
+                        <Field
+                          as={Input}
+                          type="number"
+                          required
+                          p=" 8px 16px"
+                          name="ticketQuantity"
+                          min="1"
+                          max="7"
+                          placeholder="Entradas"
+                          h="50px"
                           color="white"
-                          fontSize="14px"
-                        >
-                          El limite de entradas por reserva es de 7.
-                        </Text>
-                      )}
+                          border="1px solid rgba(255, 255, 255, 0.40)"
+                          borderRadius="4px"
+                          focusBorderColor="white"
+                          onInput={(e: any) =>
+                            limitInputToRange(e, (value: boolean) =>
+                              setIsLimitedTickets(value)
+                            )
+                          }
+                          _placeholder={{
+                            color: "white",
+                            fontSize: { base: "16px", lg: "16px" },
+                            fontWeight: 400,
+                            lineHeight: { base: "34px", lg: "34px" },
+                            letterSpacing: { base: "0.8px", lg: "0.8px" },
+                            opacity: 0.5,
+                          }}
+                          position="relative"
+                        ></Field>
+                        {isLimitedTickets && (
+                          <Text
+                            as="span"
+                            position="absolute"
+                            top="55px"
+                            left="5px"
+                            color="white"
+                            fontSize="14px"
+                          >
+                            El limite de entradas por reserva es de 7.
+                          </Text>
+                        )}
+                      </Flex>
                     </Flex>
-                  </Flex>
-                  <Button
-                    type="submit"
-                    bg="#DDC692"
-                    color="#3B424A"
-                    size="lg"
-                    my="2rem"
-                    textTransform="uppercase"
-                    p="16px"
-                    w="fit-content"
-                    fontSize={{ base: "14px", lg: "14px" }}
-                    fontWeight={700}
-                    letterSpacing={{ base: "2.8px", lg: "2.4px" }}
-                    borderRadius="4px"
-                    _hover={{ opacity: 0.7 }}
-                    isLoading={isSubmitting}
-                  >
-                    Reservar
-                  </Button>
-                </Stack>
-              </form>
-            )}
-          </Formik>
-        </Flex>
-      )}
-    </Stack>
+                    <Button
+                      type="submit"
+                      bg="#DDC692"
+                      color="#3B424A"
+                      size="lg"
+                      my="2rem"
+                      textTransform="uppercase"
+                      p="16px"
+                      w="fit-content"
+                      fontSize={{ base: "14px", lg: "14px" }}
+                      fontWeight={700}
+                      letterSpacing={{ base: "2.8px", lg: "2.4px" }}
+                      borderRadius="4px"
+                      _hover={{ opacity: 0.7 }}
+                      isLoading={isSubmitting}
+                    >
+                      Reservar
+                    </Button>
+                  </Stack>
+                </form>
+              )}
+            </Formik>
+            </Flex>
+          </Flex>
+        )}
+      </Stack>
     </>
   );
 };

@@ -10,10 +10,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { GetStaticProps } from "next";
+import React, { FC, useEffect, useState } from "react";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { BsFacebook, BsYoutube } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
+import { eventService } from "../../../services/events.service";
 import instagramApi from "../../../services/instagram.service";
 
 const accessToken = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
@@ -24,9 +26,13 @@ interface IgPost {
   caption: string;
 }
 
-const FollowUS = () => {
+interface Props {
+  igPosts: IgPost[];
+}
+
+const FollowUS: FC<Props> = ({ igPosts }) => {
   const [isLgOrBigger, setIsLgOrBigger] = useState(true);
-  const [igPosts, setIgPosts] = useState<IgPost[]>([]);
+  // const [igPosts, setIgPosts] = useState<IgPost[]>([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,19 +48,19 @@ const FollowUS = () => {
     };
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data: igPostsToShow } = await instagramApi.getPosts(
-          accessToken as string,
-          isLgOrBigger ? 9 : 3
-        );
-        setIgPosts(igPostsToShow.media.data);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [isLgOrBigger]);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const { data: igPostsToShow } = await instagramApi.getPosts(
+  //         accessToken as string,
+  //         isLgOrBigger ? 9 : 3
+  //       );
+  //       setIgPosts(igPostsToShow.media.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
+  // }, [isLgOrBigger]);
 
   return (
     <Stack
@@ -155,9 +161,9 @@ const FollowUS = () => {
         templateRows="repeat(3, 300px)"
         gap="24px"
       >
-        {igPosts.map((post) => (
+        {igPosts?.slice(0, isLgOrBigger ? 9 : 3).map((post) => (
           <GridItem bg="transparent" position="relative" key={post.id} sx={{'> video': {w: '100%', h: '100%',  objectFit: "cover"}, '&:hover > .post-hover': { display: "flex"}}} display="flex" justifyContent="center" alignItems="center" overflow="hidden">
-            {post.media_type === "IMAGE" ? (
+            {post.media_type !== "VIDEO" ? (
               <Image
                 src={post.media_url}
                 alt={post.caption}

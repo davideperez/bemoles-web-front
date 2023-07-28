@@ -6,8 +6,20 @@ const WeSearch = () => {
     <Flex as="section" px={{base: "16px", lg: "80px"}} color="#3B424A" alignItems={"center"} justifyContent="center" flexWrap={"wrap"} gap="8rem">
         <Flex  justifyContent={"center"} minW="625px">
         <Stack position="relative" w="fit-content">
+        <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/weSearch2.png"
+                  media="(max-width: 480px)"
+                />
             <Image src="/images/weSearch2.png" alt="Buscamos" w={{base: "215px", md: "370px"}} h={{base: "215px", md: "370px"}} mt={{base: "88px", md:"152px"}} ml={{base: "147px", md:"254px"}} />
+              </Flex>
+              <Flex as="picture">
+                <source
+                  srcSet="/images/responsive/weSearch1.png"
+                  media="(max-width: 480px)"
+                />
             <Image src="/images/weSearch1.png" alt="Buscamos" w={{base: "215px", md: "370px"}} h={{base: "215px", md: "370px"}} position="absolute" top={0} left={0} />
+              </Flex>
         </Stack>
         </Flex>
         <Flex maxW="403px">

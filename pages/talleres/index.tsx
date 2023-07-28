@@ -16,6 +16,7 @@ import React, { useState, useEffect } from "react";
 import { ApiBase } from "../../models/apiBase";
 import { Event } from "../../models/event";
 import { eventService } from "../../services/events.service";
+import { scaleCloudinaryImageFromUrl } from "../../utils/functions";
 
 const TalleresPage = () => {
   const [activeEvents, setActiveEvents] = useState<Event[]>();
@@ -70,9 +71,7 @@ const TalleresPage = () => {
   return (
     <>
       <Head>
-        <title>
-          Talleres | Los Bemoles
-        </title>
+        <title>Talleres | Los Bemoles</title>
       </Head>
 
       <Stack
@@ -125,7 +124,11 @@ const TalleresPage = () => {
                       flexDirection="column"
                       justifyContent={"space-between"}
                     >
-                      <Flex alignItems={"center"} h="100%">
+                      <Flex as="picture" alignItems={"center"} h="100%">
+                        <source
+                          srcSet={scaleCloudinaryImageFromUrl(e.image, 400)}
+                          media="(max-width: 480px)"
+                        />
                         <Image
                           src={e.image}
                           alt={e.title}
@@ -193,10 +196,15 @@ const TalleresPage = () => {
                       justifyContent={"space-between"}
                     >
                       <Flex
+                        as="picture"
                         alignItems={"center"}
                         h="100%"
                         filter="grayscale(100%)"
                       >
+                        <source
+                          srcSet={scaleCloudinaryImageFromUrl(e.image, 400)}
+                          media="(max-width: 480px)"
+                        />
                         <Image
                           src={e.image}
                           alt={e.title}
