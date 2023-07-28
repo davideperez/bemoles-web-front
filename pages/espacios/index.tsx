@@ -244,7 +244,7 @@ const EspaciosPage = () => {
               >
                 Un agradable espacio concebido para la exploración musical,
                 correctamente acustizado y con las condiciones ténicas para que
-                al hacerlo podamo captar todo el potencial y brillo.
+                al hacerlo podamos captar todo el potencial y brillo.
                 <br />
                 Ensayos. Grabación Multipista. Estudio dotado con equipos
                 Fender, Laney, Monitores Makie, Consola Allen & Heath,

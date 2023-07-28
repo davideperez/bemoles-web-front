@@ -1,4 +1,4 @@
-import { Flex, Stack, Text } from '@chakra-ui/react'
+import { Flex, Link, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import Logo from '../../admin/Login/Logo'
 import FooterLogo from './FooterLogo'
@@ -9,7 +9,7 @@ const Footer = () => {
       <FooterLogo color="white" w="186px" h="56px" />
       <Stack color="white" opacity="0.5" textAlign={{base: "center", lg: "right"}} fontSize="16px" fontWeight={400} lineHeight="34px" letterSpacing={"0.8px"}>
         <Text>(54-11) 4238.4973</Text>
-        <Text>info@losbemoles.com.ar</Text>
+        <Link href="mailto:info@losbemoles.com.ar" isExternal>info@losbemoles.com.ar</Link>
         <Text>Copyright 2023 | Los Bemoles | www.losbemoles.com.ar</Text>
       </Stack>
     </Flex>
