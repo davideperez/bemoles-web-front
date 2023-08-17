@@ -1,4 +1,11 @@
-import {
+import {  
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
   Box,
   Button,
   Flex,
@@ -7,13 +14,15 @@ import {
   Input,
   Stack,
   Text,
+  useDisclosure,
   useToast,
+  Link,
 } from "@chakra-ui/react";
 import { AxiosError } from "axios";
 import { Field, Formik, FormikHelpers } from "formik";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Event } from "../../../models/event";
 import { eventService } from "../../../services/events.service";
 import { reserveService } from "../../../services/reserves.service";
@@ -56,6 +65,9 @@ const AgendaDetail = () => {
   const router = useRouter();
   const toast = useToast();
   const [isLimitedTickets, setIsLimitedTickets] = useState(false);
+  const [ paymentLink, setPaymentLink ] = useState('');
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const cancelRef = useRef(null);
 
   useEffect(() => {
     if (typeof window !== "undefined" && router.query.id) {
@@ -68,15 +80,17 @@ const AgendaDetail = () => {
 
   const handleSubmit = async (reserve: any, actions: FormikHelpers<any>) => {
     try {
-      const reserveCreated = await reserveService.createReserve({ ...reserve });
+      const { data: reserveCreated} = await reserveService.createReserve({ ...reserve });
       if (reserveCreated) {
-        toast({
-          title: "Reserva exitosa",
-          description: `La reserva se ha realizado exitosamente. En los próximos minutos recibirá un email con el link de un cupon de pago para efectivizar su reserva.`,
-          status: "success",
-          duration: 9000,
-          isClosable: true,
-        });
+        // toast({
+        //   title: "Reserva realizada",
+        //   description: `La reserva se ha realizado exitosamente. En los próximos minutos recibirá un email con el link de un cupon de pago para efectivizar su reserva.`,
+        //   status: "success",
+        //   duration: 9000,
+        //   isClosable: true,
+        // });
+        setPaymentLink(reserveCreated.paymentLink)
+        onOpen();
       }
     } catch (err) {
       if ((err as AxiosError)?.response?.status === 409)
@@ -380,6 +394,46 @@ const AgendaDetail = () => {
           </Flex>
         )}
       </Stack>
+      
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        size="xl"
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Reserva realizada
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+            Presioná en “Pagar Ahora”, o podés hacerlo mas tarde mediante el link que llegó a tu correo. Recordá que la reserva expira en 48 horas
+            </AlertDialogBody>
+
+            <AlertDialogFooter pb="0px !important">
+              <Link href={paymentLink}>
+              <Button  type="submit"
+                      bg="#DDC692"
+                      color="#3B424A"
+                      size="lg"
+                      my="2rem"
+                      textTransform="uppercase"
+                      p="16px"
+                      w="fit-content"
+                      fontSize={{ base: "14px", lg: "14px" }}
+                      fontWeight={700}
+                      letterSpacing={{ base: "2.8px", lg: "2.4px" }}
+                      borderRadius="4px"
+                      _hover={{ opacity: 0.7 }}
+                      onClick={onClose}>
+                Pagar Ahora
+              </Button>
+              </Link>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </>
   );
 };

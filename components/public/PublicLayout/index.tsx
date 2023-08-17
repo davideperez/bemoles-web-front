@@ -18,7 +18,6 @@ const PublicLayout = ({ children }: { children: ReactNode }) => {
 
   const setWidthPage = () => {
     const windowWidth = window.innerWidth;
-    console.log(router.asPath)
     const bgHeight =
       router.asPath.length > 1
         ? `${
