@@ -21,4 +21,5 @@ export type Reserve = {
   email: string;
   event: Event | string;
   createdAt: Date;
+  paymentStatus: string;
 };

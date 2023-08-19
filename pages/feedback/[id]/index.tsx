@@ -1,7 +1,22 @@
-import { Center, Flex, Heading, Spinner, Stack, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  Flex,
+  Heading,
+  Icon,
+  Spinner,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { IconType } from "react-icons";
+import { AiOutlineClockCircle } from "react-icons/ai";
+import { BsClockHistory } from "react-icons/bs";
+import { FiCheck } from "react-icons/fi";
+import { MdOutlineArrowBack, MdOutlineClose } from "react-icons/md";
 import { PAYMENT_STATUS } from "../../../models/enums/paymentStatus";
 import { reserveService } from "../../../services/reserves.service";
 
@@ -9,31 +24,44 @@ const getTitleAndDescriptionFromPaymentStatus = (status: string) => {
   switch (status) {
     case PAYMENT_STATUS.FAILURE:
       return {
+        icon: MdOutlineClose,
+        iconColor: "red.500",
         title: "Pago fallido",
         description: "El pago no se ha podido realizar. Vuelve a intentarlo.",
       };
     case PAYMENT_STATUS.PENDING:
       return {
+        icon: AiOutlineClockCircle,
+        iconColor: "gray.500",
         title: "Pago pendiente de confirmación",
-        description: "“El pago esta pendiente de confirmacion.",
+        description: "El pago esta pendiente de confirmacion.",
       };
     case PAYMENT_STATUS.SUCCESS:
       return {
+        icon: FiCheck,
+        iconColor: "green.500",
         title: "Pago confirmado",
-        description: "La compra fue realizada con éxito.  ¡Te esperamos!",
+        description: "La compra fue realizada con éxito. ¡Te esperamos!",
       };
     default:
       return {
+        icon: MdOutlineClose,
+        iconColor: "red.500",
         title: "Pago no encontrado",
         description:
-          "El pago no ha sido encontrado. Redirigiendo a la página de inicio...",
+          "El pago no ha sido encontrado.",
       };
   }
 };
 
 const FeedbackPage = () => {
   const router = useRouter();
-  const [content, setContent] = useState({ title: "", description: "" });
+  const [content, setContent] = useState<{
+    icon: IconType;
+    iconColor: string;
+    title: string;
+    description: string;
+  }>();
 
   useEffect(() => {
     if (
@@ -41,6 +69,9 @@ const FeedbackPage = () => {
       router.query.id &&
       router.query?.payment_id?.length
     ) {
+      if (router.query.collection_id) {
+        router.replace(`/feedback/${router.query.id}?payment_id=${router.query.payment_id}`)
+      } else {
       (async () => {
         try {
           const { data } = await reserveService.getFeedbackReserve(
@@ -53,7 +84,8 @@ const FeedbackPage = () => {
         }
       })();
     }
-  }, [router.query]);
+    }
+  }, [router]);
 
   return (
     <>
@@ -79,10 +111,21 @@ const FeedbackPage = () => {
         >
           Agenda
         </Heading>
-        {content.title ? (
-          <Stack pt={{ base: "0px", lg: "2rem" }} spacing="16px">
+        {content?.title ? (
+          <Stack
+            pt={{ base: "0px", lg: "2rem" }}
+            spacing="16px"
+            alignItems="center"
+          >
+            <Icon
+              as={content.icon}
+              w="155px"
+              h="155px"
+              color={content.iconColor}
+            />
             <Text
               as="h3"
+              textAlign="center"
               color="#3B424A"
               fontFamily={"DM Serif Display"}
               fontSize={{ base: "40px", lg: "54px" }}
@@ -94,6 +137,7 @@ const FeedbackPage = () => {
             </Text>
             <Text
               as="p"
+              textAlign="center"
               fontSize={{ base: "16px", lg: "16px" }}
               fontWeight={400}
               lineHeight={{ base: "24px", lg: "34px" }}
@@ -102,6 +146,26 @@ const FeedbackPage = () => {
             >
               {content.description}
             </Text>
+            <Link href={`/agenda/${router.query.id}`}>
+              <Button
+                type="submit"
+                bg="#DDC692"
+                color="#3B424A"
+                size="lg"
+                mt="4rem"
+                textTransform="uppercase"
+                p="16px"
+                w="fit-content"
+                fontSize={{ base: "14px", lg: "14px" }}
+                fontWeight={700}
+                letterSpacing={{ base: "2.8px", lg: "2.4px" }}
+                borderRadius="4px"
+                _hover={{ opacity: 0.7 }}
+                leftIcon={<MdOutlineArrowBack />}
+              >
+                Volver al evento
+              </Button>
+            </Link>
           </Stack>
         ) : (
           <Center h="80vh">

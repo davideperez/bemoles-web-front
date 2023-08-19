@@ -170,7 +170,7 @@ const AgendaDetail = () => {
                 objectPosition="top"
               />
             </Flex>
-            <Stack maxW="470px" spacing="16px" justifyContent={"flex-start"} mt="auto">
+            <Stack w="470px" spacing="16px" justifyContent={"flex-start"} mt="auto">
               <Text
                 as="h3"
                 color="#3B424A"

@@ -42,14 +42,55 @@ import { MdOutlineSearch } from "react-icons/md";
 import { Pagination } from "../../../../components/admin/Pagination";
 import useDebounce from "../../../../hooks/useDebounce";
 import { ApiBase } from "../../../../models/apiBase";
+import { PAYMENT_STATUS } from "../../../../models/enums/paymentStatus";
 import { Event, Reserve } from "../../../../models/event";
 import { eventService } from "../../../../services/events.service";
 import { formatDate } from "../../../../utils/functions";
 
-const getReserveQuantity = (reserves: Reserve[]) => reserves.reduce((reserveQuantity: number, reserve: Reserve) => {
-  const reserveQuantityToUpdate = reserveQuantity + reserve.ticketQuantity;
-  return reserveQuantityToUpdate;
-}, 0)
+const getPaymentStatusText = (status: string) => {
+  switch (status) {
+    case PAYMENT_STATUS.FAILURE:
+      return {
+        text: "Fallido",
+        color: "red",
+      };
+    case PAYMENT_STATUS.PENDING:
+      return {
+        text: "Pendiente de confirmación",
+        color: "gray",
+      };
+    case PAYMENT_STATUS.SUCCESS:
+      return { text: "Confirmado", color: "green" };
+    default:
+      return { text: "No realizado", color: "purple" };
+  }
+};
+
+const isExpiratedReserve = (createReserveDate: Date) => {
+  const currentTime: any = new Date();
+  const createdReserveDate: any = new Date(createReserveDate);
+  const initialFeatureDate = new Date(process.env.NEXT_PUBLIC_INITIAL_DATE_PAYMENT_GATEWAY_FEATURE as string)
+  if (initialFeatureDate > createdReserveDate) return false;
+
+  const timeDifference = currentTime - createdReserveDate;
+
+  const expirationHours = process.env.NEXT_PUBLIC_EXPIRATION_HOURS as string;
+  const fortyEightHoursInMilliseconds = Number(expirationHours) * 60 * 60 * 1000;
+
+  return timeDifference >= fortyEightHoursInMilliseconds;
+};
+
+const getReserveQuantity = (reserves: Reserve[]) =>
+  reserves.reduce((reserveQuantity: number, reserve: Reserve) => {
+    const isValidatedReserve =
+      !isExpiratedReserve(reserve.createdAt) ||
+      [PAYMENT_STATUS.PENDING, PAYMENT_STATUS.SUCCESS].includes(
+        reserve.paymentStatus
+      );
+    const reserveQuantityToUpdate =
+      reserveQuantity + (isValidatedReserve ? reserve.ticketQuantity : 0);
+    return reserveQuantityToUpdate;
+  }, 0);
 
 const EventReservesPage = () => {
   const [events, setEvents] = useState<ApiBase<Event>>();
@@ -148,11 +189,11 @@ const EventReservesPage = () => {
                     </Text>
                     <Text as="span" fontSize="md" mr={20}>
                       <b>Cupo máximo: </b>
-                      {event?.maxAttendance} 
+                      {event?.maxAttendance}
                     </Text>
                     <Text as="span" fontSize="md" mr={20}>
                       <b>Reservadas: </b>
-                      {getReserveQuantity(event?.reserves || [])} 
+                      {getReserveQuantity(event?.reserves || [])}
                     </Text>
                     <Text as="span" fontSize="md" mr={4}>
                       <b>Fecha: </b>
@@ -184,6 +225,7 @@ const EventReservesPage = () => {
                       <Th p={2}>Dni</Th>
                       <Th p={2}>Email</Th>
                       <Th p={2}>Cantidad de entradas</Th>
+                      <Th p={2}>Estado del pago</Th>
                       <Th p={2}>Fecha</Th>
                       <Th p={2} textAlign="center">
                         Acciones
@@ -191,40 +233,59 @@ const EventReservesPage = () => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {event?.reserves?.map((reserve) => (
-                      <Tr key={event._id}>
-                        <Td p={2}>
-                          {`${reserve.firstName} ${reserve.lastName}`}
-                        </Td>
-                        <Td p={2}>{reserve.dni}</Td>
-                        <Td p={2}>{reserve.email}</Td>
-                        <Td p={2}>{`${reserve.ticketQuantity}`}</Td>
-                        <Td p={2}>
-                          {event?.date ? formatDate(reserve.createdAt) : ""}
-                        </Td>
-                        <Td p={2}>
-                          <Flex w="100%" justifyContent={"center"}>
-                            <Tooltip label="Ver detalle de evento">
-                              <Button
-                                onClick={() =>
-                                  router.push(`/admin/events/${event._id}`)
-                                }
-                                size="md"
-                                bg="transparent"
-                                p={0}
-                              >
-                                <FiExternalLink color="#9D6E33" size={18} />
-                              </Button>
-                            </Tooltip>
-                            {/* <Tooltip label="Eliminar evento">
+                    {event?.reserves
+                      ?.filter(
+                        (reserve) =>
+                          !isExpiratedReserve(reserve.createdAt) ||
+                          [
+                            PAYMENT_STATUS.PENDING,
+                            PAYMENT_STATUS.SUCCESS,
+                          ].includes(reserve.paymentStatus)
+                      )
+                      .map((reserve) => (
+                        <Tr key={event._id}>
+                          <Td p={2}>
+                            {`${reserve.firstName} ${reserve.lastName}`}
+                          </Td>
+                          <Td p={2}>{reserve.dni}</Td>
+                          <Td p={2}>{reserve.email}</Td>
+                          <Td p={2}>{`${reserve.ticketQuantity}`}</Td>
+                          <Td p={2}>
+                            <Badge
+                              colorScheme={
+                                getPaymentStatusText(reserve.paymentStatus)
+                                  .color
+                              }
+                            >
+                              {getPaymentStatusText(reserve.paymentStatus).text}
+                            </Badge>
+                          </Td>
+                          <Td p={2}>
+                            {event?.date ? formatDate(reserve.createdAt) : ""}
+                          </Td>
+                          <Td p={2}>
+                            <Flex w="100%" justifyContent={"center"}>
+                              <Tooltip label="Ver detalle de evento">
+                                <Button
+                                  onClick={() =>
+                                    router.push(`/admin/events/${event._id}`)
+                                  }
+                                  size="md"
+                                  bg="transparent"
+                                  p={0}
+                                >
+                                  <FiExternalLink color="#9D6E33" size={18} />
+                                </Button>
+                              </Tooltip>
+                              {/* <Tooltip label="Eliminar evento">
                         <Button size="md" bg="transparent" p={0} onClick={() => handleDeleteEvent(event)}>
                           <FiTrash2 color="red" size={18} />
                         </Button>
                       </Tooltip> */}
-                          </Flex>
-                        </Td>
-                      </Tr>
-                    ))}
+                            </Flex>
+                          </Td>
+                        </Tr>
+                      ))}
                   </Tbody>
                 </Table>
               </AccordionPanel>
