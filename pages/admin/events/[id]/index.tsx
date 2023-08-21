@@ -213,16 +213,16 @@ const EventDetail = () => {
                         (reserve) =>
                           !isExpiratedReserve(reserve.createdAt) ||
                           [
-                            PAYMENT_STATUS.PENDING,
-                            PAYMENT_STATUS.SUCCESS,
+                            PAYMENT_STATUS.PENDING as string,
+                            PAYMENT_STATUS.SUCCESS as string,
                           ].includes(reserve.paymentStatus)
                       ).length ? event?.reserves
                       ?.filter(
                         (reserve) =>
                           !isExpiratedReserve(reserve.createdAt) ||
                           [
-                            PAYMENT_STATUS.PENDING,
-                            PAYMENT_STATUS.SUCCESS,
+                            PAYMENT_STATUS.PENDING as string,
+                            PAYMENT_STATUS.SUCCESS as string,
                           ].includes(reserve.paymentStatus)
                       )
                       .map((reserve) => (
