@@ -1,3 +1,5 @@
+import { PAYMENT_STATUS } from "../models/enums/paymentStatus";
+
 export function formatDate(date) {
   // Convierte la fecha a objeto Date si no lo es
   if (!(date instanceof Date)) {
@@ -44,3 +46,48 @@ export function formatDateTime(date) {
 }
 
 export const scaleCloudinaryImageFromUrl = (url, width) => url?.replace('/upload/', `/upload/c_fit,w_${width}/`);
+
+export const getPaymentStatusText = (status) => {
+  switch (status) {
+    case PAYMENT_STATUS.FAILURE:
+      return {
+        text: "Fallido",
+        color: "red",
+      };
+    case PAYMENT_STATUS.PENDING:
+      return {
+        text: "Pendiente de confirmación",
+        color: "gray",
+      };
+    case PAYMENT_STATUS.SUCCESS:
+      return { text: "Confirmado", color: "green" };
+    default:
+      return { text: "No realizado", color: "purple" };
+  }
+};
+
+export const isExpiratedReserve = (createReserveDate) => {
+  const currentTime = new Date();
+  const createdReserveDate = new Date(createReserveDate);
+  const initialFeatureDate = new Date(process.env.NEXT_PUBLIC_INITIAL_DATE_PAYMENT_GATEWAY_FEATURE)
+  if (initialFeatureDate > createdReserveDate) return false;
+
+  const timeDifference = currentTime - createdReserveDate;
+
+  const expirationHours = process.env.NEXT_PUBLIC_EXPIRATION_HOURS;
+  const expirationHoursMilliseconds = Number(expirationHours) * 60 * 60 * 1000;
+
+  return timeDifference >= expirationHoursMilliseconds;
+};
+
+export const getReserveQuantity = (reserves) =>
+  reserves.reduce((reserveQuantity, reserve) => {
+    const isValidatedReserve =
+      !isExpiratedReserve(reserve.createdAt) ||
+      [PAYMENT_STATUS.PENDING, PAYMENT_STATUS.SUCCESS].includes(
+        reserve.paymentStatus
+      );
+    const reserveQuantityToUpdate =
+      reserveQuantity + (isValidatedReserve ? reserve.ticketQuantity : 0);
+    return reserveQuantityToUpdate;
+  }, 0);

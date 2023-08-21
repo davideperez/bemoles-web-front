@@ -4,12 +4,6 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
   Button,
   Flex,
   Heading,
@@ -20,77 +14,29 @@ import {
   Skeleton,
   Stack,
   Table,
-  TableContainer,
   Tbody,
   Td,
   Text,
   Th,
   Thead,
-  Toast,
   Tooltip,
   Tr,
-  useDisclosure,
-  useToast,
   Box,
   Badge,
-  Divider,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, ChangeEvent } from "react";
+import { AiOutlineEye } from "react-icons/ai";
 import { FiExternalLink, FiTrash2 } from "react-icons/fi";
 import { MdOutlineSearch } from "react-icons/md";
 import { Pagination } from "../../../../components/admin/Pagination";
+import PaymentDetailModal from "../../../../components/admin/reserves/paymentDetailModal";
 import useDebounce from "../../../../hooks/useDebounce";
 import { ApiBase } from "../../../../models/apiBase";
 import { PAYMENT_STATUS } from "../../../../models/enums/paymentStatus";
 import { Event, Reserve } from "../../../../models/event";
 import { eventService } from "../../../../services/events.service";
-import { formatDate } from "../../../../utils/functions";
-
-const getPaymentStatusText = (status: string) => {
-  switch (status) {
-    case PAYMENT_STATUS.FAILURE:
-      return {
-        text: "Fallido",
-        color: "red",
-      };
-    case PAYMENT_STATUS.PENDING:
-      return {
-        text: "Pendiente de confirmación",
-        color: "gray",
-      };
-    case PAYMENT_STATUS.SUCCESS:
-      return { text: "Confirmado", color: "green" };
-    default:
-      return { text: "No realizado", color: "purple" };
-  }
-};
-
-const isExpiratedReserve = (createReserveDate: Date) => {
-  const currentTime: any = new Date();
-  const createdReserveDate: any = new Date(createReserveDate);
-  const initialFeatureDate = new Date(process.env.NEXT_PUBLIC_INITIAL_DATE_PAYMENT_GATEWAY_FEATURE as string)
-  if (initialFeatureDate > createdReserveDate) return false;
-
-  const timeDifference = currentTime - createdReserveDate;
-
-  const expirationHours = process.env.NEXT_PUBLIC_EXPIRATION_HOURS as string;
-  const fortyEightHoursInMilliseconds = Number(expirationHours) * 60 * 60 * 1000;
-
-  return timeDifference >= fortyEightHoursInMilliseconds;
-};
-
-const getReserveQuantity = (reserves: Reserve[]) =>
-  reserves.reduce((reserveQuantity: number, reserve: Reserve) => {
-    const isValidatedReserve =
-      !isExpiratedReserve(reserve.createdAt) ||
-      [PAYMENT_STATUS.PENDING, PAYMENT_STATUS.SUCCESS].includes(
-        reserve.paymentStatus
-      );
-    const reserveQuantityToUpdate =
-      reserveQuantity + (isValidatedReserve ? reserve.ticketQuantity : 0);
-    return reserveQuantityToUpdate;
-  }, 0);
+import { formatDate, getPaymentStatusText, getReserveQuantity, isExpiratedReserve } from "../../../../utils/functions";
 
 const EventReservesPage = () => {
   const [events, setEvents] = useState<ApiBase<Event>>();
@@ -192,7 +138,7 @@ const EventReservesPage = () => {
                       {event?.maxAttendance}
                     </Text>
                     <Text as="span" fontSize="md" mr={20}>
-                      <b>Reservadas: </b>
+                      <b>Entradas reservadas: </b>
                       {getReserveQuantity(event?.reserves || [])}
                     </Text>
                     <Text as="span" fontSize="md" mr={4}>
@@ -265,6 +211,7 @@ const EventReservesPage = () => {
                           </Td>
                           <Td p={2}>
                             <Flex w="100%" justifyContent={"center"}>
+                              <PaymentDetailModal reserveId={reserve._id} isDisabled={!reserve?.payments?.some(p => p.paymentId)}/>
                               <Tooltip label="Ver detalle de evento">
                                 <Button
                                   onClick={() =>

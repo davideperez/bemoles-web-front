@@ -39,6 +39,7 @@ import {
   Textarea,
   useDisclosure,
   useToast,
+  Badge,
 } from "@chakra-ui/react";
 import { Field, Formik } from "formik";
 import { useRouter } from "next/router";
@@ -49,7 +50,9 @@ import Head from "next/head";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Link from "next/link";
 import { FiExternalLink } from "react-icons/fi";
-import { formatDate, formatDateTime } from "../../../../utils/functions";
+import { formatDate, formatDateTime, getPaymentStatusText, getReserveQuantity, isExpiratedReserve } from "../../../../utils/functions";
+import { PAYMENT_STATUS } from "../../../../models/enums/paymentStatus";
+import PaymentDetailModal from "../../../../components/admin/reserves/paymentDetailModal";
 
 const EventDetail = () => {
   const [event, setEvent] = useState<Event>();
@@ -186,16 +189,18 @@ const EventDetail = () => {
       <Modal isOpen={modalIsOpen} onClose={modalOnClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Reservas de evento: {event?.title}</ModalHeader>
+          <ModalHeader>Reservas de evento: {event?.title} ({getReserveQuantity(event?.reserves || []) || 0} entradas reservadas)</ModalHeader>
           <ModalCloseButton />
           <ModalBody mb={8}>
-         <Table fontSize="15px">
+        
+                <Table fontSize="15px">
                   <Thead h="40px">
                     <Tr>
                       <Th p={2}>Nombre y apellido</Th>
                       <Th p={2}>Dni</Th>
                       <Th p={2}>Email</Th>
                       <Th p={2}>Cantidad de entradas</Th>
+                      <Th p={2}>Estado del pago</Th>
                       <Th p={2}>Fecha</Th>
                       <Th p={2} textAlign="center">
                         Acciones
@@ -203,40 +208,68 @@ const EventDetail = () => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {event?.reserves?.length ? event?.reserves?.map((reserve) => (
-                      <Tr key={event._id}>
-                        <Td p={2}>
-                          {`${reserve.firstName} ${reserve.lastName}`}
-                        </Td>
-                        <Td p={2}>{reserve.dni}</Td>
-                        <Td p={2}>{reserve.email}</Td>
-                        <Td p={2}>{`${reserve.ticketQuantity}`}</Td>
-                        <Td p={2}>
-                          {event?.date ? formatDate(reserve.createdAt) : ""}
-                        </Td>
-                        <Td p={2}>
-                          <Flex w="100%" justifyContent={"center"}>
-                            <Tooltip label="Ver detalle de evento">
-                              <Button
-                                onClick={() =>
-                                  router.push(`/admin/events/${event._id}`)
-                                }
-                                size="md"
-                                bg="transparent"
-                                p={0}
-                              >
-                                <FiExternalLink color="#9D6E33" size={18} />
-                              </Button>
-                            </Tooltip>
-                            {/* <Tooltip label="Eliminar evento">
+                    {!!event?.reserves
+                      ?.filter(
+                        (reserve) =>
+                          !isExpiratedReserve(reserve.createdAt) ||
+                          [
+                            PAYMENT_STATUS.PENDING,
+                            PAYMENT_STATUS.SUCCESS,
+                          ].includes(reserve.paymentStatus)
+                      ).length ? event?.reserves
+                      ?.filter(
+                        (reserve) =>
+                          !isExpiratedReserve(reserve.createdAt) ||
+                          [
+                            PAYMENT_STATUS.PENDING,
+                            PAYMENT_STATUS.SUCCESS,
+                          ].includes(reserve.paymentStatus)
+                      )
+                      .map((reserve) => (
+                        <Tr key={event._id}>
+                          <Td p={2}>
+                            {`${reserve.firstName} ${reserve.lastName}`}
+                          </Td>
+                          <Td p={2}>{reserve.dni}</Td>
+                          <Td p={2}>{reserve.email}</Td>
+                          <Td p={2}>{`${reserve.ticketQuantity}`}</Td>
+                          <Td p={2}>
+                            <Badge
+                              colorScheme={
+                                getPaymentStatusText(reserve.paymentStatus)
+                                  .color
+                              }
+                            >
+                              {getPaymentStatusText(reserve.paymentStatus).text}
+                            </Badge>
+                          </Td>
+                          <Td p={2}>
+                            {event?.date ? formatDate(reserve.createdAt) : ""}
+                          </Td>
+                          <Td p={2}>
+                            <Flex w="100%" justifyContent={"center"}>
+                              <PaymentDetailModal reserveId={reserve._id} isDisabled={!reserve?.payments?.some(p => p.paymentId)}/>
+                              <Tooltip label="Ver detalle de evento">
+                                <Button
+                                  onClick={() =>
+                                    router.push(`/admin/events/${event._id}`)
+                                  }
+                                  size="md"
+                                  bg="transparent"
+                                  p={0}
+                                >
+                                  <FiExternalLink color="#9D6E33" size={18} />
+                                </Button>
+                              </Tooltip>
+                              {/* <Tooltip label="Eliminar evento">
                         <Button size="md" bg="transparent" p={0} onClick={() => handleDeleteEvent(event)}>
                           <FiTrash2 color="red" size={18} />
                         </Button>
                       </Tooltip> */}
-                          </Flex>
-                        </Td>
-                      </Tr>
-                    )) : <Tr><Td colSpan={10} textAlign="center">No hay reservas en el evento.</Td></Tr>}
+                            </Flex>
+                          </Td>
+                        </Tr>
+                      )) : <Tr><Td colSpan={10} textAlign="center">No hay reservas en el evento.</Td></Tr>}
                   </Tbody>
                 </Table>
           </ModalBody>
