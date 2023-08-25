@@ -246,7 +246,7 @@ const EventDetail = () => {
                       />
                     </FormControl>
 
-                    <FormControl>
+                    {/* <FormControl>
                       <FormLabel>Link de pago</FormLabel>
                       <Field
                         as={Input}
@@ -254,7 +254,7 @@ const EventDetail = () => {
                         type="text"
                         w="400px"
                       />
-                    </FormControl>
+                    </FormControl> */}
                     <FormControl>
                       <FormLabel>Publicado</FormLabel>
                       <Switch

@@ -145,7 +145,7 @@ const EventDetail = () => {
               <Text as="span"><b>Fecha:</b> {formatDateTime(event?.date)}</Text>
               <Text as="span"><b>Cupo:</b> {event?.maxAttendance}</Text>
               <Text as="span"><b>Precio:</b> ${event?.price}</Text>
-              <Text as="span"><b>Link de pago:</b> {event?.paymentLink}</Text>
+              {/* <Text as="span"><b>Link de pago:</b> {event?.paymentLink}</Text> */}
               </Stack>
             </Stack>
             
