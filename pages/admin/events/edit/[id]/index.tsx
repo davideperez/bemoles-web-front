@@ -24,14 +24,7 @@ import { eventService } from "../../../../../services/events.service";
 import { Event } from "../../../../../models/event";
 import Head from "next/head";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-
-const formatDate = (date: any) => {
-  const newDate = new Date(date);
-  const offset = newDate.getTimezoneOffset() * 60000; // Calcula el offset en milisegundos
-  const adjustedDate = new Date(newDate.getTime() - offset); // Ajusta la fecha restando el offset
-  const adjustedISOString = adjustedDate.toISOString().substring(0, 16); 
-  return adjustedISOString;
-};
+import { formatUTCToTimezone } from "../../../../../utils/functions";
 
 const EventDetail = () => {
   const [event, setEvent] = useState<Event>();
@@ -58,8 +51,12 @@ const EventDetail = () => {
       const form = new FormData();
       if (image) form.append("image", image);
       for (const value of Object.keys(values)) {
-        if (value !== "image")
+        if (value !== "image" && value !== "date")
           form.append(value, `${values[value as keyof typeof values]}`);
+        if (value === "date")
+          form.append(
+            value,
+            `${new Date(values[value as keyof typeof values] as string)}`);
       }
       if (router.query.id !== "add") {
         event = await eventService.updateEvent(`${router.query.id}`, form);
@@ -126,8 +123,8 @@ const EventDetail = () => {
                 title: event?.title || "",
                 image: event?.image || "",
                 date: event?.date
-                  ? formatDate(event?.date)
-                  : formatDate(new Date()),
+                  ? formatUTCToTimezone(event?.date)
+                  : formatUTCToTimezone(new Date()),
                 info: event?.info || "",
                 price: event?.price || 0,
                 active: event?.active || false,
@@ -242,7 +239,7 @@ const EventDetail = () => {
                         type="number"
                         required
                         w="200px"
-                        minlength="0"
+                        min={0}
                       />
                     </FormControl>
 

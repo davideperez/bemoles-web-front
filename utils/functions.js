@@ -91,3 +91,11 @@ export const getReserveQuantity = (reserves) =>
       reserveQuantity + (isValidatedReserve ? reserve.ticketQuantity : 0);
     return reserveQuantityToUpdate;
   }, 0);
+
+export const formatUTCToTimezone = (date) => {
+  const newDate = new Date(date);
+  const offset = newDate.getTimezoneOffset() * 60000;
+  const adjustedDate = new Date(newDate.getTime() - offset);
+  const adjustedISOString = adjustedDate.toISOString().substring(0, 16);
+  return adjustedISOString;
+};
