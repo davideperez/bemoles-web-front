@@ -39,13 +39,13 @@ const HomePage: NextPage<Props> = ({ igPosts }) => {
         <MainCategories />
         <Services />
         <WeSearch />
-        <FollowUS igPosts={igPosts} />
+        {/* <FollowUS igPosts={igPosts} /> */}
         <VisitUs />
       </Stack>
     </>
   );
 };
-
+/* 
 export const getStaticProps: GetStaticProps = async () => {
   const res = await instagramApi.getPostsFetch(
     process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN as string,
@@ -53,6 +53,6 @@ export const getStaticProps: GetStaticProps = async () => {
   );
   const igPosts = await res.json();
   return { props: { igPosts: igPosts.media.data }, revalidate: 3600 };
-};
+}; */
 
 export default HomePage;
