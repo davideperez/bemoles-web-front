@@ -34,6 +34,17 @@ const HomePage: NextPage<Props> = ({ igPosts }) => {
         padding={{ base: "60px 0px 20px 0px", lg: "340px 0px 120px 0px" }}
         overflow="hidden"
         spacing="4rem"
+        backgroundImage={{
+          base: "none",
+          lg: "url('/images/home-bg-01.png')",
+        }}
+        bgRepeat= "no-repeat"
+        bgPos={{lg:"50px 3950px", xl:"420px 2130px"}}
+        bgSize={{lg: "100%", xl: "55%"}}
+        //ref={bgRef} 
+        //bgSize="cover" 
+        //bgPosition="initial" 
+        //position="absolute" 
       >
         <Hero />
         <MainCategories />

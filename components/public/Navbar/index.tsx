@@ -97,7 +97,7 @@ const Navbar = () => {
           >
             Espacios
           </Link>
-          <Link
+{/*           <Link
             as={NextLink}
             href="/sum-arte"
             _hover={{ color: "#DDC692" }}
@@ -105,7 +105,7 @@ const Navbar = () => {
             onClick={onClose}
           >
             Sum-arte
-          </Link>
+          </Link> */}
           <Link
             as={NextLink}
             href="/estudio"

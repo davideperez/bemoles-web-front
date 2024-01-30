@@ -42,11 +42,10 @@ const Hero = () => {
         Consultorios, un hermoso Salón, la Sala de música, el Estudio de
         Grabación, nuestro Zaguán, el Living, el Quincho/Taller y otros
         espacios para el desarrollo de diversas propuestas.
-        <br /> <br /> Buscamos fomentar la multiplicación de experiencias
-        que apunten al abordaje integral de la salud, usando como
-        herramientas todas las disciplinas de las que nos podamos servir,
-        con el fin de potenciar la exploración y la expresión como
-        comportamientos creadores y saludables.
+        <br /> <br /> Buscamos fomentar la multiplicación de experiencias 
+          que apunten al abordaje integral pensando en un mejor vivir, 
+          usando como herramientas todas las disciplinas de las que nos podamos servir, 
+          con el fin de potenciar la exploración y la expresión como comportamientos creadores y saludables.
       </Text>
       <BemolesHeroLogo
         position="absolute"

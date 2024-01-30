@@ -9,9 +9,8 @@ const MainCategories = () => {
       as="section"
       flexWrap={"wrap"}
       gap={{ base: "16px", sm: "72px" }}
-      justifyContent="space-around"
+      justifyContent="center"
       px={{ base: "16px", lg: "80px" }}
-      //alignContent={"stretch"}
     >
       <Link href="/posibilidades">
         <Flex
@@ -27,7 +26,7 @@ const MainCategories = () => {
               srcSet="/images/responsive/consultorios.png"
               media="(max-width: 480px)"
             />
-            <Img src="/images/consultorios.png" alt="Consultorios" />
+            <Img src="/images/consultorios.png" alt="Posibilidades" />
           </Flex>
           <Flex
             position="absolute"
@@ -58,7 +57,7 @@ const MainCategories = () => {
                     srcSet="/images/responsive/sum-arte.png"
                     media="(max-width: 480px)"
                   />
-                  <Img src="/images/sum-arte.png" alt="Consultorios" />
+                  <Img src="/images/sum-arte.png" alt="Espacios" />
                 </Flex>
           <Flex
             position="absolute"
@@ -89,7 +88,7 @@ const MainCategories = () => {
                     srcSet="/images/responsive/musica.png"
                     media="(max-width: 480px)"
                   />
-                  <Img src="/images/musica.png" alt="Consultorios" />
+                  <Img src="/images/musica.png" alt="Estudio" />
                 </Flex>
           <Flex
             position="absolute"
@@ -97,7 +96,7 @@ const MainCategories = () => {
             zIndex="1"
             color="white"
             p="24px"
-            bg="rgba(27, 58, 102, 0.80)"
+            bg="rgba(59, 66, 74, 0.8)"
             letterSpacing={"4.8px"}
             fontWeight={700}
             fontSize="24px"
@@ -120,7 +119,7 @@ const MainCategories = () => {
                     srcSet="/images/responsive/proyectos-home-button-01.png"
                     media="(max-width: 480px)"
                   />
-                  <Img src="/images/proyectos-home-button-01.png" alt="Consultorios" />
+                  <Img src="/images/proyectos-home-button-01.png" alt="Proyectos" />
                 </Flex>
           <Flex
             position="absolute"
@@ -151,7 +150,7 @@ const MainCategories = () => {
                     srcSet="/images/responsive/talleres-home.png"
                     media="(max-width: 480px)"
                   />
-                  <Img src="/images/talleres-home.png" alt="Consultorios" />
+                  <Img src="/images/talleres-home.png" alt="Talleres" />
                 </Flex>
           <Flex
             position="absolute"
@@ -159,7 +158,7 @@ const MainCategories = () => {
             zIndex="1"
             color="white"
             p="24px"
-            bg="rgba(221, 198, 146, 0.80);"
+            bg="rgba(208, 178, 108, 0.9);"
             letterSpacing={"4.8px"}
             fontWeight={700}
             fontSize="24px"
@@ -182,7 +181,7 @@ const MainCategories = () => {
                     srcSet="/images/responsive/agenda-home.png"
                     media="(max-width: 480px)"
                   />
-                  <Img src="/images/agenda-home.png" alt="Consultorios" />
+                  <Img src="/images/agenda-home.png" alt="Agenda" />
                 </Flex>
           <Flex
             position="absolute"
@@ -190,7 +189,7 @@ const MainCategories = () => {
             zIndex="1"
             color="white"
             p="24px"
-            bg="rgba(221, 198, 146, 0.80);"
+            bg="rgba(208, 178, 108, 0.9);"
             letterSpacing={"4.8px"}
             fontWeight={700}
             fontSize="24px"
