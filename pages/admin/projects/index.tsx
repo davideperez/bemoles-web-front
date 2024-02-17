@@ -76,18 +76,18 @@ const ProjectsPage = () => {
     setItemsPerPage(+e.target.value);
   };
 
-  const handleDeleteProject = (event: Project) => {
+  const handleDeleteProject = (project: Project) => {
     onOpen();
-    setSelectedProject(event);
+    setSelectedProject(project);
   };
 
-  const deleteEvent = async () => {
+  const deleteProject = async () => {
     try {
       if (!selectedProject) return;
-      const eventDeleted = await projectService.deleteProject(
+      const projectDeleted = await projectService.deleteProject(
         selectedProject._id
       );
-      if (eventDeleted) {
+      if (projectDeleted) {
         setProjects((prev) =>
           prev?.values
             ? {
@@ -99,16 +99,17 @@ const ProjectsPage = () => {
             : prev
         );
         toast({
-          description: "Event deleted successfully",
+          description: "Project deleted successfully",
           status: "success",
         });
       }
     } catch (err) {
       toast({
-        description: "Error deleting event",
+        description: "Error deleting project.",
         status: "error",
       });
     }
+    onClose();
   };
 
   useEffect(() => {
@@ -255,7 +256,7 @@ const ProjectsPage = () => {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancelar
               </Button>
-              <Button colorScheme="red" onClick={deleteEvent} ml={3}>
+              <Button colorScheme="red" onClick={deleteProject} ml={3}>
                 Eliminar
               </Button>
             </AlertDialogFooter>

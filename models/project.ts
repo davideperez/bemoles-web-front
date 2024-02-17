@@ -4,6 +4,7 @@ export type Project = {
   pdf: string;
   image: string;
   category: ProjectCategory;
+  info: string;
   active: boolean;
   createdAt: Date;
 };

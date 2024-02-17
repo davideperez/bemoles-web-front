@@ -94,7 +94,6 @@ import {
                   </Text>
                   <Link 
                     href="mailto:info@losbemoles.com.ar"
-                    
                   >
                     <Button
                       type="button"

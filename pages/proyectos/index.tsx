@@ -54,13 +54,13 @@ const ProyectosPage = () => {
             itemsPerPage
           );
           setProjects(result);
+          console.log(result.values)
         } catch (error) {
           // console.log(error);
         }
       })();
     }
   }, [page, itemsPerPage]);
-
   return (
     <>
       <Head>
@@ -98,14 +98,16 @@ const ProyectosPage = () => {
           gap="24px"
           flexWrap={"wrap"}
         >
-          <Flex as="picture"               mx={{ base: "auto", lg: "0px" }}
->
+          <Flex 
+            as="picture"
+            mx={{ base: "auto", lg: "0px" }}
+          >
             <source
-              srcSet="/images/responsive/proyectos.png"
+              srcSet="https://dummyimage.com/540x810/242424/808080.png"
               media="(max-width: 480px)"
             />
             <Image
-              src="/images/proyectos.png"
+              src="https://dummyimage.com/540x810/242424/808080.png"
               alt="Los Bemoles"
               maxW={{ base: 317, sm: 540 }}
             />{" "}
@@ -142,6 +144,7 @@ const ProyectosPage = () => {
             >
               {projectCategories.map((category) => (
                 <GridItem key={category.name}>
+                  {/* Titulo de la Categoria */}
                   <Flex
                     p="16px"
                     w="100%"
@@ -156,14 +159,18 @@ const ProyectosPage = () => {
                   >
                     {category.name}
                   </Flex>
-                  <Flex gap="10px">
+                  
+                  <Flex 
+                    gap="10px"
+                    flexWrap={"wrap"}
+                  >
                     {projects?.values
                       .filter((p) => p.category === category.type)
-                      .slice(0, 2)
+                      .slice(0, 10)
                       .map((project) => (
                         <Link
                           isExternal
-                          href={project.pdf}
+                          onClick={() => router.push(`/proyectos/${project._id}`)}
                           key={project._id}
                           _hover={{ opacity: 0.7 }}
                         >
@@ -176,7 +183,7 @@ const ProyectosPage = () => {
                             objectPosition="top"
                           />
                         </Link>
-                      ))}
+                    ))}
                   </Flex>
                 </GridItem>
               ))}

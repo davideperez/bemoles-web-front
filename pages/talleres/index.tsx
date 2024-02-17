@@ -19,9 +19,13 @@ import { eventService } from "../../services/events.service";
 import { scaleCloudinaryImageFromUrl } from "../../utils/functions";
 
 const TalleresPage = () => {
+  // Arma el array de los talleres. 
   const [activeEvents, setActiveEvents] = useState<Event[]>();
+  //Arma el array de los talleres inactivos. 
   const [inactiveEvents, setInactiveEvents] = useState<Event[]>();
+  //Activa el icon loading. 
   const [isLoading, setIsLoading] = useState(false);
+  // 
   const [activePage, setActivePage] = useState<number>(1);
   const [inactivePage, setInactivePage] = useState<number>(1);
   const router = useRouter();
@@ -34,7 +38,7 @@ const TalleresPage = () => {
           true,
           undefined,
           activePage,
-          8,
+          50,
           "true",
           undefined,
           "true"

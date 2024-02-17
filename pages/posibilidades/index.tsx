@@ -8,7 +8,6 @@ import {
   Stack,
   Button,
   Heading,
-  GridItem,
   ListItem,
   UnorderedList,
 } from "@chakra-ui/react";
@@ -581,7 +580,7 @@ const PosibilidadesPage = () => {
                   media="(max-width: 480px)"
                 />
                 <Image
-                  src="/images/talleres-intensivos-1-v02.png"
+                  src="https://dummyimage.com/700x700/242424/808080.png"//"/images/talleres-intensivos-1-v02.png"
                   alt="Talleres intensivos"
                   objectFit={"cover"}
                   border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
@@ -598,7 +597,7 @@ const PosibilidadesPage = () => {
                   media="(max-width: 480px)"
                 />
                 <Image
-                  src="/images/talleres-intensivos-2-v02.png"
+                  src="https://dummyimage.com/400x700/242424/808080.png"//"/images/talleres-intensivos-2-v02.png"
                   alt="Talleres intensivos"
                   objectFit={"cover"}
                   border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
@@ -681,44 +680,29 @@ const PosibilidadesPage = () => {
                   </Button>
                 </Link>
               </Stack>
-{/*               <Flex as="picture" mt={{base: "0px !important", sm: "0px"}}>
-                <source
-                  srcSet="/images/responsive/talleres-intensivos-3.png"
-                  media="(max-width: 480px)"
-                />
-                <Image
-                  src="/images/talleres-intensivos-3.png"
-                  alt="Talleres intensivos"
-                  w="480px"
-                  h="204px"
-                  display={{ base: "none", sm: "flex" }}
-                />{" "}
-              </Flex> */}
             </Stack>
           </Flex>
 
-
         {/* ///////////////////////////////////////////////////////////////////////////////////////////////// */}
-        {/* ///////////////////////////////////////////////////////////////////////////////////////////////// */}
-        {/* ///////////////////////////////////////////////////////////////////////////////////////////////// */}
-        {/* ////////////////////////////                                        ///////////////////////////// */}
-        {/* ///////////////////////////////////////////////////////////////////////////////////////////////// */}
-        {/* ///////////////////////////////////////////////////////////////////////////////////////////////// */}
+          {/* 01 */}
           <Flex
             gap="24px"
-            flexWrap="wrap"
-            alignItems={"flex-start"}
-          >
-            {/* Imgs 1 & 2 */}
+            flexWrap="nowrap"
+            alignItems="center"
+            >
+
+
+            {/* a */} 
             <Flex 
-              flexDir={"column"}
-              alignItems={"flex-start"}
+              flexDirection="column"
+              flex={1}
+              alignItems={"center"}
               alignSelf={"stretch"}
             >
               {/* Img 1 */}
               <Flex 
                 as="picture"
-                alignSelf={"stretch"}
+                flexGrow={1}
               >
                 <source
                   srcSet="https://dummyimage.com/300x300/242424/808080.png"
@@ -734,7 +718,7 @@ const PosibilidadesPage = () => {
               {/* Img 2 */}
               <Flex 
                 as="picture"
-                alignSelf={"stretch"}
+                flexGrow={1}
               >
                 <source
                   srcSet="https://dummyimage.com/300x300/242424/808080.png"
@@ -748,15 +732,14 @@ const PosibilidadesPage = () => {
                 />
               </Flex>
             </Flex>
-            {/* Text */}
+
+
+            {/* b */} 
             <Stack 
-              spacing="24px" 
-              //maxW="501px"
-              alignSelf={"stretch"}
-              
+              spacing="24px"
+              flex={2}
             >
               <Stack
-                //justifyContent={"flex-end"}
                 spacing="16px"
                 px="10px"
               >
@@ -774,6 +757,7 @@ const PosibilidadesPage = () => {
                 </Text>
                 <UnorderedList
                   px="0.5rem"
+
                   fontSize={{ base: "16px", lg: "16px" }}
                   fontWeight={400}
                   lineHeight={{ base: "34px", lg: "34px" }}
@@ -827,10 +811,13 @@ const PosibilidadesPage = () => {
                 </Link>
               </Stack>
             </Stack>
-            {/* Img 3*/}
+
+
+            {/* c */} 
             <Flex 
-                as="picture"
-                alignSelf={"stretch"}
+              as="picture"
+              maxW={"550px"}
+              alignSelf={"stretch"}
               >
                 <source
                   srcSet="https://dummyimage.com/600x600/242424/808080.png"

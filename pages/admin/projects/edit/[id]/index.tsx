@@ -122,6 +122,7 @@ const ProjectDetail = () => {
                 title: project?.title || "",
                 image: project?.image || "",
                 pdf: project?.pdf || "",
+                info: project?.info || "",
                 category: project?.category || ProjectCategory.ANUALES,
               }}
               onSubmit={handleSubmit}
@@ -202,6 +203,16 @@ const ProjectDetail = () => {
                             }
                           }
                         }}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>Información del Projecto</FormLabel>
+                      <Field
+                        as={Textarea}
+                        name="info"
+                        required
+                        maxW="800px"
+                        minH="300px"
                       />
                     </FormControl>
                     <FormControl>

@@ -8,23 +8,11 @@ import {
   Button,
   Flex,
   Heading,
-  Image,
   Input,
   InputGroup,
   InputLeftElement,
   Skeleton,
   Stack,
-  Switch,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Toast,
-  Tooltip,
-  Tr,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -39,6 +27,7 @@ import { Event } from "../../../models/event";
 import { eventService } from "../../../services/events.service";
 
 const EventsPage = () => {
+
   const [oldEvents, setOldEvents] = useState<ApiBase<Event>>();
   const [nextEvents, setNextEvents] = useState<ApiBase<Event>>();
   const [searchValue, setSearchValue] = useState<string>("");
@@ -53,6 +42,7 @@ const EventsPage = () => {
   const cancelRef = React.useRef(null);
 
   useEffect(() => {
+    //Para asegurarnos que el codigo se ejecuta en el entorno del navegador/cliente, (objeto window)
     if (typeof window !== "undefined") {
       (async () => {
         const { data: result } = await eventService.getEvents(
@@ -124,27 +114,36 @@ const EventsPage = () => {
   };
 
   const handleDeleteEvent = (event: Event) => {
+    //Abre el modal
     onOpen();
+    //Pone un evento en la variable de estado "SelectedEvent"
     setSelectedEvent(event);
   };
 
   const deleteEvent = async () => {
     try {
+      //Chequea si hay algun evento seleccionado (en la variable de estado "SelectedEvent")
+      //Si no hay evento devuelve undefined.
       if (!selectedEvent) return;
+
+      //Si hay evento ejecuta el servicio de eliminar eventos
       const eventDeleted = await eventService.deleteEvent(selectedEvent._id);
+      
+      //Si hay evento ...
       if (eventDeleted) {
+        //???
         if (nextEvents?.values?.some((v) => v._id === selectedEvent._id)) {
+          //???
           setNextEvents((prev) =>
-            prev?.values
-              ? {
-                  ...prev,
-                  values: prev?.values?.filter(
-                    (e) => e?._id !== selectedEvent._id
-                  ),
-                }
+            prev?.values ?
+              /* Si hay eventos, Despliega las propiedades objeto-estado prev, y cambia su values property 
+              por un array de eventos que no incluye el evento recientemente borrado.  */
+              { ...prev, values: prev?.values?.filter((e) => e?._id !== selectedEvent._id), } 
+              //Si no hay eventos, devuelve la lista anterior. 
               : prev
           );
         } else {
+          //???
           setOldEvents((prev) =>
             prev?.values
               ? {

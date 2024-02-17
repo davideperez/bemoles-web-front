@@ -1,4 +1,13 @@
-import { Flex, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Link,
+  Image,
+  Stack,
+  Button,
+  Heading,
+} from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -31,10 +40,10 @@ const ReservaDetail = () => {
         padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
         overflow="hidden"
         spacing={{ base: "2rem", lg: "4rem" }}
-        backgroundImage={{
+/*         backgroundImage={{
           base: "none",
           lg: "url('/images/agenda-detail.png')",
-        }}
+        }} */
         objectFit={"cover"}
         objectPosition="center"
         backgroundPosition={{ base: "top", lg: "-40px 250px" }}
@@ -52,6 +61,22 @@ const ReservaDetail = () => {
         >
           Taller
         </Heading>
+        <Box
+          backgroundImage={{
+            base: "none",
+            lg: "url('/images/agenda-detail.png')",
+          }}
+          backgroundSize="auto"
+          backgroundPosition={{ base: "top", lg: "-400px 400px" }}
+          backgroundRepeat={"no-repeat"}
+          position="absolute"
+          top={0}
+          left={0}
+          width="100%"
+          height="100%"
+          zIndex="-1" // Ensure background stays behind content
+          transform={{ base: "none", lg: "scaleY(-1)" }} // Flip vertically
+        ></Box>
         {event && (
           <Flex
             pt={{ base: "0px", lg: "2rem" }}
@@ -93,6 +118,26 @@ const ReservaDetail = () => {
               >
                 {event.info}
               </Text>
+              <Link
+                href="mailto:info@losbemoles.com.ar"
+              >
+                <Button
+                  type="button"
+                  bg="#DDC692"
+                  color="#3B424A"
+                  size="lg"
+                  textTransform="uppercase"
+                  p="16px"
+                  w="fit-content"
+                  fontSize={{ base: "14px", lg: "14px" }}
+                  fontWeight={900}
+                  letterSpacing={{ base: "2.8px", lg: "2.4px" }}
+                  borderRadius="4px"
+                  _hover={{ bg: "#e9dbb9" }}
+                >
+                  Consultar
+                </Button>
+              </Link>
             </Stack>
           </Flex>
         )}

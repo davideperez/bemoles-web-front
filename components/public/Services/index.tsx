@@ -1,4 +1,4 @@
-import { Flex, Grid, GridItem, ListItem, Stack, Text, UnorderedList, Image, Spacer } from "@chakra-ui/react";
+import { Flex, Stack, Text, Image } from "@chakra-ui/react";
 import React from "react";
 
 const Services = () => {

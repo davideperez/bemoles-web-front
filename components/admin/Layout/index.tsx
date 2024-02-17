@@ -12,6 +12,12 @@ import { UserContext } from "../../../context/userContext";
 import { authService } from "../../../services/auth.service";
 import LeftBar from "../LeftBar";
 
+/* Variable que se ha definido como bandera booleana fuera del componente React Layout 
+para realizar un seguimiento de si el componente ha sido montado o no.
+--> para evitar que se realicen ciertas acciones en el primer renderizado del componente 
+que puedan causar efectos secundarios no deseados o innecesarios. 
+*/
+
 let mounted = false;
 
 const Layout = ({ children }: { children: ReactNode }) => {
@@ -19,6 +25,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { user, setUser } = useContext(UserContext);
 
+  //3.0 
   const verifyUser = useCallback(() => {
     authService
       .refreshToken()
@@ -45,8 +52,13 @@ const Layout = ({ children }: { children: ReactNode }) => {
   }, [setUser, router]);
 
   useEffect(() => {
+    /* 1.0 Se chequea que el entorno de ejecucion sea la ventana del navegador, 
+    y que el componente no haya sido ya montado aun. */
     if (typeof window !== "undefined" && !mounted) {
+      /*2.0 Se marca la bandera como true 
+      y de esta manera controlamos que la primer accion sera el verify user. */
       mounted = true;
+      //3.0 Se llama al servicio de autenticacion de token.
       verifyUser();
       setIsLoading(false);
     }
