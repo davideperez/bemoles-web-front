@@ -159,7 +159,9 @@ const EventReservesPage = () => {
   return (
     <Stack spacing={4}>
       <Heading>Reservas de eventos</Heading>
+
       <Skeleton isLoaded={!!events?.values}>
+
         <Flex justifyContent={"space-between"} mb={4} alignItems="center">
           <Stack w="100%">
             <InputGroup w="300px">
@@ -180,6 +182,7 @@ const EventReservesPage = () => {
             </InputGroup>
           </Stack>
         </Flex>
+
         <Accordion allowToggle>
           {events?.values?.map((event) => (
             <AccordionItem
@@ -190,53 +193,69 @@ const EventReservesPage = () => {
               _expanded={{ bg: "gray.500" }}
             >
               <h2>
-
                 <AccordionButton>
-                  <Flex flex="1" textAlign="left" py={2} alignItems="center">
-                    <Box
-                      border="2px solid"
-                      borderColor="gray.300"
-                      borderRadius={"lg"}
-                      mr="4"
+                  <Flex 
+                    flex="1" 
+                    textAlign="left" 
+                    py={2} 
+                    alignItems="center"
+                    justify={"space-between"}
+                  >
+                    {/* Titulo */}
+                    <Flex
+                      alignItems="center"
+
                     >
-                      <Image
-                        src={event.image || "/images/noavail.jpg"}
-                        alt={event.title}
-                        w="60px"
-                        h="50px"
-                        objectFit={"cover"}
-                        borderRadius={"md"}
-                      />
-                    </Box>
-                    <Link onClick={(e) => handleTitleLinkClick(event._id, e)} >
-                      <Text
-                        as={"b"}
-                        fontSize="md"
-                        mr={8}
-                        minW="400px"
-                        textAlign={"start"}
+                      <Box
+                        border="2px solid"
+                        borderColor="gray.300"
+                        borderRadius={"lg"}
+                        mr="4"
                       >
-                        {event?.title}
+                        <Image
+                          src={event.image || "/images/noavail.jpg"}
+                          alt={event.title}
+                          w="60px"
+                          h="50px"
+                          objectFit={"cover"}
+                          borderRadius={"md"}
+                        />
+                      </Box>
+                      <Link onClick={(e) => handleTitleLinkClick(event._id, e)} >
+                        <Text
+                          as={"b"}
+                          fontSize="lg"
+                          mr={8}
+                          minW="400px"
+                          textAlign={"start"}
+                        >
+                          {event?.title}
+                        </Text>
+                      </Link>
+                    </Flex>
+                    {/* Datos Reserva */}
+                    <Flex
+                      //alignItems="center"
+                    >
+                      <Text as="span" fontSize="md" mr={20}>
+                        <b>Cupo máximo: </b>
+                        {event?.maxAttendance}
                       </Text>
-                    </Link>
-                    <Text as="span" fontSize="md" mr={20}>
-                      <b>Cupo máximo: </b>
-                      {event?.maxAttendance}
-                    </Text>
-                    <Text as="span" fontSize="md" mr={20}>
-                      <b>Reservadas: </b>
-                      {getReserveQuantity(event?.reserves || [])}
-                    </Text>
-                    <Text as="span" fontSize="md" mr={20}>
-                      <b>Restantes: </b>
-                      {event?.maxAttendance - getReserveQuantity(event?.reserves || [])}
-                    </Text>
-                    <Text as="span" fontSize="md" mr={4}>
-                      <b>Fecha: </b>
-                      <i>{event?.date ? formatDate(event?.date) : ""}</i>
-                    </Text>
-                    <Flex ml="auto" mr="4">
-{/*                       <Tooltip label="Ver detalle de evento">
+                      <Text as="span" fontSize="md" mr={20}>
+                        <b>Reservadas: </b>
+                        {getReserveQuantity(event?.reserves || [])}
+                      </Text>
+                      <Text as="span" fontSize="md" mr={20}>
+                        <b>Restantes: </b>
+                        {event?.maxAttendance - getReserveQuantity(event?.reserves || [])}
+                      </Text>
+                      <Text as="span" fontSize="md" mr={4}>
+                        <b>Fecha: </b>
+                        <i>{event?.date ? formatDate(event?.date) : ""}</i>
+                      </Text>
+                    </Flex>
+                    {/*<Flex ml="auto" mr="4">
+                       <Tooltip label="Ver detalle de evento">
                         <Button
                           onClick={() =>
                             router.push(`/admin/events/${event._id}`)
@@ -247,13 +266,11 @@ const EventReservesPage = () => {
                         >
                           <FiExternalLink color="#9D6E33" size={20} />
                         </Button>
-                      </Tooltip> */}
-                    </Flex>
+                      </Tooltip> 
+                    </Flex>*/}
                   </Flex>
                   <AccordionIcon />
                 </AccordionButton>
-
-                
               </h2>
               <AccordionPanel pb={4}>
                 <Table fontSize="15px">
@@ -304,7 +321,7 @@ const EventReservesPage = () => {
                           <Td p={2}>
                             <Flex w="100%" justifyContent={"center"}>
                               <PaymentDetailModal reserveId={reserve._id} isDisabled={!reserve?.payments?.some(p => p.paymentId)}/>
-                              <Tooltip
+  {/*                             <Tooltip
                                label={"Realizar Pago Manual"}
                               >
                                 <Button
@@ -315,8 +332,8 @@ const EventReservesPage = () => {
                                 >
                                   <RiMoneyDollarBoxLine color="#9D6E33" size={18} />
                                 </Button>
-                              </Tooltip>
-                            {/*<Tooltip label="Ver detalle de evento">
+                              </Tooltip> */}
+                            <Tooltip label="Ver detalle de evento">
                                 <Button
                                   onClick={() =>
                                     router.push(`/admin/events/${event._id}`)
@@ -327,7 +344,7 @@ const EventReservesPage = () => {
                                 >
                                   <FiExternalLink color="#9D6E33" size={18} />
                                 </Button>
-                              </Tooltip> */}
+                              </Tooltip>
                                <Tooltip label="Eliminar reserva">
                                 <Button size="md" bg="transparent" p={0} onClick={() => handleDeleteReserve(reserve)}>
                                   <FiTrash2 color="red" size={18} />
