@@ -180,7 +180,7 @@ const FollowUS: FC<Props> = ({ igPosts }) => {
              </Link>
           </GridItem>
         ))}
-        {/* <GridItem bg="#D9D9D9"></GridItem>
+        <GridItem bg="#D9D9D9"></GridItem>
         <GridItem bg="#D9D9D9"></GridItem>
         <GridItem bg="#D9D9D9"></GridItem>
         {isLgOrBigger && (
@@ -192,7 +192,7 @@ const FollowUS: FC<Props> = ({ igPosts }) => {
             <GridItem bg="#D9D9D9"></GridItem>
             <GridItem bg="#D9D9D9"></GridItem>
           </>
-        )} */}
+        )}
       </Grid>
     </Stack>
   );
