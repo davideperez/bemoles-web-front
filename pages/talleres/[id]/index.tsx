@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { Event } from "../../../models/event";
 import { eventService } from "../../../services/events.service";
 import { scaleCloudinaryImageFromUrl } from "../../../utils/functions";
@@ -116,8 +116,14 @@ const ReservaDetail = () => {
                 lineHeight={{ base: "24px", lg: "34px" }}
                 letterSpacing={{ base: "0.8px", lg: "0.8px" }}
               >
-                {event.info}
-              </Text>
+                {
+                  //convierte los <br/> del string project.info a comoponentes <br/>
+                  event?.info.split("<br/>").map((line, index) => (
+                    <Fragment key={index}>
+                      {line}
+                      {index !== event.info.split("<br/>").length - 1 && <br />}
+                    </Fragment>
+                ))}              </Text>
               <Link
                 href="mailto:info@losbemoles.com.ar"
               >

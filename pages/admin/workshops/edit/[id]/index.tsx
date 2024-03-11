@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { Field, Formik } from "formik";
 import { useRouter } from "next/router";
+import { lineBreaksToBrs, brsToLineBreaks } from "../../../../../utils/functions";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { eventService } from "../../../../../services/events.service";
 import { Event } from "../../../../../models/event";
@@ -52,6 +53,11 @@ const EventDetail = () => {
     try {
       let event;
       const form = new FormData();
+      //Permite que el texto ingresado con parrafos, sea respetado mas tarde al 
+      //ser mostrado.
+      const infoWithLineBreaks = lineBreaksToBrs(values.info)
+      values.info = infoWithLineBreaks;
+      //
       if (image) form.append("image", image);
       for (const value of Object.keys(values)) {
         if (value !== "image")
@@ -124,7 +130,7 @@ const EventDetail = () => {
                 date: event?.date
                   ? formatDate(event?.date)
                   : formatDate(new Date()),
-                info: event?.info || "",
+                info: brsToLineBreaks(event?.info) || "",
                 price: event?.price || 0,
                 maxAttendance: event?.maxAttendance || 0,
                 paymentLink: event?.paymentLink || "",

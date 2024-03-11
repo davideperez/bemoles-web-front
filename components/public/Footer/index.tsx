@@ -1,6 +1,5 @@
 import { Flex, Link, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
-import Logo from '../../admin/Login/Logo'
 import FooterLogo from './FooterLogo'
 
 const Footer = () => {

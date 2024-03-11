@@ -5,11 +5,11 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import React from "react";
 import FollowUS from "../components/public/FollowUs";
-import Hero from "../components/public/Hero";
-import MainCategories from "../components/public/MainCategories";
-import Services from "../components/public/Services";
+import Hero from "../components/public/Home/Hero";
+import SeccionesPrincipales from "../components/public/Home/SeccionesPrincipales";
+import TalleresYEspacios from "../components/public/Home/TalleresYEspacios";
 import VisitUs from "../components/public/VisitUs";
-import WeSearch from "../components/public/WeSearch";
+import Buscamos from "../components/public/Home/Buscamos";
 import instagramApi from "../services/instagram.service";
 
 interface IgPost {
@@ -34,28 +34,26 @@ const HomePage: NextPage<Props> = ({ igPosts }) => {
         padding={{ base: "60px 0px 20px 0px", lg: "340px 0px 120px 0px" }}
         overflow="hidden"
         spacing="4rem"
+        align={"center"}
         backgroundImage={{
           base: "none",
-          lg: "url('/images/home-bg-01.png')",
+          lg: "url('/images/01_home/home-bg-01.png')",
         }}
         bgRepeat= "no-repeat"
-        bgPos={{lg:"50px 3950px", xl:"420px 2130px"}}
-        bgSize={{lg: "100%", xl: "55%"}}
-        //ref={bgRef} 
-        //bgSize="cover" 
-        //bgPosition="initial" 
-        //position="absolute" 
+        bgPos={{sm:"", lg:"20px 2500px", xl:"460px 2200px"}}
+        bgSize={{lg: "100%", xl:"42%"}}
       >
         <Hero />
-        <MainCategories />
-        <Services />
-        <WeSearch />
+        <SeccionesPrincipales />
+        <TalleresYEspacios />
+        <Buscamos />
         {/* <FollowUS igPosts={igPosts} /> */}
         <VisitUs />
       </Stack>
     </>
   );
 };
+
 /* 
 export const getStaticProps: GetStaticProps = async () => {
   const res = await instagramApi.getPostsFetch(

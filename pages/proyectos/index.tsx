@@ -72,8 +72,8 @@ const ProyectosPage = () => {
         overflow="hidden"
         spacing={{ base: "2rem", lg: "4rem" }}
         backgroundImage={{
-          base: "url('/images/proyectos-bg-mobile.png')",
-          lg: "url('/images/proyectos-bg.png')",
+          base: "url('/images/05_proyectos/proyectos-bg-mobile.png')",
+          lg: "url('/images/05_proyectos/proyectos-bg.png')",
         }}
         objectFit={"cover"}
         objectPosition="center"
@@ -103,11 +103,11 @@ const ProyectosPage = () => {
             mx={{ base: "auto", lg: "0px" }}
           >
             <source
-              srcSet="https://dummyimage.com/540x810/242424/808080.png"
+              srcSet="/images/05_proyectos/proyectos.png"
               media="(max-width: 480px)"
             />
             <Image
-              src="https://dummyimage.com/540x810/242424/808080.png"
+              src="/images/05_proyectos/proyectos.png"
               alt="Los Bemoles"
               maxW={{ base: 317, sm: 540 }}
             />{" "}

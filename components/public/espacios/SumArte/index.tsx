@@ -1,48 +1,62 @@
-import { Flex, Image, Text, Button, Link } from "@chakra-ui/react";
+import { 
+    Flex, 
+    Image, 
+    Text, 
+    Button, 
+    Link 
+} from "@chakra-ui/react";
 
 const SumArte = () => {
     return (
         <Flex
-            gap={{ base: "8px", sm: "24px" }}
-            px={{ base: "8px", sm: "16px" }}
+            w={"100%"}
+            maxW={"1312px"}
+            minW={{base:"0px", lg:"1060px", xl:"0px"} }
+            gap={{ base: "24px", sm: "24px" }}
             flexDirection={"column"}
             alignItems={"center"}
-            w={"82rem"}
+            //px={{ base: "8px", sm: "16px" }}
         >
 
             {/* 01- 2 Columnas */}
             <Flex 
                 flexWrap={"wrap"}
-                flexDirection={{ base: "column", sm: "row" }}
+                flexDirection={{ base: "column", lg: "row" }}
                 alignItems={"flex-start"}
                 //gap={{ base: "8px", sm: "24px" }}
             >
                 {/*01-01- Columna 1 */}
                 <Flex 
                     as="picture"
+                    w={{ base: "100%", lg: "50%" }}
                     alignSelf={"stretch"}
-                    flex={"1"}
                     maxH={"450px"}
+                    order={{base:"2", lg:"1"}}
+                    mt={{ base: "1rem", lg: "0rem" }}
                     /* alignSelf={"stretch"}
                     display={{base:"none", sm:"flex"}} */
                 >
                     <source
-                        srcSet="/images/sum-arte-02-v03.png"
+                        srcSet="/images/responsive/03_espacios/sum-arte-01.png"
                         //media="(min-width: 480px)"
                     />
                     <Image
-                        src="/images/sum-arte-02-v03.png"
+                        src="/images/03_espacios/sum-arte-01.png"
+                        w={{ base: "100%", lg: "100%" }}
                         alt="Clases y cursos"
                         objectFit={"cover"}
                         border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                     />
                 </Flex>
+
                 {/* 01-02- Columna 2 */}
                 <Flex
+                    w={{ base: "100%", lg: "50%" }}
                     flexDirection={"column"}
                     gap={{base:"16px", sm:"48px"}}
                     flex={"1"}
                     alignSelf={"stretch"}
+                    order={{base:"1", lg:"2"}}
                     //justify={"normal"}
                 >
                     {/* 01-02-01 Textos y Boton */}
@@ -105,35 +119,33 @@ const SumArte = () => {
                 </Flex>
             </Flex>
 
-
             {/* 02- Filas */}
             <Flex 
-                gap={{ base: "8px", sm: "24px" }}
-                flexDirection={"column"}
+                gap={{ base: "24px", sm: "24px" }}
+                flexDirection={{base:"column", lg:"column"}}
                 alignItems={"center"}
                 alignSelf={"stretch"}
             >
-
                 {/* 02-01- Versatilidad */}
                 <Flex
-                    flexDir={{base:"column", sm:"row"}}
-                    gap="24px"
+                    w={"100%"}
+                    flexDir={{base:"column", lg:"row"}}
+                    gap={{base:"16px", lg:"24px"}}
                     padding="0px 10px"
                     alignItems={"flex-start"}
                 >
-
                     {/* 02-01-01  */}
                     <Flex 
                         flexDirection={"column"}
-                        gap="16px"
-                        flex={"1"}
+                        w={{ base: "100%", lg: "50%" }}
+                        gap="8px"
                     >
                         <Flex
                             p="14px"
                             h={{base:"", sm:"81px"}}
-                            alignItems={"flex-start"}
-                            alignSelf={"stretch"}
                             align={"center"}
+                            alignSelf={"stretch"}
+
                             bg="rgba(121, 163, 66, 0.80)"
                             color="white"
                             fontSize={{ base: "16px", lg: "24px" }}
@@ -144,11 +156,13 @@ const SumArte = () => {
                             borderTop={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                             borderRight={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                             borderBottom={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
-                        borderLeft={"0"}
+                            borderLeft={"0"}
                         >
                             VERSATILIDAD
                         </Flex>
-                        <Flex>
+                        <Flex
+                            px={"8px"}
+                        >
                             <Text
                                 as="p"
                                 fontSize={{ base: "16px", lg: "16px" }}
@@ -172,20 +186,18 @@ const SumArte = () => {
                         as="picture"
                         alignSelf={"stretch"}
                         maxH={"300px"}
-                        //flex={"1"}
-                        //w={{base:"100%", sm:"30%"}}
-                        //h={"384px"}
+                        w={{ base: "100%", lg: "50%" }}
+
                     >
                         <source
-                            srcSet="https://dummyimage.com/600x600/242424/808080.png"//"/images/sum-arte-03-v03.png"
+                            srcSet="/images/responsive/03_espacios/sum-arte-02.png"
                             //media="(min-width: 480px)"
                         />
                         <Image
-                            src="https://dummyimage.com/600x600/242424/808080.png"//"/images/sum-arte-03-v03.png"
+                            src="/images/03_espacios/sum-arte-02.png"
                             alt="Clases y cursos"
                             objectFit={"cover"}
-                            //w={"100%"}
-                            //h={"30%"}
+                            w={"100%"}
                             border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                         />
                     </Flex>
@@ -194,77 +206,77 @@ const SumArte = () => {
 
                 {/* Sistema de Audio y Video */}
                 <Flex
+                    w={"100%"}
                     padding="0px 10px"
                     alignItems="flex-start"
-                    gap="16px"
+                    flexDir={{base:"column", lg:"row"}}
+                    gap="8px"
                     alignSelf=" stretch"
+                    mt={{base:"8px", lg:""}}
                 >
                     {/* Texto */}
-                    <Flex 
-                        align-self=" stretch"
-                        flex={"1"}
-
+                    <Flex
+                        w={{ base: "100%", lg: "50%" }}
                         flexDirection={"column"}
-                        alignItems="flex-start"
-                        gap="24px"
-                        order={"2"}
+                        gap="8px"
+                        order={{base:"1", lg:"2"}}
                     >
                         <Flex
-                        p="14px"
-                        h={"81px"}
-                        alignItems={"flex-start"}
-                        alignSelf={"stretch"}
-                        bg="rgba(245, 130, 32, 0.80) "
-                        color="white"
-                        fontSize={{ base: "16px", lg: "24px" }}
-                        fontWeight={700}
-                        letterSpacing={{ base: "3.2px", lg: "4.8px" }}
-                        textTransform={"uppercase"}
-                        whiteSpace={{ base: "normal", lg: "nowrap" }}
-                        borderTop={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
-                        borderRight={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
-                        borderBottom={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
-                        borderLeft={"0"}
+                            p="14px"
+                            textAlign={"center"}
+                            alignSelf={"stretch"}
+
+                            bg="rgba(245, 130, 32, 0.80) "
+                            color="white"
+                            fontSize={{ base: "16px", lg: "24px" }}
+                            fontWeight={700}
+                            letterSpacing={{ base: "3.2px", lg: "4.8px" }}
+                            textTransform={"uppercase"}
+                            whiteSpace={{ base: "normal", lg: "nowrap" }}
+                            borderTop={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
+                            borderRight={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
+                            borderBottom={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
+                            borderLeft={"0"}
                         >
-                        SISTEMA DE AUDIO Y VIDEO
+                            SISTEMA DE AUDIO Y VIDEO
                         </Flex>
                         <Flex 
-                        alignSelf={"stretch"}
-                        flex={"1 0 0"}
+                            alignSelf={"stretch"}
+                            flex={"1 0 0"}
+                            px={"8px"}
                         >
-                        <Text
-                            as="p"
-                            fontSize={{ base: "16px", lg: "16px" }}
-                            fontWeight={400}
-                            lineHeight={{ base: "24px", lg: "34px" }}
-                            letterSpacing={{ base: "0.8px", lg: "0.8px" }}
-                        >
-                            Si necesitas proyectar una presentación, mostrar una película o 
-                            transmitir contenido multimedia, tenemos un sistema de proyección 
-                            y sonido que garantizará una <b>experiencia</b> visual y auditiva excepcional 
-                            para todos los asistentes.
-                        </Text>
+                            <Text
+                                as="p"
+                                fontSize={{ base: "16px", lg: "16px" }}
+                                fontWeight={400}
+                                lineHeight={{ base: "24px", lg: "34px" }}
+                                letterSpacing={{ base: "0.8px", lg: "0.8px" }}
+                            >
+                                Si necesitas proyectar una presentación, mostrar una película o 
+                                transmitir contenido multimedia, tenemos un sistema de proyección 
+                                y sonido que garantizará una <b>experiencia</b> visual y auditiva excepcional 
+                                para todos los asistentes.
+                            </Text>
                         </Flex>
                     </Flex>
                     {/* Imagen 2 */}
                     <Flex 
                         as="picture"
-                        order={"1"}
                         alignSelf={"stretch"}
-                        flex={"1"}
+                        w={{ base: "100%", lg: "50%" }}
                         maxH={"300px"}
-                        //w={"30%"}
-                        //h={"384px"}
+                        order={{base:"2", lg:"1"}}
                     >
                         <source
-                        srcSet="https://dummyimage.com/600x600/242424/808080.png"//"/images/sum-arte-04-v03.png"
+                        srcSet="/images/responsive/03_espacios/sum-arte-03.png"
                         //media="(min-width: 480px)"
                         />
                         <Image
-                        src="https://dummyimage.com/600x600/242424/808080.png"//"/images/sum-arte-04-v03.png"
-                        alt="Clases y cursos"
-                        objectFit={"cover"}
-                        border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
+                            src="/images/03_espacios/sum-arte-03.png"
+                            alt="Clases y cursos"
+                            w={"100%"}
+                            objectFit={"cover"}
+                            border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                         />
                     </Flex>
                 </Flex>
@@ -273,25 +285,28 @@ const SumArte = () => {
                 {/* Servicios Adicionales */}
                 <Flex
                     alignSelf=" stretch"
-
                     padding="0px 10px"
+                    flexDir={{base:"column", lg:"row"}}
                     alignItems="flex-start"
                     gap="16px"
+                    mt={{base:"8px", lg:""}}
                 >
                     {/* Texto */}
                     <Flex 
                         align-self=" stretch"
-
                         flexDirection={"column"}
                         align-items="flex-start"
-                        gap="24px"
+                        w={{ base: "100%", lg: "50%" }}
+                        gap="8px"
                         flex={"1"}
                     >
                         <Flex
                             p="14px"
-                            h={"81px"}
-                            alignItems={"flex-start"}
+                            alignItems={"center"}
+                            
                             alignSelf={"stretch"}
+                            textAlign={{base:"center"}}
+
                             bg="rgba(27, 58, 102, 0.80)"
                             color="white"
                             fontSize={{ base: "16px", lg: "24px" }}
@@ -304,11 +319,12 @@ const SumArte = () => {
                             borderBottom={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                             borderLeft={"0"}
                         >
-                        SERVICIOS ADICIONALES
+                            SERVICIOS ADICIONALES
                         </Flex>
                         <Flex 
                             alignSelf={"stretch"}
                             flex={"1 0 0"}
+                            px={"8px"}
                         >
                             <Text
                                 as="p"
@@ -331,17 +347,17 @@ const SumArte = () => {
                     <Flex 
                         as="picture"
                         align-items="flex-start"
-                        flex={"1"}
+                        w={{ base: "100%", lg: "50%" }}
                         maxH={"300px"}
-                        //h={"384px"}
                     >
                         <source
-                            srcSet="https://dummyimage.com/600x600/242424/808080.png"//"/images/sum-arte-05-v03.png"
+                            srcSet="/images/responsive/03_espacios/sum-arte-04.png"//"/images/sum-arte-05-v03.png"
                             //media="(min-width: 480px)"
                         />
                         <Image
-                            src="https://dummyimage.com/600x600/242424/808080.png"//"/images/sum-arte-05-v03.png"
+                            src="/images/03_espacios/sum-arte-04.png"//"/images/sum-arte-05-v03.png"
                             alt="Clases y cursos"
+                            w={"100%"}
                             objectFit={"cover"}
                             border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                         />
@@ -352,17 +368,16 @@ const SumArte = () => {
             {/* 03- Texto Final*/}
             <Flex
                 as={"div"}
-                w={"1332px"}
                 justify={"center"}
+                px={"18px"}
             >
                 <Text
                     as={"p"}
                     color= "3B424A"
-                    //fontFamily= "Manrope"
                     fontSize= "24px"
                     fontStyle= "normal"
                     fontWeight= "700"
-                    lineHeight= "34px" /* 141.667% */
+                    lineHeight= "34px"
                     letterSpacing= "1.2px"
                 >
                     Nuestro SUM-ARTE es un espacio ideal en un entorno perfecto para que tus eventos sean placenteros.

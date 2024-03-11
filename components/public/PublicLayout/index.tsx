@@ -1,9 +1,11 @@
-import { Stack } from "@chakra-ui/react";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { ReactNode, useEffect, useRef } from "react";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
+import { Stack } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import React, { 
+  ReactNode,
+  useEffect, useRef } from "react";
 
 const headerHeight = {
   homePage: "600px",

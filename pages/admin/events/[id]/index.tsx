@@ -43,7 +43,7 @@ import {
 } from "@chakra-ui/react";
 import { Field, Formik } from "formik";
 import { useRouter } from "next/router";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState, Fragment } from "react";
 import { eventService } from "../../../../services/events.service";
 import { Event } from "../../../../models/event";
 import Head from "next/head";
@@ -139,7 +139,22 @@ const EventDetail = () => {
               <Heading as="h2" fontSize="3xl">{event?.title}</Heading>
               <Text as="span" mt="0px !important" fontSize="15px" fontStyle={"italic"}>Creado el {formatDate(event?.date)}</Text>
               </Stack>
-              <Text as="pre" fontFamily="unset" fontSize="md"  minH="100px">{event?.info}</Text>
+              <Text 
+                as="pre" 
+                fontFamily="unset" 
+                fontSize="md"  
+                minH="100px"
+                whiteSpace={"break-spaces"}
+              >
+                {
+                  //convierte los <br/> del string project.info a comoponentes <br/>
+                  event?.info.split("<br/>").map((line, index) => (
+                    <Fragment key={index}>
+                      {line}
+                      {index !== event?.info.split("<br/>").length - 1 && <br />}
+                    </Fragment>
+                ))}
+              </Text>
               <Divider />
               <Stack spacing={0}>
               <Text as="span"><b>Fecha:</b> {formatDateTime(event?.date)}</Text>

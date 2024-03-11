@@ -1,20 +1,20 @@
 import {
   Box,
-  Button,
-  Center,
   Flex,
   Grid,
-  GridItem,
-  Heading,
   Image,
-  Spinner,
   Stack,
+  Button,
+  Center,
+  Heading,
+  Spinner,
+  GridItem,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import { ApiBase } from "../../models/apiBase";
 import { Event } from "../../models/event";
+import { ApiBase } from "../../models/apiBase";
+import React, { useState, useEffect } from "react";
 import { eventService } from "../../services/events.service";
 import { scaleCloudinaryImageFromUrl } from "../../utils/functions";
 
@@ -155,7 +155,7 @@ const AgendaPage = () => {
                   </GridItem>
                 ))}
               </Grid>
-              <Flex justifyContent={"center"}>
+{/*               <Flex justifyContent={"center"}>
                 <Button
                   bg="#DDC692"
                   color="#3B424A"
@@ -166,7 +166,7 @@ const AgendaPage = () => {
                 >
                   Ver mas
                 </Button>
-              </Flex>
+              </Flex> */}
             </Stack>
             <Stack pt="2rem" spacing="1.5rem">
               <Heading

@@ -9,6 +9,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import Head from "next/head";
+import { Fragment } from "react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Project } from "../../../models/project";
@@ -83,6 +84,7 @@ const ReservaDetail = () => {
             pt={{ base: "0px", lg: "2rem" }}
             gap="24px"
             flexWrap={"wrap"}
+            justify={{base:"center", lg:"start"}}
           >
             <Flex as="picture">
               <source
@@ -118,7 +120,15 @@ const ReservaDetail = () => {
                 lineHeight={{ base: "24px", lg: "34px" }}
                 letterSpacing={{ base: "0.8px", lg: "0.8px" }}
               >
-                {project.info}
+                {
+                  //convierte los <br/> del string project.info a comoponentes <br/>, 
+                  //TBD: averiguar como componentizar esto, si tiene sentido.
+                  project.info.split("<br/>").map((line, index) => (
+                    <Fragment key={index}>
+                      {line}
+                      {index !== project.info.split("<br/>").length - 1 && <br />}
+                    </Fragment>
+                ))}
               </Text>
               <Link href={project.pdf}>
                 <Button

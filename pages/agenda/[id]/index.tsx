@@ -1,28 +1,38 @@
+import { 
+  Field,
+  Formik,
+  FormikHelpers
+} from "formik";
 import {
+  Box,
+  Text,
+  Link,
+  Flex,
+  Stack,
+  Input,
+  Image,
+  Button,
+  Heading,
+  useToast,
   AlertDialog,
+  useDisclosure,
   AlertDialogBody,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
   AlertDialogCloseButton,
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Input,
-  Stack,
-  Text,
-  useDisclosure,
-  useToast,
-  Link,
 } from "@chakra-ui/react";
-import { AxiosError } from "axios";
-import { Field, Formik, FormikHelpers } from "formik";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  ChangeEvent,
+  Fragment
+} from "react";
 import Head from "next/head";
+import { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Event } from "../../../models/event";
 import { eventService } from "../../../services/events.service";
 import { reserveService } from "../../../services/reserves.service";
@@ -60,6 +70,7 @@ function limitInputToRange(
   }
 }
 
+
 const AgendaDetail = () => {
   const [event, setEvent] = useState<Event>();
   const router = useRouter();
@@ -69,6 +80,7 @@ const AgendaDetail = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const cancelRef = useRef(null);
 
+  //Trae el evento en cuestion.
   useEffect(() => {
     if (typeof window !== "undefined" && router.query.id) {
       (async () => {
@@ -78,6 +90,7 @@ const AgendaDetail = () => {
     }
   }, [router.query.id]);
 
+  //Envia los datos del form.
   const handleSubmit = async (reserve: any, actions: FormikHelpers<any>) => {
     try {
       const { data: reserveCreated } = await reserveService.createReserve({
@@ -115,6 +128,8 @@ const AgendaDetail = () => {
         isClosable: true,
       });
     }
+
+    //se resetea el form
     actions.resetForm();
   };
 
@@ -125,6 +140,7 @@ const AgendaDetail = () => {
           {event ? `Agenda: ${event?.title}` : "Cargando..."} | Los Bemoles
         </title>
       </Head>
+
       <Stack
         as="main"
         padding={{ base: "44px 16px 20px 16px", lg: "96px 100px 120px 100px" }}
@@ -151,62 +167,93 @@ const AgendaDetail = () => {
         >
           Agenda
         </Heading>
+        
+        
+        {/* Vista */}
+
         {event && (
-          <Flex pt={{ base: "0px", lg: "2rem" }} gap="24px" flexWrap={"wrap"}>
-            <Flex as="picture">
-              <source
-                srcSet={scaleCloudinaryImageFromUrl(event.image, 400)}
-                media="(max-width: 480px)"
-              />
-              <Image
-                src={event.image}
-                alt={event.title}
-                maxW={{ base: 350, sm: 400 }}
-                objectFit="contain"
-                objectPosition="top"
-              />
-            </Flex>
-            <Stack
-              w="470px"
-              spacing="16px"
-              justifyContent={"flex-start"}
-              mt="auto"
+          <Flex 
+            gap="24px" 
+            pt={{ base: "0px", lg: "2rem" }} 
+            flexWrap={"wrap"}
+            alignItems={"start"}
+            justify={"center"}
+          >
+            {/* Imagen Evento*/}
+            <Flex
+              gap={"2rem"}
+              flexWrap={"wrap"}
+              justify={"center"}
             >
-              <Text
-                as="h3"
-                color="#3B424A"
-                fontFamily={"DM Serif Display"}
-                fontSize={{ base: "40px", lg: "54px" }}
-                fontWeight={400}
-                lineHeight={{ base: "42px", lg: "54px" }}
-                letterSpacing={{ base: "0.4px", lg: "2.7px" }}
+              
+              <Flex 
+                as="picture"
               >
-                {event.title}
-              </Text>
-              <Text
-                as="p"
-                color="#3B424A"
-                fontSize={{ base: "20px", lg: "24px" }}
-                fontWeight={400}
-                lineHeight={{ base: "34px", lg: "34px" }}
-                letterSpacing={{ base: "1px", lg: "1.2px" }}
+                <source
+                  srcSet={scaleCloudinaryImageFromUrl(event.image, 400)}
+                  media="(max-width: 480px)"
+                />
+                <Image
+                  src={event.image}
+                  alt={event.title}
+                  maxW={{ base: 350, sm: 400 }}
+                  objectFit="contain"
+                  objectPosition="top"
+                />
+              </Flex>
+              {/* Datos Evento */}
+              <Stack
+                maxW="470px"
+                spacing="16px"
+                justifyContent={"flex-start"}
+                mt="auto"
               >
-                Entrada:
-                <Text as="span" fontWeight={700} ml="2px">
-                {Boolean(event?.price) ? `$${event?.price}` : ' Gratis'}
+                <Text
+                  as="h3"
+                  color="#3B424A"
+                  fontFamily={"DM Serif Display"}
+                  fontSize={{ base: "40px", lg: "54px" }}
+                  fontWeight={400}
+                  lineHeight={{ base: "42px", lg: "54px" }}
+                  letterSpacing={{ base: "0.4px", lg: "2.7px" }}
+                >
+                  {event.title}
                 </Text>
-              </Text>
-              <Text
-                as="p"
-                fontSize={{ base: "16px", lg: "16px" }}
-                fontWeight={400}
-                lineHeight={{ base: "24px", lg: "34px" }}
-                letterSpacing={{ base: "0.8px", lg: "0.8px" }}
-              >
-                {event.info}
-              </Text>
-            </Stack>
-            <Flex mt="auto">
+                <Text
+                  as="p"
+                  color="#3B424A"
+                  fontSize={{ base: "20px", lg: "24px" }}
+                  fontWeight={400}
+                  lineHeight={{ base: "34px", lg: "34px" }}
+                  letterSpacing={{ base: "1px", lg: "1.2px" }}
+                >
+                  Entrada:
+                  <Text as="span" fontWeight={700} ml="2px">
+                  {Boolean(event?.price) ? `$${event?.price}` : ' Gratis'}
+                  </Text>
+                </Text>
+                <Text
+                  as="p"
+                  fontSize={{ base: "16px", lg: "16px" }}
+                  fontWeight={400}
+                  lineHeight={{ base: "24px", lg: "34px" }}
+                  letterSpacing={{ base: "0.8px", lg: "0.8px" }}
+                >
+                {
+                  //convierte los <br/> del string project.info a comoponentes <br/>
+                  event?.info.split("<br/>").map((line, index) => (
+                    <Fragment key={index}>
+                      {line}
+                      {index !== event.info.split("<br/>").length - 1 && <br />}
+                    </Fragment>
+                ))}
+                </Text>
+              </Stack>
+            </Flex>
+            {/* Formulario Evento */}
+            <Flex
+
+            >
               <Formik
                 initialValues={{
                   firstName: "",
@@ -396,6 +443,7 @@ const AgendaDetail = () => {
         )}
       </Stack>
 
+      {/* Toast */}
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}

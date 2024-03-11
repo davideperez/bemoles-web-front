@@ -160,7 +160,7 @@ const TalleresPage = () => {
                   </GridItem>
                 ))}
               </Grid>
-              <Flex justifyContent={"center"}>
+             {/*  <Flex justifyContent={"center"}>
                 <Button
                   bg="#DDC692"
                   color="#3B424A"
@@ -171,7 +171,7 @@ const TalleresPage = () => {
                 >
                   Ver mas
                 </Button>
-              </Flex>
+              </Flex> */}
             </Stack>
             <Stack pt="2rem" spacing="1.5rem">
               <Heading
@@ -220,7 +220,7 @@ const TalleresPage = () => {
                   </GridItem>
                 ))}
               </Grid>
-              <Flex justifyContent={"center"}>
+{/*               <Flex justifyContent={"center"}>
                 <Button
                   bg="#DDC692"
                   color="#3B424A"
@@ -231,7 +231,7 @@ const TalleresPage = () => {
                 >
                   Ver mas
                 </Button>
-              </Flex>
+              </Flex> */}
             </Stack>
           </>
         ) : (

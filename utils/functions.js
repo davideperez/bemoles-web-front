@@ -66,18 +66,18 @@ export const getPaymentStatusText = (status) => {
   }
 };
 
-export const isExpiratedReserve = (createReserveDate) => {
-  const currentTime = new Date();
-  const createdReserveDate = new Date(createReserveDate);
-  const initialFeatureDate = new Date(process.env.NEXT_PUBLIC_INITIAL_DATE_PAYMENT_GATEWAY_FEATURE)
-  if (initialFeatureDate > createdReserveDate) return false;
+export const isExpiratedReserve = (reserveCreationDate) => {
+  const currentDate = new Date();
+  const reserveDateOfCreation = new Date(reserveCreationDate);
+  const featureInitialDate = new Date(process.env.NEXT_PUBLIC_INITIAL_DATE_PAYMENT_GATEWAY_FEATURE)
+  if (featureInitialDate > reserveDateOfCreation) return false;
 
-  const timeDifference = currentTime - createdReserveDate;
+  const elapsedTime = currentDate - reserveDateOfCreation;
 
   const expirationHours = process.env.NEXT_PUBLIC_EXPIRATION_HOURS;
-  const expirationHoursMilliseconds = Number(expirationHours) * 60 * 60 * 1000;
+  const expirationHoursInMilliseconds = Number(expirationHours) * 60 * 60 * 1000;
 
-  return timeDifference >= expirationHoursMilliseconds;
+  return elapsedTime >= expirationHoursInMilliseconds;
 };
 
 export const getReserveQuantity = (reserves) =>
@@ -99,3 +99,14 @@ export const formatUTCToTimezone = (date) => {
   const adjustedISOString = adjustedDate.toISOString().substring(0, 16);
   return adjustedISOString;
 };
+
+export const lineBreaksToBrs = (text/*:  string | undefined */) => {
+  const textWithLineBreaks = text?.replace(/\n/g, "<br/>")
+  return textWithLineBreaks
+}
+
+
+export const brsToLineBreaks = (text) => {
+  const textWithLineBreaks = text?.replace(/<br\/>/g, "\n")
+  return textWithLineBreaks;
+}
