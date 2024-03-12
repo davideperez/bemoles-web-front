@@ -345,11 +345,11 @@ const EventReservesPage = () => {
                                   <FiExternalLink color="#9D6E33" size={18} />
                                 </Button>
                               </Tooltip>
-                               <Tooltip label="Eliminar reserva">
+      {/*                          <Tooltip label="Eliminar reserva">
                                 <Button size="md" bg="transparent" p={0} onClick={() => handleDeleteReserve(reserve)}>
                                   <FiTrash2 color="red" size={18} />
                                 </Button>
-                              </Tooltip>
+                              </Tooltip> */}
                             </Flex>
                           </Td>
                         </Tr>
