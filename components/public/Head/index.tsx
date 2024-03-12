@@ -34,6 +34,7 @@ const HeadLayout: React.FC<Props> = ({ children }) => {
         <meta name="theme-color" content="#ffffff" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="losbemoles.com.ar" />
+        <meta property="og:url" content="losbemoles.com.ar" />
       </Head>
       {children}
     </>

@@ -44,7 +44,7 @@ const VisitUs = () => {
           {" "}
           <Text
             color="#3B424A"
-            as="h4"
+            as="h2"
             fontFamily={"DM Serif Display"}
             fontSize="54px"
             fontWeight={400}

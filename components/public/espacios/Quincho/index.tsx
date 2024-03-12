@@ -59,6 +59,7 @@ const Quincho = () => {
                         >
                             <Button
                                 type="button"
+                                aria-label="Ver Talleres"
                                 bg="#DDC692"
                                 color="#3B424A"
                                 size="lg"

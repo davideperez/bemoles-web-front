@@ -203,6 +203,7 @@ export default function EstudioSeccion01 () {
             <Link href="mailto:info@losbemoles.com.ar">
               <Button
                 type="button"
+                aria-label="Consultar"
                 bg="#DDC692"
                 color="#3B424A"
                 size="lg"

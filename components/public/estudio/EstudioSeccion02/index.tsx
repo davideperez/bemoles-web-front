@@ -59,6 +59,7 @@ export default function EstudioSeccion02 () {
           <Link href="mailto:info@losbemoles.com.ar">
             <Button
               type="button"
+              title="Consultar"
               bg="#DDC692"
               color="#3B424A"
               size="lg"

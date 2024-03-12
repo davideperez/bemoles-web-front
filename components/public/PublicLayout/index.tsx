@@ -34,7 +34,7 @@ const PublicLayout = ({ children }: { children: ReactNode }) => {
         }`;
     if (bgRef.current) {
       bgRef.current.style.height = bgHeight;
-      bgRef.current.style.background = `url('/images/hero${windowWidth > 768 ? '' : '-mobile'}.png')`;
+      bgRef.current.style.background = `url('/images/hero${windowWidth > 768 ? '' : '-mobile'}.webp')`;
     }
   }
 
@@ -54,7 +54,7 @@ const PublicLayout = ({ children }: { children: ReactNode }) => {
       <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
     </Head>
     <Stack spacing="0px" position="relative">
-      <Stack ref={bgRef} h="600px" w="100%" bg="url('/images/hero.png')" bgSize="cover" bgRepeat="no-repeat" bgPosition="initial" position="absolute" top="0px" left="0px" zIndex="-1"></Stack>
+      <Stack ref={bgRef} h="600px" w="100%" bg="url('/images/hero.webp')" bgSize="cover" bgRepeat="no-repeat" bgPosition="initial" position="absolute" top="0px" left="0px" zIndex="-1"></Stack>
       <Navbar />
       <>{children}</>
       <Footer />

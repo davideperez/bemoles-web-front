@@ -15,7 +15,7 @@ const TalleresYEspacios = () => {
       w={"100%"}
 /*       backgroundImage={{
         base: "none",
-        lg: "url('/images/01_home/home-bg-01.png')",
+        lg: "url('/images/01_home/home-bg-01.webp')",
       }}
       bgRepeat= "no-repeat"
       bgPos={{
@@ -39,7 +39,7 @@ const TalleresYEspacios = () => {
           w={"100%"}
         >
           <Text 
-            as="h4" 
+            as="h2" 
             color="#3B424A"
             fontFamily={"DM Serif Display"} 
             fontSize="54px" 
@@ -82,11 +82,11 @@ const TalleresYEspacios = () => {
         px={{base:"16px", lg:"80px"}}
       >
         <source
-          srcSet="/images/responsive/01_home/talleres-de-encuentro.png"
+          srcSet="/images/responsive/01_home/talleres-de-encuentro.webp"
           media="(max-width: 480px)"
         />
         <Image 
-          src="/images/01_home/talleres-de-encuentro.png" 
+          src="/images/01_home/talleres-de-encuentro.webp" 
           alt="Talleres de encuentro" 
           w={{base: "403px", md: "370px"}} 
           h={{base: "403px", md: "370px"}} 

@@ -87,7 +87,7 @@ const FollowUS: FC<Props> = ({ igPosts }) => {
       >
         <Text
           color="#3B424A"
-          as="h4"
+          as="h2"
           fontFamily={"DM Serif Display"}
           fontSize="54px"
           fontWeight={400}
@@ -99,6 +99,7 @@ const FollowUS: FC<Props> = ({ igPosts }) => {
         <Flex gap="16px" alignItems={"center"}>
           <Link
             href="https://www.instagram.com/losbemoles/"
+            aria-label="Link a Instagram"
             isExternal
             bg="white"
             borderRadius={"50%"}
@@ -118,6 +119,7 @@ const FollowUS: FC<Props> = ({ igPosts }) => {
           </Link>
           <Link
             href="https://www.facebook.com/losbemoles"
+            aria-label="Link a Facebook"
             isExternal
             bg="white"
             borderRadius={"50%"}
@@ -137,6 +139,7 @@ const FollowUS: FC<Props> = ({ igPosts }) => {
           </Link>
           <Link
             href="https://www.youtube.com/channel/UCZiynJlarViws3OdsLdocIA"
+            aria-label="Link a Youtube"
             isExternal
             bg="white"
             borderRadius={"50%"}

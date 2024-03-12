@@ -15,8 +15,7 @@ export default function Consultorios () {
             gap={{ base: "8px", sm: "24px" }} 
             flexWrap={{base:"wrap-reverse", sm:"nowrap"}}
         >
-            
-            
+            {/* 2 Imagenes */}
             <Flex
                 w={"100%"} 
                 gap={{ base: "8px", lg: "24px" }} 
@@ -62,16 +61,19 @@ export default function Consultorios () {
                 </Flex>
             </Flex>
 
+            {/* Textos y 1 Imagen */}
             <Stack 
                 w={"100%"}
                 spacing={{ base: "8px", sm: "24px" }}
             >
+                {/* Textos */}
                 <Stack
                     justifyContent={"flex-end"}
                     spacing="16px"
                     px="10px"
                     maxW="468px"
                 >
+                    
                     <Text
                         as="h3"
                         color="#3B424A"
@@ -105,6 +107,7 @@ export default function Consultorios () {
                         >
                             <Button
                                 type="button"
+                                aria-label="Consultar"
                                 bg="#DDC692"
                                 color="#3B424A"
                                 size="lg"
@@ -122,6 +125,8 @@ export default function Consultorios () {
                         </Link>
                     </Flex>
                 </Stack>
+
+                {/* 1 Imagen */}
                 <Flex
                     as="picture"
                     w={{ base: "100%", lg: "468px" }}

@@ -24,11 +24,11 @@ const Buscamos = () => {
         >
           <Flex as="picture">
             <source
-              srcSet="/images/01_home/buscamos_01.png"
+              srcSet="/images/01_home/buscamos_01.webp"
               media="(max-width: 480px)"
             />
             <Image 
-              src="/images/01_home/buscamos_01.png" 
+              src="/images/01_home/buscamos_01.webp" 
               alt="Buscamos" 
               w={{base: "215px", md: "370px"}} 
               h={{base: "215px", md: "370px"}} 
@@ -39,11 +39,11 @@ const Buscamos = () => {
           </Flex>
           <Flex as="picture">
             <source
-              srcSet="/images/01_home/buscamos_02.png"
+              srcSet="/images/01_home/buscamos_02.webp"
               media="(max-width: 480px)"
             />
             <Image 
-              src="/images/01_home/buscamos_02.png" 
+              src="/images/01_home/buscamos_02.webp" 
               alt="Buscamos" 
               w={{base: "215px", md: "370px"}} 
               h={{base: "215px", md: "370px"}} 
@@ -68,7 +68,7 @@ const Buscamos = () => {
           //justify={"space-around"}
         >
           <Text 
-            as="h4" 
+            as="h2" 
             fontFamily={"DM Serif Display"} 
             px="2" 
             fontSize="54px" 
@@ -82,6 +82,7 @@ const Buscamos = () => {
           <Link href='/talleres'>
             <Button
               type="button"
+              title="Ver Talleres"
               bg="#DDC692"
               color="#3B424A"
               size="lg"
@@ -95,7 +96,7 @@ const Buscamos = () => {
               borderRadius="4px"
               _hover={{ opacity: 0.7 }}
             >
-              Ver los Talleres
+              Ver Talleres
             </Button>
           </Link>
         </Stack>

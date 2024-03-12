@@ -119,6 +119,7 @@ export default function EstudioSeccion03 () {
               mt={"24px"}
               mb={"10px"}
               type="button"
+              title="Consultar"
               bg="#DDC692"
               color="#3B424A"
               size="lg"

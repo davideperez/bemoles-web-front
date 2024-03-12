@@ -141,6 +141,7 @@ const Navbar = () => {
       </Flex>
       <Button
         display={{ base: "flex", lg: "none" }}
+        aria-label="Menu de navegación"
         _hover={{ bg: "transparent" }}
         bg="transparent"
         position="absolute"

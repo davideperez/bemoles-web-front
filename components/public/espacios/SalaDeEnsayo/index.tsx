@@ -79,6 +79,7 @@ export default function SalaDeEnsayo () {
                 <Link href="/estudio">
                     <Button
                         type="button"
+                        aria-label="Consultar"
                         bg="#DDC692"
                         color="#3B424A"
                         size="lg"
