@@ -162,7 +162,16 @@ const FollowUS: FC<Props> = ({ igPosts }) => {
         gap="24px"
       >
         {igPosts?.slice(0, isLgOrBigger ? 9 : 3).map((post) => (
-          <GridItem bg="transparent" position="relative" key={post.id} sx={{'> video': {w: '100%', h: '100%',  objectFit: "cover"}, '&:hover > .post-hover': { display: "flex"}}} display="flex" justifyContent="center" alignItems="center" overflow="hidden">
+          <GridItem 
+            bg="transparent"
+            position="relative"
+            key={post.id} 
+            sx={{'> video': {w: '100%', h: '100%',  objectFit: "cover"}, '&:hover > .post-hover': { display: "flex"}}}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            overflow="hidden"
+          >
             {post.media_type !== "VIDEO" ? (
               <Image
                 src={post.media_url}

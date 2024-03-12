@@ -46,11 +46,11 @@ export default function EstudioSeccion01 () {
               //bg={"green"}
               >
                 <source
-                  srcSet="/images/responsive/sala1.png"
+                  srcSet="/images/responsive/04_estudio/sala1.png"
                   media="(max-width: 480px)"
                 />
                 <Image
-                  src={"/images/sala1.png"}
+                  src={"/images/04_estudio/sala1.png"}
                   alt={"Sum-arte"}
                   objectFit={"cover"}
                 />
@@ -68,11 +68,11 @@ export default function EstudioSeccion01 () {
                 
               >
                 <source
-                  srcSet="/images/responsive/sala2.png"
+                  srcSet="/images/responsive/04_estudio/sala2.png"
                   media="(max-width: 480px)"
                 />
                 <Image
-                  src={"/images/sala2.png"}
+                  src={"/images/04_estudio/sala2.png"}
                   alt={"Sum-arte"}
                   objectFit={"cover"}
                 />
@@ -96,11 +96,11 @@ export default function EstudioSeccion01 () {
                 alignSelf={"start"}
               >
                 <source
-                  srcSet="/images/responsive/sala3.png"
+                  srcSet="/images/responsive/04_estudio/sala3.png"
                   media="(max-width: 480px)"
                 />
                 <Image
-                  src={"/images/sala3.png"}
+                  src={"/images/04_estudio/sala3.png"}
                   alt={"Sum-arte"}
                   objectFit={"cover"}
                 />
@@ -116,11 +116,11 @@ export default function EstudioSeccion01 () {
                 display={{base:"flex", lg:"flex", xl:"flex"}}
               >
                 <source
-                  srcSet="/images/responsive/sala4.png"
+                  srcSet="/images/responsive/04_estudio/sala4.png"
                   media="(max-width: 480px)"
                 />
                 <Image
-                  src={"/images/sala4.png"}
+                  src={"/images//04_estudio/sala4.png"}
                   alt={"Sum-arte"}
                   objectFit={"cover"}
                 />

@@ -47,7 +47,7 @@ const HomePage: NextPage<Props> = ({ igPosts }) => {
         <SeccionesPrincipales />
         <TalleresYEspacios />
         <Buscamos />
-        {/* <FollowUS igPosts={igPosts} /> */}
+        <FollowUS igPosts={igPosts} />
         <VisitUs />
       </Stack>
     </>
