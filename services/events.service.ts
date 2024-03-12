@@ -11,14 +11,7 @@ export const eventService = {
     published?: string | undefined
   ) =>
     axios.get(
-      `/api/eventos?isWorkshop=
-          ${isWorkshop}&
-          ${search ? `search=${search}` : ""}
-          ${page ? `&page=${page}` : ""}
-          ${items ? `&items=${items}` : ""}
-          ${active ? `&active=${active}` : ""}
-          ${upcoming ? `&upcoming=${upcoming}` : ""}
-          ${published ? `&published=${published}` : ""}`
+      `/api/eventos?isWorkshop=${isWorkshop}&${search ? `search=${search}` : ""}${page ? `&page=${page}` : ""}${items ? `&items=${items}` : ""}${active ? `&active=${active}` : ""}${upcoming ? `&upcoming=${upcoming}` : ""}${published ? `&published=${published}` : ""}`
     ),
   getEvent: (id: string) => axios.get(`/api/eventos/${id}`),
   createEvent: (event: FormData) => axios.post(`/api/eventos`, event),
