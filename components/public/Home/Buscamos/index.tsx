@@ -24,26 +24,27 @@ const Buscamos = () => {
         >
           <Flex as="picture">
             <source
-              srcSet="/images/01_home/buscamos_01.webp"
+              srcSet="/images/responsive/01_home/8-buscamos-jugar-2.webp"
               media="(max-width: 480px)"
             />
             <Image 
-              src="/images/01_home/buscamos_01.webp" 
+              src="/images/01_home/8-buscamos-jugar-2.webp" 
               alt="Buscamos" 
               w={{base: "215px", md: "370px"}} 
               h={{base: "215px", md: "370px"}} 
               mt={{base: "88px", md:"152px"}} 
               ml={{base: "147px", md:"254px"}} 
               objectFit={"cover"}
+              transform="scaleX(-1)"
             />
           </Flex>
           <Flex as="picture">
             <source
-              srcSet="/images/01_home/buscamos_02.webp"
+              srcSet="/images/responsive/01_home/7-buscamos-jugar-1.webp"
               media="(max-width: 480px)"
             />
             <Image 
-              src="/images/01_home/buscamos_02.webp" 
+              src="/images/01_home/7-buscamos-jugar-1.webp" 
               alt="Buscamos" 
               w={{base: "215px", md: "370px"}} 
               h={{base: "215px", md: "370px"}} 
@@ -105,4 +106,4 @@ const Buscamos = () => {
   )
 }
 
-export default Buscamos
+export default Buscamos;

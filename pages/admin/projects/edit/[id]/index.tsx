@@ -54,11 +54,9 @@ const ProjectDetail = () => {
   //se asigna a values el tipo Project de manera parcial.
   const handleSubmit = async (values: Partial<Project>) => {
     try {
-      console.log("Esto es info antes de aplicarle los saltos: ", values.info)
       let project;
       const infoWithLineBreaks = lineBreaksToBrs(values.info)
       values.info = infoWithLineBreaks;
-      console.log("Esto es info DESPUES de aplicarle los saltos: ", values.info)
 
       /* se adjuntan los datos a FormData()  */
       const form = new FormData();

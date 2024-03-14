@@ -22,20 +22,40 @@ const ClasesYCursos = () => {
             justify={{base: "center", md:"start"}}
         >
 
+            {/* Imagen 01 */}
+            <Flex 
+                as="picture"
+                w={{base: "100%", lg: "100%"}}
+                h={{base: "200px", sm: "auto"}}
+                order={{base: "2", xl:"0"}}
+                display={{base:"flex", sm:"flex", md:"flex", lg:"none", xl:"flex"}}
+            >
+                <source
+                    srcSet="/images/responsive/02_posibilidades/clases-y-cursos-1.png"
+                    media="(max-width: 600px)"
+                />
+                <Image
+                    src="/images/02_posibilidades/clases-y-cursos-1.png"
+                    alt="Clases y cursos"
+                    objectFit="cover"
+                    //objectPosition={{base: "0 -200px", sm:"auto"}}
+                    border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
+                    w={"100%"}
+                />{" "}
+            </Flex>
+
             {/* Texto */}
             <Stack
                 spacing="24px"
                 py="10px"
                 px="10px"
             >
-                
                 {/* Titulo */}
                 <Flex 
                     justify={{base:"start", sm:"start"}} 
-
                 >
                     <Text
-                        maxW={{base:"250px", md:"390px"}}
+                        maxW={{base:"250px", md:"363px"}}
                         as="h3"
                         color="#3B424A"
                         fontFamily={"DM Serif Display"}
@@ -128,76 +148,52 @@ const ClasesYCursos = () => {
                 </Flex>              
             </Stack>
 
-            {/* Imagenes */}
-            <Flex 
+            {/* 2 Imagenes */}
+{/*             <Flex 
                 flexWrap={{base:"wrap", sm:"nowrap"}}
                 alignItems={"stretch"}
                 w={"100%"}
-            >
-            
-                {/* Imagen 01 */}
-                <Flex 
-                    as="picture"
-                    w={{base: "100%", lg: "35%"}}
-                    h={{base: "200px", sm: "auto"}}
-                    order={{base: "2", lg:"1"}}
-                >
-                    <source
-                        srcSet="/images/responsive/02_posibilidades/clases-y-cursos-1.png"
-                        media="(max-width: 600px)"
-                    />
-                    <Image
-                        src="/images/02_posibilidades/clases-y-cursos-1.png"
-                        alt="Clases y cursos"
-                        objectFit="cover"
-                        //objectPosition={{base: "0 -200px", sm:"auto"}}
-                        border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
-                        w={"100%"}
-                    />{" "}
-                </Flex>
+            > */}
 
-                {/* Imagen 02 */}
-                <Hide below="768px">
-                    <Flex 
-                        as="picture"
-                        w={{base: "25%", md: "65%"}}
-                        order={{base: "1", lg:"2"}}
-                    >
-                        <source
-                        srcSet="/images/responsive/02_posibilidades/clases-y-cursos-2.png"
-                        media="(max-width: 480px)"
-                        />
-                        <Image
-                        src="/images/02_posibilidades/clases-y-cursos-2.png"
-                        alt="Clases y cursos"
-                        objectFit="cover"
-                        border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
-                        w={"100%"}
-                        />{" "}
-                    </Flex>
-                </Hide>
-                {/* Imagen 03 */}
-                <Hide below="1280px">
-                    <Flex 
-                    as="picture" 
-                    w={{base: "", lg: "292px"}}
-                    order={"3 sm:3"}
-                    >
-                    <source
-                        srcSet="/images/responsive/02_posibilidades/clases-y-cursos-3.png"
-                        media="(min-width: 480px)"
-                    />
-                    <Image
-                        src="/images/02_posibilidades/clases-y-cursos-3.png"
-                        alt="Clases y cursos"
-                        objectFit="cover"
-                        border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
-                    />
-                    </Flex>
-                </Hide>
+            {/* Imagen 02 */}
+            <Flex 
+                as="picture"
+                w={{base: "25%", md: "100%"}}
+                order={{base: "1", lg:"2"}}
+                display={{base:"none", md:"none",lg:"flex"}}
+            >
+                <source
+                    srcSet="/images/responsive/02_posibilidades/clases-y-cursos-3.png"
+                    media="(max-width: 480px)"
+                />
+                <Image
+                    src="/images/02_posibilidades/clases-y-cursos-3.png"
+                    alt="Clases y cursos"
+                    objectFit="cover"
+                    border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
+                    w={"100%"}
+                />
             </Flex>
-            
-    </Flex>
+                {/* Imagen 03 */}
+            <Flex 
+                as="picture" 
+                w={{base: "100%", xl: "40%"}}
+                order={"3 sm:3"}
+                display={{base:"none", md:"none", lg:"flex"}}
+            >
+            <source
+                srcSet="/images/responsive/02_posibilidades/clases-y-cursos-2.png"
+                media="(min-width: 480px)"
+            />
+            <Image
+                src="/images/02_posibilidades/clases-y-cursos-2.png"
+                alt="Clases y cursos"
+                objectFit="cover"
+                border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
+            />
+            </Flex>
+{/*             </Flex>
+ */}    </Flex>
 
     )
 }

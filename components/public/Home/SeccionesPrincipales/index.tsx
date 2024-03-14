@@ -13,23 +13,27 @@ const SeccionesPrincipales = () => {
       justify={"center"}
       gap={{ base: "16px", sm: "72px" }}
       //justifyContent="center"
-
     >
       <Link href="/posibilidades" aria-label="Conocer las Posibilidades">
         <Flex
-          minW={{ base: "100%", sm: "403px" }}
-          minH={{ base: "100%", sm: "403px" }}
+          w={{ base: "100%", sm: "403px" }}
+          h={{ base: "100%", sm: "403px" }}
           position="relative"
           justifyContent={"center"}
           alignItems="center"
           _hover={{opacity: 0.7}}
+          //maxW={"403px"}
         >
-          <Flex as="picture">
+          <Flex as="picture" w={"100%"} h={"100%"} >
             <source
-              srcSet="/images/responsive/01_home/consultorios.webp"
+              srcSet="/images/responsive/01_home/2-posibilidades.webp"
               media="(max-width: 480px)"
             />
-            <Img src="/images/01_home/consultorios.webp" alt="Sillas y la mesa de un aula" />
+            <Img 
+              src="/images/01_home/2-posibilidades.webp" 
+              alt="Sillas y la mesa de un aula"
+              objectFit={"cover"}
+            />
           </Flex>
           <Flex
             position="absolute"
@@ -48,19 +52,29 @@ const SeccionesPrincipales = () => {
       </Link>
       <Link href="/espacios" aria-label="Link a los Espacios.">
         <Flex
-          minW={{ base: "100%", sm: "403px" }}
-          minH={{ base: "100%", sm: "403px" }}
+          maxW={{ base: "100%px", sm: "403px" }}
+          maxH={{ base: "100%", sm: "403px" }}
           position="relative"
           justifyContent={"center"}
           alignItems="center"
           _hover={{opacity: 0.7}}
+          //maxW={"403px"}
         >
-          <Flex as="picture">
+          <Flex 
+            as="picture" 
+            w={"100%"} 
+            h={"100%"}
+          >
                   <source
-                    srcSet="/images/responsive/01_home/espacios.webp"
+                    srcSet="/images/responsive/01_home/3-espacios.webp"
                     media="(max-width: 480px)"
                   />
-                  <Img src="/images/01_home/espacios.webp" alt="Un salon teatro para eventos con instrumentos y mesas" />
+                  <Img 
+                    src="/images/01_home/3-espacios.webp" 
+                    alt="Un salon teatro para eventos con instrumentos y mesas"
+                    objectFit={"cover"}
+                    w={"100%"}
+                  />
                 </Flex>
           <Flex
             position="absolute"
@@ -79,19 +93,28 @@ const SeccionesPrincipales = () => {
       </Link>
       <Link href="/estudio" aria-label="Conocer la seccion estudio.">
         <Flex
-          minW={{ base: "100%", sm: "403px" }}
-          minH={{ base: "100%", sm: "403px" }}
+          w={{ base: "100%", sm: "403px" }}
+          h={{ base: "100%", sm: "403px" }}
+          maxW={"403px"}
           position="relative"
           justifyContent={"center"}
           alignItems="center"
           _hover={{opacity: 0.7}}
         >
-          <Flex as="picture">
+          <Flex 
+            as="picture" 
+            w={"100%"}
+            h={"100%"}
+          >
             <source
-              srcSet="/images/responsive/01_home/estudio.webp"
+              srcSet="/images/responsive/01_home/4-estudio.webp"
               media="(max-width: 480px)"
             />
-            <Img src="/images/01_home/estudio.webp" alt="Un estudio de grabación" />
+            <Img 
+              src="/images/01_home/4-estudio.webp" 
+              alt="Un estudio de grabación" 
+              objectFit={"cover"}
+            />
           </Flex>
           <Flex
             position="absolute"
@@ -110,19 +133,24 @@ const SeccionesPrincipales = () => {
       </Link>
       <Link href="/proyectos" aria-label="">
         <Flex
-          minW={{ base: "100%", sm: "403px" }}
-          minH={{ base: "100%", sm: "403px" }}
+          w={{ base: "100%", sm: "403px" }}
+          h={{ base: "100%", sm: "403px" }}
           position="relative"
           justifyContent={"center"}
           alignItems="center"
           _hover={{opacity: 0.7}}
+          maxW={"403px"}
         >
-          <Flex as="picture">
+          <Flex as="picture" w={"100%"} h={"100%"}>
             <source
-              srcSet="/images/responsive/01_home/proyectos-home-button-01.webp"
+              srcSet="/images/responsive/01_home/1-proyectos.webp"
               media="(max-width: 480px)"
             />
-            <Img src="/images/01_home/proyectos-home-button-01.webp" alt="La puerta de entrada del centro cultural" />
+            <Img 
+              src="/images/01_home/1-proyectos.webp" 
+              alt="La puerta de entrada del centro cultural"
+              objectFit={"cover"}
+            />
           </Flex>
           <Flex
             position="absolute"
@@ -141,20 +169,26 @@ const SeccionesPrincipales = () => {
       </Link>
       <Link href="/talleres">
         <Flex
-          minW={{ base: "100%", sm: "403px" }}
-          minH={{ base: "100%", sm: "403px" }}
+          w={{ base: "100%", sm: "403px" }}
+          h={{ base: "100%", sm: "403px" }}
           position="relative"
           justifyContent={"center"}
           alignItems="center"
           _hover={{opacity: 0.7}}
+          maxW={"403px"}
         >
-          <Flex as="picture">
-                  <source
-                    srcSet="/images/responsive/01_home/talleres-home.webp"
-                    media="(max-width: 480px)"
-                  />
-                  <Img src="/images/01_home/talleres-home.webp" alt="Pizarrones blancos y fibrones" />
-                </Flex>
+          <Flex as="picture" w={"100%"} h={"100%"}>
+            <source
+              srcSet="/images/responsive/01_home/5-talleres.webp"
+              media="(max-width: 480px)"
+            />
+            <Img 
+              src="/images/01_home/5-talleres.webp" 
+              alt="Un collage de fotos de actividades de taller" 
+              objectFit={"cover"}
+              //w={"100%"}
+            />
+          </Flex>
           <Flex
             position="absolute"
             textTransform={"uppercase"}
@@ -172,19 +206,28 @@ const SeccionesPrincipales = () => {
       </Link>
       <Link href="/agenda">
         <Flex
-          minW={{ base: "100%", sm: "403px" }}
-          minH={{ base: "100%", sm: "403px" }}
+          w={{ base: "100%", sm: "403px" }}
+          h={{ base: "100%", sm: "403px" }}
           position="relative"
           justifyContent={"center"}
           alignItems="center"
           _hover={{opacity: 0.7}}
+          //maxW={"403px"}
         >
-          <Flex as="picture">
+          <Flex 
+            as="picture" 
+            w={"100%"} 
+            h={"100%"}
+          >
             <source
-              srcSet="/images/responsive/01_home/agenda-home.webp"
+              srcSet="/images/responsive/01_home/6-agenda.webp"
               media="(max-width: 480px)"
             />
-            <Img src="/images/01_home/agenda-home.webp" alt="Luces reflectoras de un teatro" />
+            <Img 
+              src="/images/01_home/6-agenda.webp" 
+              alt="Luces reflectoras de un teatro" 
+              objectFit={"cover"}
+            />
           </Flex>
           <Flex
             position="absolute"
