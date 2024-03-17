@@ -19,9 +19,16 @@ const VisitUs = () => {
       pt="2rem"
       flexWrap={{ base: "wrap", xl: "nowrap" }}
     >
-      <Flex flex="1.2" justifyContent={{ base: "center", xl: "flex-end" }} sx={{
-        '> div > iframe': { w: { base: "250px", sm: "450px", md: "740px" }, h:{base: "265px", md: "410px"} }
-      }}>
+      <Flex 
+        flex="1.2" 
+        justifyContent={{ base: "center", xl: "flex-end" }} 
+        sx={
+          {'> div > iframe': 
+            { w: { base: "250px", sm: "450px", md: "740px" }, 
+              h:{base: "265px", md: "410px"
+            }}
+          }}
+      >
         <Box w={{ base: "250px", sm: "450px", md: "740px" }} h={{base: "265px", md: "410px"}}>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13098.885961075137!2d-58.3820744!3d-34.8380944!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcd4c86e03d307%3A0xec9c4bac14136be8!2sLos%20Bemoles!5e0!3m2!1ses-419!2sar!4v1689654829328!5m2!1ses-419!2sar"

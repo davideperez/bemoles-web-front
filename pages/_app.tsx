@@ -21,11 +21,11 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </Layout>
           ) : (
-            <main className={manrope.className}>
+            <div className={manrope.className}>
               <PublicLayout>
                 <Component {...pageProps} />
               </PublicLayout>
-            </main>
+            </div>
           )}
         </HeadLayout>
       </UserProvider>

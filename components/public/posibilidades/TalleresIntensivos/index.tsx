@@ -45,7 +45,7 @@ const TalleresIntensivos = () => {
                 <Flex 
                     as="picture"
                     alignSelf={"stretch"}
-                    display={{base:"none", md:"flex"}}
+                    display={{base:"none", lg:"flex"}}
                 >
                     <source
                         srcSet="/images/responsive/02_posibilidades/talleres-intensivos-2.webp"
@@ -57,6 +57,7 @@ const TalleresIntensivos = () => {
                         objectFit={"cover"}
                         border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                         w={"100%"}
+                        objectPosition={{base:"-400px 0px", lg:"-500px 0px", xl:"-400px 0px"}}
                     />
                 </Flex>
             </Flex>
@@ -75,7 +76,7 @@ const TalleresIntensivos = () => {
                     fontWeight={400}
                     lineHeight={{ base: "42px", lg: "72px" }}
                     letterSpacing={{ base: "0.7px", lg: "0.7px" }}
-                    maxW={{base:"200px", lg:"481px"}}
+                    maxW={{base:"210px", lg:"481px"}}
                     backgroundColor="rgb(355,355,355, 1)"
                     border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                 >

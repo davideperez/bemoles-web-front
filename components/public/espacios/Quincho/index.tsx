@@ -10,6 +10,7 @@ import {
 const Quincho = () => {
     return (
         <Flex
+            as={"section"}
             w={"100%"}
             maxW={"1312px"} 
             gap={{ base: "8px", sm: "24px" }}

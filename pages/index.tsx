@@ -1,4 +1,4 @@
-import { Stack } from "@chakra-ui/react";
+import { Stack, Image, Flex } from "@chakra-ui/react";
 import type { NextPage } from "next";
 
 import { GetStaticProps } from "next";
@@ -48,6 +48,19 @@ const HomePage: NextPage<Props> = ({ igPosts }) => {
         <TalleresYEspacios />
         <Buscamos />
         <FollowUS igPosts={igPosts} />
+{/*         <Flex
+          maxW={"1920px"}
+          zIndex={-2}
+          pos={"relative"}
+          top={"-1000px "}
+          transform={"scale(1.5)"}
+          //overflow={"hidden"}
+        >
+          <Image
+            src="/images/followUs.png"
+            alt="Los Bemoles"
+          />
+        </Flex> */}
         <VisitUs />
       </Stack>
     </>

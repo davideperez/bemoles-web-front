@@ -14,6 +14,7 @@ import {
 const ClasesYCursos = () => {
     return (
         <Flex
+            as={"section"}
             w={"100%"}
             maxW={"1308px"}
             gap={{ base: "8px", sm: "24px" }}
@@ -21,7 +22,6 @@ const ClasesYCursos = () => {
             flexWrap={{base:"wrap", sm:"nowrap"}}
             justify={{base: "center", md:"start"}}
         >
-
             {/* Imagen 01 */}
             <Flex 
                 as="picture"
@@ -31,16 +31,18 @@ const ClasesYCursos = () => {
                 display={{base:"flex", sm:"flex", md:"flex", lg:"none", xl:"flex"}}
             >
                 <source
-                    srcSet="/images/responsive/02_posibilidades/clases-y-cursos-1.png"
+                    srcSet="/images/responsive/02_posibilidades/clases-y-cursos-1.webp"
                     media="(max-width: 600px)"
                 />
                 <Image
-                    src="/images/02_posibilidades/clases-y-cursos-1.png"
+                    w={"100%"}
+                    src="/images/02_posibilidades/clases-y-cursos-1.webp"
                     alt="Clases y cursos"
                     objectFit="cover"
-                    //objectPosition={{base: "0 -200px", sm:"auto"}}
                     border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
-                    w={"100%"}
+                    objectPosition={{base:"0px 0px", sm:"-540px 0px", md:"-460px 0px", lg:"-460px 0px"}}
+                    //transform={"scaleX(-1)"}
+                    //objectPosition={{base: "0 -200px", sm:"auto"}}
                 />{" "}
             </Flex>
 
@@ -163,15 +165,16 @@ const ClasesYCursos = () => {
                 display={{base:"none", md:"none",lg:"flex"}}
             >
                 <source
-                    srcSet="/images/responsive/02_posibilidades/clases-y-cursos-3.png"
+                    srcSet="/images/responsive/02_posibilidades/clases-y-cursos-3.webp"
                     media="(max-width: 480px)"
                 />
                 <Image
-                    src="/images/02_posibilidades/clases-y-cursos-3.png"
+                    src="/images/02_posibilidades/clases-y-cursos-3.webp"
                     alt="Clases y cursos"
                     objectFit="cover"
                     border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                     w={"100%"}
+                    transform={"scaleX(-1)"}
                 />
             </Flex>
                 {/* Imagen 03 */}
@@ -182,11 +185,11 @@ const ClasesYCursos = () => {
                 display={{base:"none", md:"none", lg:"flex"}}
             >
             <source
-                srcSet="/images/responsive/02_posibilidades/clases-y-cursos-2.png"
+                srcSet="/images/responsive/02_posibilidades/clases-y-cursos-2.webp"
                 media="(min-width: 480px)"
             />
             <Image
-                src="/images/02_posibilidades/clases-y-cursos-2.png"
+                src="/images/02_posibilidades/clases-y-cursos-2.webp"
                 alt="Clases y cursos"
                 objectFit="cover"
                 border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}

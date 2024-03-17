@@ -10,29 +10,31 @@ import {
 export default function SalaDeEnsayo () {
     return (
         <Flex
+            as={"section"}
             w={"100%"}
             maxW={"1312px"} 
             gap={{ base: "8px", lg: "24px" }}
-            flexWrap={{base:"wrap", sm:"nowrap"}}
+            flexWrap={{base:"wrap", md:"nowrap"}}
             //alignItems={"flex-start"}
         >
             <Flex 
-                display={{base:"none", sm:"flex"} }
+                display={{base:"none", md:"flex"} }
                 as="picture" 
-                order={{ base: "1", sm: "1" }}
-                w={{ base: "100%", sm: "500px" }}
+                order={{ base: "1", md: "1" }}
+                w={{ base: "100%", md: "500px" }}
                 alignSelf={"stretch"}
             >
                 <source
-                    srcSet="/images/responsive/03_espacios/sala-de-ensayo-1.png"
+                    srcSet="/images/responsive/03_espacios/sala-de-ensayo-1.webp"
                     media="(max-width: 480px)"
                 />
                 <Image
-                    src="/images/03_espacios/sala-de-ensayo-1.png"
+                    src="/images/03_espacios/sala-de-ensayo-1.webp"
                     alt="Clases y cursos"
                     objectFit={"cover"}
                     border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                     //transform="scaleX(-1)"
+                    objectPosition={"-400px 0px"}  
                 />
             </Flex>
 
@@ -40,8 +42,8 @@ export default function SalaDeEnsayo () {
             <Flex
                 py="10px"
                 px="10px"
-                order={{ base: "1", sm: "2" }}
-                maxW="401px"
+                order={{ base: "1", md: "2" }}
+                maxW={{base:"100%" ,md:"401px"}}
                 flexDir={{base:"column"}}
             >
                 <Text
@@ -111,15 +113,16 @@ export default function SalaDeEnsayo () {
 
                 >
                     <source
-                        srcSet="/images/responsive/03_espacios/sala-de-ensayo-2.png"
+                        srcSet="/images/responsive/03_espacios/sala-de-ensayo-2.webp"
                         media="(max-width: 480px)"
                     />
                     <Image
-                        src="/images/03_espacios/sala-de-ensayo-2.png"
+                        src="/images/03_espacios/sala-de-ensayo-2.webp"
                         alt="Clases y cursos"
                         w={"100%"}
                         objectFit={"cover"}
                         border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
+                        transform={{base:"scaleX(1)", sm:"scaleX(-1)"}}
                     />
                 </Flex>
                 <Flex 
@@ -129,15 +132,14 @@ export default function SalaDeEnsayo () {
                     display={{base:"flex", sm:"none"} }
                 >
                     <source
-                        srcSet="/images/responsive/03_espacios/sala-de-ensayo-1.png"
+                        srcSet="/images/responsive/03_espacios/sala-de-ensayo-1.webp"
                         media="(max-width: 480px)"
                     />
                     <Image
-                        src="/images/03_espacios/sala-de-ensayo-1-.png"
+                        src="/images/03_espacios/sala-de-ensayo-1-.webp"
                         alt="Clases y cursos"
                         objectFit={"cover"}
                         border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
-                        transform="scaleX(-1)"
                     />
                 </Flex>
             </Flex>

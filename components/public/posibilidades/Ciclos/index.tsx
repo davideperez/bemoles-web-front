@@ -13,6 +13,7 @@ const Ciclos = () => {
 
     return (
         <Flex
+            as={"section"}
             w={"100%"}
             maxW={"1308px"}
             gap={{ base: "8px", sm: "24px" }} 
@@ -91,7 +92,7 @@ const Ciclos = () => {
                     spacing="24px"
                     px="10px"
                     maxH={{base:"auto", lg:"550px"}}
-                    minW={{base:"", sm:"460px", md:"460px", lg:"460px", xl:"550px"}}
+                    minW={{base:"", sm:"460px", md:"460px", lg:"460px", xl:"480px"}}
                 >
                 <Text
                     as="h3"
@@ -185,7 +186,7 @@ const Ciclos = () => {
                         src="/images/02_posibilidades/ciclos-3.webp"
                         alt="Talleres intensivos"
                         objectFit={"cover"}
-                        objectPosition={{base: "0px -60px", sm: "0px -100px", md: "0px -210px", lg: "0px 0px"}}
+                        objectPosition={{base: "0px -30px", sm: "0px -40px", md: "0px -80px", lg: "0px 0px"}}
                         border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                     />
                 </Flex>

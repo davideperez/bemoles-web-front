@@ -69,14 +69,14 @@ const FollowUS: FC<Props> = ({ igPosts }) => {
       alignItems={"center"}
       spacing="2rem"
       py="4rem"
-      bg={{
+/*       bg={{
         base: "url('/images/followUsMobile.png')",
         lg: "url('/images/followUs.png')",
       }}
       objectFit={"cover"}
       objectPosition="center"
       backgroundPosition={{ base: "center", lg: "center" }}
-      backgroundRepeat={"no-repeat"}
+      backgroundRepeat={"no-repeat"} */
     >
       <Flex
         flexDirection={{ base: "column", lg: "row" }}

@@ -11,16 +11,18 @@ const Buscamos = () => {
       alignItems={"center"} 
       justify={"center"}
       flexWrap={{base:"wrap", lg:"nowrap"}}
-      gap={{base:"1rem", md:"4rem", lg:"4rem", xl:"8rem"}}
+      gap={{base:"1rem", md:"2rem", lg:"2rem", xl:"8rem"}}
     >
       {/* 2 Imagenes */}
       <Flex  
         justifyContent={"center"} 
-        minW="625px"
+        //minW="625px"
+        w={{base:"100%", lg:"50%"}}
       >
         <Stack 
           position="relative" 
           //w="fit-content"
+          //w={{base:"100%", lg:"50%"}}
         >
           <Flex as="picture">
             <source
@@ -30,8 +32,8 @@ const Buscamos = () => {
             <Image 
               src="/images/01_home/8-buscamos-jugar-2.webp" 
               alt="Buscamos" 
-              w={{base: "215px", md: "370px"}} 
-              h={{base: "215px", md: "370px"}} 
+              w={{base: "200px", md: "370px"}} 
+              h={{base: "200px", md: "370px"}} 
               mt={{base: "88px", md:"152px"}} 
               ml={{base: "147px", md:"254px"}} 
               objectFit={"cover"}
@@ -46,8 +48,8 @@ const Buscamos = () => {
             <Image 
               src="/images/01_home/7-buscamos-jugar-1.webp" 
               alt="Buscamos" 
-              w={{base: "215px", md: "370px"}} 
-              h={{base: "215px", md: "370px"}} 
+              w={{base: "200px", md: "370px"}} 
+              h={{base: "200px", md: "370px"}} 
               position="absolute" 
               objectFit={"cover"}
               top={0} 
@@ -59,7 +61,8 @@ const Buscamos = () => {
 
       {/* Textos */}
       <Flex 
-        maxW="403px"
+        //maxW="403px"
+        w={{base:"100%", lg:"50%"}}
       >
         <Stack 
           spacing="2rem" 
@@ -79,7 +82,17 @@ const Buscamos = () => {
           >
             Buscamos jugar más y hacerlo juntos
           </Text>
-          <Text as="p" fontSize="16px" fontWeight={400} lineHeight="34px" letterSpacing={"0.8px"}>Queremos encontrarnos en lo que somos, pero fundamentalmente en lo que hacemos. Nos encontraremos en lo que ofrecemos y en lo que requerimos de otros, dispuestos a jugar el mismo juego.</Text>
+          <Text 
+            as="p" 
+            fontSize="16px" 
+            fontWeight={400} 
+            lineHeight="34px" 
+            letterSpacing={"0.8px"}
+          >
+            Queremos encontrarnos en lo que somos, pero fundamentalmente en
+            lo que hacemos. Nos encontraremos en lo que ofrecemos y en lo que 
+            requerimos de otros, dispuestos a jugar el mismo juego.
+          </Text>
           <Link href='/talleres'>
             <Button
               type="button"

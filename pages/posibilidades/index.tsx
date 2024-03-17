@@ -53,7 +53,7 @@ const PosibilidadesPage = () => {
             md: "400px -150px",
             lg: "-70px 550px",
             xl: "-70px 0px",
-            "2xl": "0px 50px",
+            "2xl": "85px 80px",
           }}
           backgroundRepeat={"no-repeat"}
           alignItems={{base:"flex-start", lg: "center"}}

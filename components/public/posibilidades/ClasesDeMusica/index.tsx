@@ -14,7 +14,8 @@ import {
 const ClasesDeMusica = () => {
     return (
       <Flex 
-      maxW={"1312px"}
+        as={"section"}
+        maxW={"1312px"}
         w={"100%"}
         gap={{ base: "8px", sm: "24px" }}
         
@@ -43,16 +44,16 @@ const ClasesDeMusica = () => {
               w={"100%"}
             >
               <source
-                srcSet="/images/responsive/02_posibilidades/clases-de-musica-1.png"
+                srcSet="/images/responsive/02_posibilidades/clases-de-musica-1.webp"
                 media="(min-width: 480px)"
-
               />
               <Image
-                src="/images/02_posibilidades/clases-de-musica-5.png"
+                src="/images/02_posibilidades/clases-de-musica-1.webp"
                 alt="Clases y cursos"
                 order={{ base: "2", sm: "1" }}
                 border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                 objectFit={"cover"}
+                objectPosition={{base:"0px 0px "}}
               />
             </Flex>
           </Hide>
@@ -65,15 +66,16 @@ const ClasesDeMusica = () => {
               w={"100%"}
             >
               <source
-                srcSet="/images/responsive/02_posibilidades/clases-de-musica-2.png"
+                srcSet="/images/responsive/02_posibilidades/clases-de-musica-2.webp"
                 //media="(max-width: 480px)"
               />
               <Image
-                src="/images/02_posibilidades/clases-de-musica-2.png"
+                src="/images/02_posibilidades/clases-de-musica-2.webp"
                 alt="Clases y cursos"
                 border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
                 order={{ base: "1", sm: "2" }}
                 objectFit={"cover"}
+                
               />{" "}
             </Flex>
           </Hide>
@@ -84,11 +86,11 @@ const ClasesDeMusica = () => {
               alignSelf={"stretch"}
             >
               <source
-                srcSet="/images/responsive/02_posibilidades/clases-de-musica-3.png"
+                srcSet="/images/responsive/02_posibilidades/clases-de-musica-3.webp"
                 media="(max-width: 480px)"
               />
               <Image
-                src="/images/02_posibilidades/clases-de-musica-3.png"
+                src="/images/02_posibilidades/clases-de-musica-3.webp"
                 alt="Clases y cursos"
                 order={{ base: "4", sm: "3" }}
                 border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
@@ -103,11 +105,11 @@ const ClasesDeMusica = () => {
               alignSelf={"stretch"}
             >
               <source
-                srcSet="/images/responsive/02_posibilidades/clases-de-musica-4.png"
+                srcSet="/images/responsive/02_posibilidades/clases-de-musica-4.webp"
                 media="(max-width: 480px)"
               />
               <Image
-                src="/images/02_posibilidades/clases-de-musica-4.png"
+                src="/images/02_posibilidades/clases-de-musica-4.webp"
                 alt="Clases y cursos"
                 order={{ base: "3", sm: "4" }}
                 border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
@@ -232,15 +234,16 @@ const ClasesDeMusica = () => {
             alignSelf={"stretch"}
           >
             <source
-              srcSet="/images/responsive/02_posibilidades/clases-de-musica-5.png"
+              srcSet="/images/responsive/02_posibilidades/clases-de-musica-5.webp"
               media="(min-width: 480px)"
             />
             <Image
-              src="/images/02_posibilidades/clases-de-musica-5.png"
+              src="/images/02_posibilidades/clases-de-musica-5.webp"
               alt="Clases y cursos"
               objectFit="cover"
               border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
               w={"100%"}
+              maxH={"296px"}
             />
           </Flex>
 

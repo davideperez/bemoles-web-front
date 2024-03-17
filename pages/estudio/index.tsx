@@ -48,7 +48,7 @@ const EstudioPage = () => {
         </Heading>
 
         <Stack
-          spacing={{ base: "48px", lg: "100px" }}
+          spacing={{ base: "64px", lg: "100px" }}
           alignItems={{base:"flex-start", lg: "center"}}
         >
           <EstudioSeccion01 />

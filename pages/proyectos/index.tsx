@@ -93,54 +93,40 @@ const ProyectosPage = () => {
           Proyectos
         </Heading>
         <Flex
+          as={"main"}
           pt={{ base: "0px", lg: "2rem" }}
-          alignItems={"flex-start"}
           gap="24px"
-          flexWrap={"wrap"}
+          justify={{base:"center", xl:"flex-start"}}
+          flexWrap={{base:"wrap", xl:"nowrap"}}
         >
           <Flex 
             as="picture"
             mx={{ base: "auto", lg: "0px" }}
-          >
+            h={{base:310, sm:310, xl:810}}
+            w={{base:"auto", sm:"100%", xl:"auto" }}
+            maxW={{base:540, sm:"100%", xl:540 }}
+            >
             <source
-              srcSet="/images/05_proyectos/proyectos.png"
+              srcSet="/images/responsive/05_proyectos/proyectos.webp"
               media="(max-width: 480px)"
             />
             <Image
-              src="/images/05_proyectos/proyectos.png"
+              src="/images/05_proyectos/proyectos.webp"
               alt="Los Bemoles"
-              maxW={{ base: 317, sm: 540 }}
+              w={{base:"auto", sm:"100%", xl:"auto" }}
+              objectFit={"cover"}
+              border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
             />{" "}
           </Flex>
-          <Stack spacing="16px" flex={1} pt={{ base: "7rem", lg: "0px" }}>
-            {/* <Text
-            as="h3"
-            color="#3B424A"
-            fontFamily={"DM Serif Display"}
-            fontSize={{ base: "40px", lg: "54px" }}
-            fontWeight={400}
-            lineHeight={{ base: "42px", lg: "54px" }}
-            letterSpacing={{ base: "0.4px", lg: "2.7px" }}
+          <Stack 
+            spacing="16px" 
+            pt={{ base: "1rem", lg: "0px" }}
+            flex={1} 
           >
-            Titulo
-          </Text>
-          <Text
-            as="p"
-            fontSize={{ base: "16px", lg: "16px" }}
-            fontWeight={400}
-            lineHeight={{ base: "24px", lg: "34px" }}
-            letterSpacing={{ base: "0.8px", lg: "0.8px" }}
-            maxW="590px"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
-            egestas dolor, nec dignissim metus. Donec augue elit, rhoncus ac
-            sodales id, porttitor vitae est. Donec laoreet rutrum libero sed
-            pharetra.
-          </Text> */}
             <Grid
               templateColumns={{ base: "1fr", lg: "1fr 1fr" }}
               gap={{ base: "40px", lg: "40px" }}
-              pt="2rem"
+              pt={{base:"0rem",sm:"2rem"}}
             >
               {projectCategories.map((category) => (
                 <GridItem key={category.name}>
@@ -156,6 +142,7 @@ const ProyectosPage = () => {
                     textTransform={"uppercase"}
                     whiteSpace="nowrap"
                     marginBottom="8px"
+                    justify={{base:"center", sm:"start"}}
                   >
                     {category.name}
                   </Flex>
@@ -163,6 +150,8 @@ const ProyectosPage = () => {
                   <Flex 
                     gap="10px"
                     flexWrap={"wrap"}
+                    justify={{base:"center", sm:"start"}}
+
                   >
                     {projects?.values
                       .filter((p) => p.category === category.type)

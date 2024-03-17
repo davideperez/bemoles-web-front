@@ -56,7 +56,7 @@ const EspaciosPage = () => {
           backgroundPosition={{
             base: "-75px 148px",
             sm: "400px 27px",
-            lg: "0px 0px",
+            lg: "150px 0px",
           }}
           backgroundRepeat={"no-repeat"}
         >

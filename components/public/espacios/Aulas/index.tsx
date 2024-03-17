@@ -10,6 +10,7 @@ import {
 export default function Aulas () {
     return (
           <Flex 
+            as={"section"}
             w={"100%"}
             maxW={"1312px"}
             gap={{ base: "8px", sm: "24px" }} 
@@ -78,11 +79,11 @@ export default function Aulas () {
               {/* //////////// Imagen 1 //////////////// */}
               <Flex as="picture">
                 <source
-                  srcSet="/images/responsive/03_espacios/aulas-1.png"
+                  srcSet="/images/responsive/03_espacios/aulas-1.webp"
                   media="(max-width: 480px)"
                 />
                 <Image
-                  src="/images/03_espacios/aulas-1.png"
+                  src="/images/03_espacios/aulas-1.webp"
                   alt="Aulas"
                   w={{ base: "100%", lg: "576px" }}
                   objectFit={"cover"}
@@ -105,11 +106,11 @@ export default function Aulas () {
                 //h={{ base: "217px", lg: "456px" }}
               >
                 <source
-                  srcSet="/images/responsive/03_espacios/aulas-2.png"
+                  srcSet="/images/responsive/03_espacios/aulas-2.webp"
                   media="(max-width: 480px)"
                 />
                 <Image
-                  src="/images/03_espacios/aulas-2.png"
+                  src="/images/03_espacios/aulas-2.webp"
                   alt="Aulas"
                   objectFit={"cover"}
                   border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
@@ -125,11 +126,11 @@ export default function Aulas () {
                 //h={{ base: "217px", lg: "456px" }}
               >
                 <source
-                  srcSet="/images/responsive/03_espacios/aulas-3.png"
+                  srcSet="/images/responsive/03_espacios/aulas-3.webp"
                   media="(max-width: 480px)"
                 />
                 <Image
-                  src="/images/03_espacios/aulas-3.png"
+                  src="/images/03_espacios/aulas-3.webp"
                   alt="Aulas"
                   objectFit={"cover"}
                   w={{ base: "100%", lg: "100%" }}

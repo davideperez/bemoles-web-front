@@ -4,11 +4,12 @@ import React from "react";
 const TalleresYEspacios = () => {
   return (
     <Flex
-      maxW={"1536px"}
+      maxW={"1312px"}
       as="section" 
-      flexWrap={{base: "wrap-reverse", lg:"wrap-reverse", xl: "nowrap" }} 
+      flexWrap={{base: "wrap-reverse", lg:"nowrap", xl: "nowrap" }} 
       justifyContent="center" 
-      gap={{base:"1rem", lg:"4rem"}}
+      alignItems={"center"}
+      gap={{base:"1rem", lg:"2rem", xl:"4rem"}}
       px={{base: "16px", md:"16px", lg: "80px", /* xl:"240px" */}}
       pt="64px"
       pb={"64px"}
@@ -17,6 +18,7 @@ const TalleresYEspacios = () => {
         base: "none",
         lg: "url('/images/01_home/home-bg-01.webp')",
       }}
+      overflow={"visible"}
       bgRepeat= "no-repeat"
       bgPos={{
         base:"0px 0px", 
@@ -25,13 +27,13 @@ const TalleresYEspacios = () => {
         lg:"0px 0px", 
         xl:"390px 460px"
       }}
-      bgSize={{base:"100%", sm:"100%", md:"100%", lg:"100%", xl:"45%"}} */
-      //bgSize={{lg: "100%", xl:"42%"}}
+      bgSize={{base:"100%", sm:"100%", md:"100%", lg:"100%", xl:"45%"}}
+      //bgSize={{lg: "100%", xl:"42%"}} */
     >
       {/* Texto */}
       <Flex  
         flexDirection="column" 
-        w={"100%"}
+        w={{base:"100%", lg:"50%"}}
         justify={"start"}
       >
         <Stack 
@@ -54,7 +56,12 @@ const TalleresYEspacios = () => {
             Talleres y espacios de encuentro
           </Text>
           <Text
-            as="p"
+            as="p" 
+            fontSize="16px" 
+            fontWeight={400} 
+            lineHeight="34px" 
+            letterSpacing={"0.8px"}
+/*             as="p"
             color="#3B424A"
             fontSize="24px"
             fontWeight={400}
@@ -64,7 +71,7 @@ const TalleresYEspacios = () => {
             //px={{base:"16px", md:"16px", lg:"80px"}}
             alignItems="center"
             backgroundColor="rgb(355,355,355, 1)"
-            border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
+            border={{base:"5px solid #FFF", sm:"10px solid #FFF"}} */
           >
             Son y serán práctica permanente; el <b>desarrollo de talleres</b> atravesados
             por múltiples disciplinas. Buscamos{" "}
@@ -79,7 +86,8 @@ const TalleresYEspacios = () => {
         as="picture" 
         minW={{base:"403px", lg:"fit-content"}} 
         justifyContent="center" 
-        px={{base:"16px", lg:"80px"}}
+        //px={{base:"16px", lg:"80px"}}
+        w={{base:"100%",lg:"50%"}}      
       >
         <source
           srcSet="/images/responsive/01_home/talleres-de-encuentro.webp"
@@ -88,8 +96,8 @@ const TalleresYEspacios = () => {
         <Image 
           src="/images/01_home/talleres-de-encuentro.webp" 
           alt="Talleres de encuentro" 
-          w={{base: "403px", md: "370px"}} 
-          h={{base: "403px", md: "370px"}} 
+          w={{base: "403px", md: "403px"}} 
+          h={{base: "403px", md: "403px"}} 
           border={{base:"5px solid #FFF", sm:"10px solid #FFF"}}
           objectFit={"cover"}
         />

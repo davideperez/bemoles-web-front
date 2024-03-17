@@ -14,6 +14,7 @@ const CuerpoSalud = () => {
     return (
         
     <Flex 
+        as={"section"}
         w={"100%"}
         maxW={"1308px"}
         gap={{ base: "8px", sm: "24px" }} 
@@ -110,11 +111,11 @@ const CuerpoSalud = () => {
                 justify={{base: "center", sm:"start"}}
             >
                 <source
-                srcSet="/images/responsive/02_posibilidades/cuerpo-salud-1.png"
+                srcSet="/images/responsive/02_posibilidades/cuerpo-salud-1.webp"
                 media="(max-width: 480px)"
                 />
                 <Image
-                    src="/images/02_posibilidades/cuerpo-salud-1.png"
+                    src="/images/02_posibilidades/cuerpo-salud-1.webp"
                     alt="Clases y cursos"
                     w={"100%"}
                     h={{ base: "104px", lg: "164px" }}
@@ -139,11 +140,11 @@ const CuerpoSalud = () => {
                 alignSelf={"stretch"}
             >
                 <source
-                    srcSet="/images/responsive/02_posibilidades/cuerpo-salud-2.png"
+                    srcSet="/images/responsive/02_posibilidades/cuerpo-salud-2.webp"
                     //media="(max-width: 480px)"
                 />
                 <Image
-                    src="/images/02_posibilidades/cuerpo-salud-2.png"
+                    src="/images/02_posibilidades/cuerpo-salud-2.webp"
                     alt="Clases y cursos"
                     w={"100%"}
                     objectFit={"cover"}
@@ -158,11 +159,11 @@ const CuerpoSalud = () => {
                 display={{base:"none", xl:"flex"}}
             >
                 <source
-                    srcSet="/images/responsive/02_posibilidades/cuerpo-salud-3.png"
+                    srcSet="/images/responsive/02_posibilidades/cuerpo-salud-3.webp"
                     media="(max-width: 480px)"
                 />
                 <Image
-                    src="/images/02_posibilidades/cuerpo-salud-3.png"
+                    src="/images/02_posibilidades/cuerpo-salud-3.webp"
                     alt="Clases y cursos"
                     objectFit={"cover"}
                     w={"100%"}

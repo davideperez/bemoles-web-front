@@ -41,6 +41,7 @@ const servicios = [
 export default function EstudioSeccion04 () {
     return (
     <Flex
+      as={"section"}
       maxW={"1312px"}
       w={"100%"}
       flexWrap={{ base: "wrap", lg: "nowrap" }}
