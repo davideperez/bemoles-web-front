@@ -34,7 +34,7 @@ const AgendaPage = () => {
           false,
           undefined,
           activePage,
-          8,
+          25,
           "true",
           "true",
           undefined
@@ -55,7 +55,7 @@ const AgendaPage = () => {
           false,
           undefined,
           inactivePage,
-          10,
+          12,
           "true",
           "false",
           undefined
@@ -215,7 +215,7 @@ const AgendaPage = () => {
                   </GridItem>
                 ))}
               </Grid>
-              <Flex justifyContent={"center"}>
+{/*               <Flex justifyContent={"center"}>
                 <Button
                   bg="#DDC692"
                   color="#3B424A"
@@ -226,7 +226,7 @@ const AgendaPage = () => {
                 >
                   Ver mas
                 </Button>
-              </Flex>
+              </Flex> */}
             </Stack>
           </>
         ) : (
